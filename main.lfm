@@ -1,0 +1,1234 @@
+object Form1: TForm1
+  Left = 378
+  Height = 734
+  Top = 152
+  Width = 1262
+  Caption = 'Lektor'
+  ClientHeight = 707
+  ClientWidth = 1262
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnResize = FormResize
+  OnShow = FormShow
+  SessionProperties = 'alternative_system_sound.Checked;CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;Height;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState;speed.Value;historia_napisy.Value'
+  LCLVersion = '2.0.0.4'
+  object Panel1: TPanel
+    Left = 0
+    Height = 510
+    Top = 0
+    Width = 1262
+    Align = alClient
+    ClientHeight = 510
+    ClientWidth = 1262
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 1
+      Height = 501
+      Top = 8
+      Width = 1260
+      Align = alClient
+      BevelOuter = bvNone
+      Caption = 'Panel3'
+      ClientHeight = 501
+      ClientWidth = 1260
+      Color = clBlack
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 0
+      object Panel4: TPanel
+        Left = 0
+        Height = 501
+        Top = 0
+        Width = 204
+        Align = alLeft
+        BevelOuter = bvNone
+        ClientHeight = 501
+        ClientWidth = 204
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 0
+        object Label5: TLabel
+          Left = 8
+          Height = 19
+          Top = 11
+          Width = 132
+          Caption = 'Opóźnienie wideo II:'
+          ParentColor = False
+          ParentFont = False
+        end
+        object opoznienie: TSpinEdit
+          AnchorSideLeft.Control = Label5
+          AnchorSideTop.Control = Label5
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Label5
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 31
+          Hint = 'Bez napisów włączone drugie wideo wystartuje z tym opóźnieniem'
+          Top = 30
+          Width = 132
+          Anchors = [akTop, akLeft, akRight]
+          MaxValue = 20
+          MinValue = 1
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          Value = 3
+        end
+        object Label6: TLabel
+          AnchorSideLeft.Control = opoznienie
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = opoznienie
+          AnchorSideTop.Side = asrCenter
+          Left = 144
+          Height = 19
+          Top = 36
+          Width = 26
+          BorderSpacing.Left = 4
+          Caption = 'sec.'
+          ParentColor = False
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 8
+          Height = 19
+          Top = 65
+          Width = 130
+          Caption = 'Prędkość odtw. (%):'
+          ParentColor = False
+          ParentFont = False
+        end
+        object Label8: TLabel
+          AnchorSideLeft.Control = historia_napisy
+          AnchorSideTop.Control = historia_napisy
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 38
+          Top = 172
+          Width = 135
+          BorderSpacing.Top = 8
+          Caption = 'Wektor przesunięcia'#10'napisów w czasie:'
+          ParentColor = False
+          ParentFont = False
+        end
+        object opoznienie_napisow: TFloatSpinEdit
+          AnchorSideLeft.Control = Label8
+          AnchorSideTop.Control = Label8
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 31
+          Hint = 'Dostosowanie czasu wyświetlania napisów'#10'(pomocne gdy odtwarzasz film nie od początku)'
+          Top = 210
+          Width = 96
+          Increment = 0.1
+          MaxValue = 10
+          MinValue = -10
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          Value = 0
+        end
+        object Label9: TLabel
+          AnchorSideLeft.Control = opoznienie_napisow
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = opoznienie_napisow
+          AnchorSideTop.Side = asrCenter
+          Left = 108
+          Height = 19
+          Top = 216
+          Width = 26
+          BorderSpacing.Left = 4
+          Caption = 'sec.'
+          ParentColor = False
+          ParentFont = False
+        end
+        object Label11: TLabel
+          AnchorSideLeft.Control = opoznienie_napisow
+          AnchorSideTop.Control = opoznienie_napisow
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 19
+          Top = 245
+          Width = 119
+          BorderSpacing.Top = 4
+          Caption = 'Wielkość czcionki:'
+          ParentColor = False
+          ParentFont = False
+        end
+        object ComboBox1: TComboBox
+          AnchorSideLeft.Control = Label11
+          AnchorSideTop.Control = Label11
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 29
+          Top = 264
+          Width = 172
+          ItemHeight = 0
+          ItemIndex = 0
+          Items.Strings = (
+            'Normalne'
+            'Powiększone'
+          )
+          OnChange = ComboBox1Change
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 2
+          Text = 'Normalne'
+        end
+        object CheckBox2: TCheckBox
+          AnchorSideLeft.Control = ComboBox1
+          AnchorSideTop.Control = ComboBox1
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 23
+          Top = 297
+          Width = 94
+          BorderSpacing.Top = 4
+          Caption = 'Tryb nauki'
+          Font.Color = clRed
+          OnChange = CheckBox2Change
+          ParentFont = False
+          TabOrder = 3
+        end
+        object TimeEdit1: TTimeEdit
+          AnchorSideLeft.Control = Label12
+          AnchorSideTop.Control = Label12
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 31
+          Top = 370
+          Width = 157
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          ParentFont = False
+          TabOrder = 4
+          Text = '00:00:00'
+        end
+        object Label12: TLabel
+          AnchorSideLeft.Control = CheckBox5
+          AnchorSideTop.Control = CheckBox5
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 19
+          Top = 351
+          Width = 90
+          BorderSpacing.Top = 4
+          Caption = 'Zakres czasu:'
+          ParentColor = False
+          ParentFont = False
+        end
+        object TimeEdit2: TTimeEdit
+          AnchorSideLeft.Control = TimeEdit1
+          AnchorSideTop.Control = TimeEdit1
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 31
+          Top = 401
+          Width = 157
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          ParentFont = False
+          TabOrder = 5
+          Text = '00:00:00'
+        end
+        object CheckBox3: TCheckBox
+          AnchorSideLeft.Control = TimeEdit1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = TimeEdit1
+          AnchorSideTop.Side = asrCenter
+          Left = 165
+          Height = 23
+          Top = 374
+          Width = 23
+          ParentFont = False
+          TabOrder = 6
+        end
+        object CheckBox4: TCheckBox
+          AnchorSideLeft.Control = TimeEdit2
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = TimeEdit2
+          AnchorSideTop.Side = asrCenter
+          Left = 165
+          Height = 23
+          Top = 405
+          Width = 23
+          ParentFont = False
+          TabOrder = 7
+        end
+        object CheckBox5: TCheckBox
+          AnchorSideLeft.Control = CheckBox2
+          AnchorSideTop.Control = CheckBox2
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 23
+          Top = 324
+          Width = 166
+          BorderSpacing.Top = 4
+          Caption = 'Tryb nauki (końcówki)'
+          Font.Color = clRed
+          OnChange = CheckBox5Change
+          ParentFont = False
+          TabOrder = 8
+        end
+        object speed: TSpinEdit
+          AnchorSideLeft.Control = Label7
+          AnchorSideTop.Control = Label7
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 31
+          Hint = 'Zwalnia wszystko jeśli nie nadążasz z mówieniem'#10'(wymaga potem konwersji pliku dźwiękowego)'
+          Top = 84
+          Width = 153
+          MinValue = 75
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 9
+          Value = 100
+        end
+        object Label17: TLabel
+          Left = 8
+          Height = 19
+          Top = 114
+          Width = 84
+          Caption = 'Historia linii:'
+          ParentColor = False
+          ParentFont = False
+        end
+        object historia_napisy: TSpinEdit
+          AnchorSideLeft.Control = Label17
+          AnchorSideTop.Control = Label17
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 31
+          Hint = 'Wybierz ilość pokazywanych linii na ekranie'#10'(pomocne jeśli napisy nie mieszczą się na ekranie)'
+          Top = 133
+          Width = 153
+          MaxValue = 10
+          MinValue = 2
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 10
+          Value = 10
+        end
+      end
+      object mplayer: TMPlayerControl
+        Left = 204
+        Height = 501
+        Top = 0
+        Width = 852
+        Align = alClient
+        Loop = 0
+        Volume = 100
+        OnStop = mplayerStop
+      end
+      object Panel10: TPanel
+        Left = 1056
+        Height = 501
+        Top = 0
+        Width = 204
+        Align = alRight
+        BevelOuter = bvNone
+        ClientHeight = 501
+        ClientWidth = 204
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 2
+        object led: TuELED
+          AnchorSideLeft.Control = led3
+          AnchorSideTop.Control = led3
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 108
+          Width = 25
+          Debug = False
+          Active = False
+          LedType = ledSquare
+          Bright = True
+          Reflection = True
+          Color = clYellow
+          ParentColor = False
+        end
+        object Label1: TLabel
+          AnchorSideLeft.Control = led
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = led
+          AnchorSideTop.Side = asrCenter
+          Left = 37
+          Height = 19
+          Top = 111
+          Width = 94
+          BorderSpacing.Left = 4
+          Caption = 'Record Active!'
+          ParentColor = False
+          ParentFont = False
+        end
+        object led1: TuELED
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = Panel10
+          Left = 8
+          Height = 25
+          Top = 8
+          Width = 25
+          Debug = False
+          Active = False
+          LedType = ledRound
+          Bright = True
+          Reflection = True
+          BorderSpacing.Left = 8
+          BorderSpacing.Top = 8
+          Color = clGreen
+          ParentColor = False
+          OnDblClick = led1DblClick
+        end
+        object Label2: TLabel
+          AnchorSideLeft.Control = led1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = led1
+          AnchorSideTop.Side = asrCenter
+          Left = 37
+          Height = 19
+          Top = 11
+          Width = 111
+          BorderSpacing.Left = 4
+          Caption = 'Film załadowany'
+          ParentColor = False
+          ParentFont = False
+        end
+        object led2: TuELED
+          AnchorSideLeft.Control = led4
+          AnchorSideTop.Control = led4
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 58
+          Width = 25
+          Debug = False
+          Active = False
+          LedType = ledRound
+          Bright = True
+          Reflection = True
+          Color = clGreen
+          ParentColor = False
+          OnDblClick = led2DblClick
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = led2
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = led2
+          AnchorSideTop.Side = asrCenter
+          Left = 37
+          Height = 19
+          Top = 61
+          Width = 127
+          BorderSpacing.Left = 4
+          Caption = 'Napisy załadowane'
+          ParentColor = False
+          ParentFont = False
+        end
+        object led3: TuELED
+          AnchorSideLeft.Control = led2
+          AnchorSideTop.Control = led2
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 83
+          Width = 25
+          Debug = False
+          Active = False
+          LedType = ledRound
+          Bright = True
+          Reflection = True
+          Color = clGreen
+          ParentColor = False
+          OnDblClick = led3DblClick
+        end
+        object Label4: TLabel
+          AnchorSideLeft.Control = led3
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = led3
+          AnchorSideTop.Side = asrCenter
+          Left = 37
+          Height = 19
+          Top = 86
+          Width = 137
+          BorderSpacing.Left = 4
+          Caption = 'Nagrywanie dźwięku'
+          ParentColor = False
+          ParentFont = False
+        end
+        object led4: TuELED
+          AnchorSideLeft.Control = led1
+          AnchorSideTop.Control = led1
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 33
+          Width = 25
+          Debug = False
+          Active = False
+          LedType = ledRound
+          Bright = True
+          Reflection = True
+          Color = clGreen
+          ParentColor = False
+          OnDblClick = led4DblClick
+        end
+        object Label10: TLabel
+          AnchorSideLeft.Control = Label4
+          AnchorSideTop.Control = led4
+          AnchorSideTop.Side = asrCenter
+          Left = 37
+          Height = 19
+          Top = 36
+          Width = 129
+          Caption = 'Alter. ścieżka Audio'
+          ParentColor = False
+          ParentFont = False
+        end
+        object BitBtn8: TBitBtn
+          AnchorSideLeft.Control = BitBtn9
+          AnchorSideRight.Control = BitBtn9
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = BitBtn9
+          Left = 24
+          Height = 49
+          Top = 373
+          Width = 156
+          Anchors = [akLeft, akRight, akBottom]
+          BorderSpacing.Bottom = 8
+          Caption = 'Nowa linia'
+          Color = clYellow
+          OnClick = BitBtn8Click
+          ParentFont = False
+          TabOrder = 0
+          Visible = False
+        end
+        object time_display: TLabel
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = led
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Side = asrBottom
+          Left = 8
+          Height = 49
+          Top = 141
+          Width = 188
+          Alignment = taCenter
+          Anchors = [akTop, akLeft, akRight]
+          AutoSize = False
+          BorderSpacing.Left = 8
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 8
+          Caption = '00:00:00'
+          Font.Height = -20
+          Font.Name = 'Sans'
+          Font.Style = [fsBold]
+          Layout = tlCenter
+          ParentColor = False
+          ParentFont = False
+        end
+        object BitBtn9: TBitBtn
+          AnchorSideLeft.Control = Panel10
+          AnchorSideLeft.Side = asrCenter
+          AnchorSideBottom.Control = Panel10
+          AnchorSideBottom.Side = asrBottom
+          Left = 24
+          Height = 49
+          Top = 430
+          Width = 156
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Bottom = 22
+          Caption = 'Przerwa'
+          Color = clRed
+          OnClick = BitBtn9Click
+          ParentFont = False
+          TabOrder = 1
+          Visible = False
+        end
+        object Panel11: TPanel
+          AnchorSideLeft.Control = time_display
+          AnchorSideTop.Control = time_display
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = time_display
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 176
+          Top = 194
+          Width = 188
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 4
+          ClientHeight = 176
+          ClientWidth = 188
+          ParentFont = False
+          TabOrder = 2
+          object Label13: TLabel
+            Left = 10
+            Height = 19
+            Top = 10
+            Width = 87
+            Caption = 'Konfiguracja:'
+            ParentColor = False
+            ParentFont = False
+          end
+          object alternative_system_sound: TCheckBox
+            AnchorSideLeft.Control = Label13
+            AnchorSideTop.Control = Label16
+            AnchorSideTop.Side = asrBottom
+            Left = 10
+            Height = 23
+            Top = 58
+            Width = 23
+            BorderSpacing.Top = 12
+            ParentFont = False
+            TabOrder = 0
+          end
+          object alternative_system_sound_caption: TLabel
+            AnchorSideLeft.Control = alternative_system_sound
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = alternative_system_sound
+            AnchorSideTop.Side = asrCenter
+            Left = 37
+            Height = 30
+            Top = 54
+            Width = 96
+            BorderSpacing.Left = 4
+            Caption = 'Alternatywny'#10'system dźwięku'
+            Font.Color = clRed
+            Font.Height = -12
+            Font.Name = 'Sans'
+            ParentColor = False
+            ParentFont = False
+          end
+          object server_on: TCheckBox
+            AnchorSideLeft.Control = alternative_system_sound
+            AnchorSideTop.Control = alternative_system_sound_caption
+            AnchorSideTop.Side = asrBottom
+            Left = 10
+            Height = 23
+            Top = 88
+            Width = 23
+            BorderSpacing.Top = 4
+            ParentFont = False
+            TabOrder = 1
+          end
+          object server_on_caption: TLabel
+            AnchorSideLeft.Control = server_on
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = server_on
+            AnchorSideTop.Side = asrCenter
+            Left = 37
+            Height = 15
+            Top = 92
+            Width = 76
+            BorderSpacing.Left = 4
+            Caption = 'Tryb serwera'
+            Font.Color = clRed
+            Font.Height = -12
+            Font.Name = 'Sans'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label16: TLabel
+            AnchorSideLeft.Control = Label13
+            AnchorSideTop.Control = Label13
+            AnchorSideTop.Side = asrBottom
+            Left = 10
+            Height = 13
+            Top = 33
+            Width = 152
+            BorderSpacing.Top = 4
+            Caption = '(Czerwone wymagają restartu)'
+            Font.Height = -10
+            Font.Name = 'Sans'
+            Font.Style = [fsItalic]
+            ParentColor = False
+            ParentFont = False
+          end
+          object v_asd: TuELED
+            AnchorSideTop.Control = alternative_system_sound
+            AnchorSideTop.Side = asrCenter
+            AnchorSideRight.Control = Panel11
+            AnchorSideRight.Side = asrBottom
+            Left = 154
+            Height = 25
+            Top = 57
+            Width = 25
+            Debug = False
+            Active = False
+            LedType = ledRound
+            Bright = True
+            Reflection = True
+            Anchors = [akTop, akRight]
+            BorderSpacing.Right = 8
+            Color = clLime
+            ParentColor = False
+          end
+          object v_ts: TuELED
+            AnchorSideTop.Control = server_on
+            AnchorSideTop.Side = asrCenter
+            AnchorSideRight.Control = Panel11
+            AnchorSideRight.Side = asrBottom
+            Left = 154
+            Height = 25
+            Top = 87
+            Width = 25
+            Debug = False
+            Active = False
+            LedType = ledRound
+            Bright = True
+            Reflection = True
+            Anchors = [akTop, akRight]
+            BorderSpacing.Right = 8
+            Color = clLime
+            ParentColor = False
+          end
+          object Label14: TLabel
+            AnchorSideLeft.Control = server_on
+            AnchorSideTop.Control = server_on
+            AnchorSideTop.Side = asrBottom
+            Left = 10
+            Height = 15
+            Top = 119
+            Width = 95
+            BorderSpacing.Top = 8
+            Caption = 'Synchro Wideo:'
+            Font.Height = -12
+            Font.Name = 'Sans'
+            ParentColor = False
+            ParentFont = False
+          end
+          object synchro_video: TFloatSpinEdit
+            AnchorSideLeft.Control = Label14
+            AnchorSideTop.Control = Label14
+            AnchorSideTop.Side = asrBottom
+            Left = 10
+            Height = 31
+            Hint = 'Ustaw jeśli Wideo względem napisów'#10'odpala się ze zbyt dużym opóźnieniem'
+            Top = 134
+            Width = 107
+            Increment = 0.1
+            MaxValue = 10
+            MinValue = 0
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            Value = 0
+          end
+          object Label15: TLabel
+            AnchorSideLeft.Control = synchro_video
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = synchro_video
+            AnchorSideTop.Side = asrCenter
+            Left = 121
+            Height = 19
+            Top = 140
+            Width = 26
+            BorderSpacing.Left = 4
+            Caption = 'sec.'
+            ParentColor = False
+            ParentFont = False
+          end
+        end
+      end
+      object Memo2: TMemo
+        AnchorSideLeft.Control = Panel4
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Control = Panel10
+        AnchorSideBottom.Control = Panel3
+        AnchorSideBottom.Side = asrBottom
+        Left = 204
+        Height = 126
+        Top = 375
+        Width = 852
+        Alignment = taCenter
+        Anchors = [akLeft, akRight, akBottom]
+        Font.Height = -21
+        Font.Name = 'Liberation Sans'
+        Lines.Strings = (
+          'Memo2'
+        )
+        ParentFont = False
+        TabOrder = 3
+        Visible = False
+      end
+    end
+    object stat1: TProgressBar
+      Left = 1
+      Height = 7
+      Top = 1
+      Width = 1260
+      Align = alTop
+      ParentFont = False
+      Smooth = True
+      TabOrder = 1
+    end
+  end
+  object Splitter1: TSplitter
+    AnchorSideLeft.Control = Panel5
+    AnchorSideRight.Control = Panel5
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Panel5
+    Cursor = crVSplit
+    Left = 0
+    Height = 8
+    Top = 510
+    Width = 1262
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object Panel9: TPanel
+    Left = 0
+    Height = 189
+    Top = 518
+    Width = 1262
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 189
+    ClientWidth = 1262
+    ParentFont = False
+    TabOrder = 2
+    object Panel2: TPanel
+      AnchorSideLeft.Control = Owner
+      AnchorSideRight.Control = Owner
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Owner
+      Left = 0
+      Height = 58
+      Top = 131
+      Width = 1262
+      Align = alBottom
+      BevelOuter = bvNone
+      ClientHeight = 58
+      ClientWidth = 1262
+      ParentFont = False
+      TabOrder = 0
+      object BitBtn1: TBitBtn
+        AnchorSideLeft.Control = Panel2
+        AnchorSideBottom.Control = Panel2
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 29
+        Top = 21
+        Width = 161
+        Anchors = [akLeft, akBottom]
+        AutoSize = True
+        BorderSpacing.Left = 8
+        BorderSpacing.Bottom = 8
+        Caption = 'Załaduj napisy do filmu'
+        OnClick = BitBtn1Click
+        ParentFont = False
+        TabOrder = 0
+      end
+      object BitBtn2: TBitBtn
+        AnchorSideLeft.Control = BitBtn1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn1
+        Left = 173
+        Height = 29
+        Top = 21
+        Width = 89
+        AutoSize = True
+        BorderSpacing.Left = 4
+        Caption = 'Załaduj film'
+        OnClick = BitBtn2Click
+        ParentFont = False
+        TabOrder = 1
+      end
+      object BitBtn3: TBitBtn
+        AnchorSideLeft.Control = BitBtn6
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn6
+        Left = 600
+        Height = 30
+        Top = 21
+        Width = 74
+        BorderSpacing.Left = 4
+        Caption = 'Start'
+        Color = clAqua
+        OnClick = BitBtn3Click
+        ParentFont = False
+        TabOrder = 2
+      end
+      object BitBtn4: TBitBtn
+        AnchorSideLeft.Control = BitBtn3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn3
+        Left = 678
+        Height = 30
+        Top = 21
+        Width = 74
+        BorderSpacing.Left = 4
+        Caption = 'Stop'
+        Color = clRed
+        OnClick = BitBtn4Click
+        ParentFont = False
+        TabOrder = 3
+      end
+      object BitBtn5: TBitBtn
+        AnchorSideRight.Control = Panel2
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Panel2
+        AnchorSideBottom.Side = asrBottom
+        Left = 1171
+        Height = 29
+        Top = 21
+        Width = 83
+        Anchors = [akRight, akBottom]
+        AutoSize = True
+        BorderSpacing.Right = 8
+        BorderSpacing.Bottom = 8
+        Caption = 'Wyjście'
+        Constraints.MinWidth = 83
+        OnClick = BitBtn5Click
+        ParentFont = False
+        TabOrder = 4
+      end
+      object BitBtn6: TBitBtn
+        AnchorSideLeft.Control = BitBtn7
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn7
+        Left = 407
+        Height = 29
+        Top = 21
+        Width = 189
+        AutoSize = True
+        BorderSpacing.Left = 4
+        Caption = 'Ustaw nagrywanie dźwięku'
+        OnClick = BitBtn6Click
+        ParentFont = False
+        TabOrder = 5
+      end
+      object CheckBox1: TCheckBox
+        AnchorSideLeft.Control = BitBtn4
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn4
+        AnchorSideTop.Side = asrCenter
+        Left = 756
+        Height = 23
+        Top = 25
+        Width = 204
+        BorderSpacing.Left = 4
+        Caption = 'Opóźnij START o 10 sekund'
+        ParentFont = False
+        TabOrder = 6
+      end
+      object stat: TProgressBar
+        AnchorSideLeft.Control = Panel2
+        AnchorSideTop.Control = Panel2
+        AnchorSideRight.Control = Panel2
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 7
+        Top = 1
+        Width = 1262
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 1
+        ParentFont = False
+        Smooth = True
+        TabOrder = 7
+      end
+      object BitBtn7: TBitBtn
+        AnchorSideLeft.Control = BitBtn2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn2
+        Left = 266
+        Height = 29
+        Top = 21
+        Width = 137
+        AutoSize = True
+        BorderSpacing.Left = 4
+        Caption = 'Alter. ścieżka audio'
+        OnClick = BitBtn7Click
+        ParentFont = False
+        TabOrder = 8
+      end
+      object stat2: TProgressBar
+        AnchorSideLeft.Control = stat
+        AnchorSideTop.Control = stat
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = stat
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 7
+        Top = 9
+        Width = 1262
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 1
+        ParentFont = False
+        Smooth = True
+        TabOrder = 9
+      end
+    end
+    object Panel5: TPanel
+      Left = 0
+      Height = 131
+      Top = 0
+      Width = 1262
+      Align = alClient
+      ClientHeight = 131
+      ClientWidth = 1262
+      ParentFont = False
+      TabOrder = 1
+      object Memo1: TMemo
+        Left = 1
+        Height = 129
+        Top = 1
+        Width = 1260
+        Align = alClient
+        Alignment = taCenter
+        BorderStyle = bsNone
+        Font.Height = -20
+        Font.Name = 'Liberation Sans'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object Panel6: TPanel
+        Left = 1
+        Height = 129
+        Top = 1
+        Width = 1260
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 129
+        ClientWidth = 1260
+        Color = clBlack
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 1
+        object Panel7: TPanel
+          Left = 0
+          Height = 129
+          Top = 0
+          Width = 204
+          Align = alLeft
+          BevelOuter = bvNone
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 0
+        end
+        object Panel8: TPanel
+          Left = 1056
+          Height = 129
+          Top = 0
+          Width = 204
+          Align = alRight
+          BevelOuter = bvNone
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 1
+        end
+        object mplayer2: TMPlayerControl
+          AnchorSideLeft.Control = Panel7
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideRight.Control = Panel8
+          AnchorSideBottom.Control = Panel6
+          AnchorSideBottom.Side = asrBottom
+          Left = 204
+          Height = 172
+          Top = -43
+          Width = 852
+          Anchors = [akLeft, akRight, akBottom]
+          Loop = 0
+          Volume = 100
+        end
+      end
+    end
+  end
+  object OpenNapisy: TOpenDialog
+    Filter = 'Wszystkie obsługiwane pliki napisów|*.srt;*.youtube|Plik w formacie SRT|*.srt|Plik w surowym formacie Youtube|*.youtube|Wszystkie pliki|*.*'
+    left = 302
+    top = 25
+  end
+  object OpenFilm: TOpenDialog
+    Title = 'Otwórz istniejący plik wideo'
+    Filter = 'Pliki Video|*.avi;*mp4;*.mkv;*.webm|Pliki *.mp4|*.mp4|Wszystkie pliki|*.*'
+    left = 417
+    top = 25
+  end
+  object timer_czas: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = timer_czasTimer
+    left = 302
+    top = 155
+  end
+  object me: TPointerTab
+    OnCreateElement = meCreateElement
+    OnDestroyElement = meDestroyElement
+    OnReadElement = meReadElement
+    OnWriteElement = meWriteElement
+    left = 645
+    top = 25
+  end
+  object SaveSound: TSaveDialog
+    Title = 'Zapisz plik audio jako'
+    DefaultExt = '.wav'
+    FileName = 'lektor.wav'
+    Filter = 'Pliki Wave|*.wav'
+    Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
+    left = 507
+    top = 25
+  end
+  object so: TSoundPlayer
+    Mode = smRecord
+    PlayCommand = '<auto>'
+    RecordCommand = '<auto>'
+    AfterStart = soAfterStart
+    AfterStop = soAfterStop
+    left = 229
+    top = 435
+  end
+  object timer_delay_sound: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = timer_delay_soundTimer
+    left = 302
+    top = 212
+  end
+  object timer_mplayer2: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = timer_mplayer2Timer
+    left = 531
+    top = 155
+  end
+  object opozniony_start: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = opozniony_startTimer
+    left = 302
+    top = 270
+  end
+  object XMLPropStorage1: TXMLPropStorage
+    StoredValues = <>
+    RootNodePath = 'root'
+    Active = False
+    OnSaveProperties = XMLPropStorage1SaveProperties
+    OnRestoreProperties = XMLPropStorage1RestoreProperties
+    left = 842
+    top = 25
+  end
+  object OpenAudio: TOpenDialog
+    Title = 'Otwórz istniejący plik audio'
+    Filter = 'Pliki Video|*.avi;*mp4;*.mkv;*.webm|Pliki Audio|*.wav;*.flac;*.ogg;*.mp3;*.mp2|Wszystkie pliki|*.*'
+    left = 417
+    top = 82
+  end
+  object mess: TExtMessage
+    Caption = '<Auto>'
+    HelpContext = 0
+    PosTop = 0
+    PosLeft = 0
+    StringToCR = '^'
+    left = 711
+    top = 25
+  end
+  object czas_pomiarowy: TLiveTimer
+    left = 842
+    top = 82
+  end
+  object MainMenu1: TMainMenu
+    left = 711
+    top = 82
+    object MenuItem1: TMenuItem
+      Caption = 'Menu'
+      object MenuItem2: TMenuItem
+        Caption = 'Załaduj napisy do filmu'
+        OnClick = BitBtn1Click
+      end
+      object MenuItem4: TMenuItem
+        Caption = 'Załaduj surowe napisy do filmu'
+        OnClick = MenuItem4Click
+      end
+      object MenuItem3: TMenuItem
+        Caption = 'Zapisz napisy w pliku *.srt'
+        OnClick = MenuItem3Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem6: TMenuItem
+        Caption = 'Wyjście'
+        OnClick = MenuItem6Click
+      end
+    end
+    object MenuItem5: TMenuItem
+      Caption = 'O programie'
+      OnClick = MenuItem5Click
+    end
+  end
+  object SaveNapisy: TSaveDialog
+    Title = 'Zapisz plik napisów jako'
+    DefaultExt = '.srt'
+    Filter = 'Pliki napisów *.srt|*.srt'
+    left = 507
+    top = 82
+  end
+  object OpenRawNapisy: TOpenDialog
+    Title = 'Otwórz istniejący plik w formacie surowego tekstu'
+    DefaultExt = '.txt'
+    Filter = 'Plik tekstowy|*.txt'
+    left = 302
+    top = 82
+  end
+  object server: TLTCPComponent
+    Port = 0
+    OnReceive = serverReceive
+    OnError = serverError
+    Timeout = 0
+    ReuseAddress = True
+    left = 302
+    top = 368
+  end
+  object timer_czas_end: TTimer
+    Enabled = False
+    OnTimer = timer_czas_endTimer
+    left = 409
+    top = 155
+  end
+  object timer_time_display: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = timer_time_displayTimer
+    left = 670
+    top = 155
+  end
+  object amixer: TConsMixer
+    left = 396
+    top = 370
+  end
+  object silnik: TUOSEngine
+    LibDirectory = 'library'
+    left = 302
+    top = 435
+  end
+  object rec: TUOSPlayer
+    DeviceEngine = silnik
+    Mode = moRecord
+    AfterStart = soAfterStart
+    AfterStop = soAfterStop
+    left = 396
+    top = 435
+  end
+  object play_synchro: TTimer
+    Enabled = False
+    Interval = 1
+    OnTimer = play_synchroTimer
+    left = 796
+    top = 276
+  end
+end
