@@ -1,0 +1,7 @@
+backup
+client/backup
+lektor
+lektor_client
+*.exe
+*.lps
+lib
