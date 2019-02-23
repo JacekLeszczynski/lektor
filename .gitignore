@@ -2,6 +2,7 @@ backup
 client/backup
 lektor
 lektor_client
+library
 *.exe
 *.lps
 lib
