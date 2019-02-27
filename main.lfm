@@ -1166,9 +1166,17 @@ object Form1: TForm1
         OnClick = MenuItem6Click
       end
     end
-    object MenuItem5: TMenuItem
-      Caption = 'O programie'
-      OnClick = MenuItem5Click
+    object MenuItem7: TMenuItem
+      Caption = 'Pomoc'
+      object MenuItem8: TMenuItem
+        Caption = 'Aktualizacja silnika MPlayer (Windows)'
+        Visible = False
+        OnClick = MenuItem8Click
+      end
+      object MenuItem9: TMenuItem
+        Caption = 'O programie'
+        OnClick = MenuItem9Click
+      end
     end
   end
   object SaveNapisy: TSaveDialog

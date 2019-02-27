@@ -33,8 +33,10 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label17: TLabel;
-    MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
     N1: TMenuItem;
     speed: TSpinEdit;
     historia_napisy: TSpinEdit;
@@ -140,8 +142,9 @@ type
     procedure meDestroyElement(Sender: TObject; var AWskaznik: Pointer);
     procedure MenuItem3Click(Sender: TObject);
     procedure MenuItem4Click(Sender: TObject);
-    procedure MenuItem5Click(Sender: TObject);
     procedure MenuItem6Click(Sender: TObject);
+    procedure MenuItem8Click(Sender: TObject);
+    procedure MenuItem9Click(Sender: TObject);
     procedure meReadElement(Sender: TObject; var AWskaznik: Pointer);
     procedure meWriteElement(Sender: TObject; var AWskaznik: Pointer);
     procedure mplayerStop(Sender: TObject);
@@ -184,7 +187,7 @@ var
 implementation
 
 uses
-  ecode, about, cverinfo;
+  ecode, about, cverinfo, pobieranie;
 
 type
   TElement = record
@@ -570,14 +573,30 @@ begin
   SendToAll('all','info','load_subtitle');
 end;
 
-procedure TForm1.MenuItem5Click(Sender: TObject);
-begin
-  FAbout.ShowModal;
-end;
-
 procedure TForm1.MenuItem6Click(Sender: TObject);
 begin
   BitBtn5.Click;
+end;
+
+procedure TForm1.MenuItem8Click(Sender: TObject);
+begin
+  FPobieranie:=TFPobieranie.Create(self);
+  try
+    FPobieranie.tytul:='Lektor - Aktualizacja Mplayer dla Windows';
+    FPobieranie.hide_dest_filename:=true;
+    FPobieranie.show_info_end:=false;
+    //FPobieranie.link_download:='http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2';
+    FPobieranie.link_download:='https://datapacket.dl.sourceforge.net/project/mplayerwin/MPlayer-MEncoder/r38119/mplayer-svn-38119.7z';
+    FPobieranie.plik:='mplayer.7z';
+    FPobieranie.ShowModal;
+  finally
+    FPobieranie.Free;
+  end;
+end;
+
+procedure TForm1.MenuItem9Click(Sender: TObject);
+begin
+  FAbout.ShowModal;
 end;
 
 procedure TForm1.meReadElement(Sender: TObject; var AWskaznik: Pointer);

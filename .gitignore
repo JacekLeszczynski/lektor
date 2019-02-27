@@ -3,6 +3,10 @@ client/backup
 lektor
 lektor_client
 library
+mplayer
 *.exe
 *.lps
 lib
+*.dll
+*.so
+*.7z

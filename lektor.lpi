@@ -74,7 +74,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../lib"/>
+            <OtherUnitFiles Value="../../lib;../../components/extlazarus"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -106,7 +106,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../lib;client"/>
+            <OtherUnitFiles Value="../../lib;../../components/extlazarus"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -158,7 +158,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="lektor.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -177,6 +177,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="pobieranie.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FPobieranie"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Pobieranie"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
