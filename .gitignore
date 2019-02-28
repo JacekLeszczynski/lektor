@@ -4,6 +4,7 @@ lektor
 lektor_client
 library
 mplayer
+mpv
 *.exe
 *.lps
 lib

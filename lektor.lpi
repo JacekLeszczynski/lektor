@@ -17,7 +17,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <BuildNr Value="1"/>
+      <MinorVersionNr Value="1"/>
+      <BuildNr Value="2"/>
       <Language Value="0415"/>
       <CharSet Value="04B0"/>
       <StringTable ProductVersion="0.0.0.0"/>
@@ -141,7 +142,7 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="4">
       <Item1>
         <PackageName Value="lnetvisual"/>
       </Item1>
@@ -149,14 +150,11 @@
         <PackageName Value="uEControls"/>
       </Item2>
       <Item3>
-        <PackageName Value="MPlayerControlLaz"/>
+        <PackageName Value="ExtLazarus"/>
       </Item3>
       <Item4>
-        <PackageName Value="ExtLazarus"/>
-      </Item4>
-      <Item5>
         <PackageName Value="LCL"/>
-      </Item5>
+      </Item4>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

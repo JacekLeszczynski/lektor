@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 378
-  Height = 734
-  Top = 152
+  Left = 379
+  Height = 780
+  Top = 133
   Width = 1262
   Caption = 'Lektor'
-  ClientHeight = 707
+  ClientHeight = 753
   ClientWidth = 1262
   Menu = MainMenu1
   OnClose = FormClose
@@ -12,28 +12,28 @@ object Form1: TForm1
   OnDestroy = FormDestroy
   OnResize = FormResize
   OnShow = FormShow
-  SessionProperties = 'alternative_system_sound.Checked;CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;Height;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState;speed.Value;historia_napisy.Value'
+  SessionProperties = 'alternative_system_sound.Checked;CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;Height;historia_napisy.Value;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;speed.Value;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState;force_mpv.Checked'
   LCLVersion = '2.0.0.4'
   object Panel1: TPanel
     Left = 0
-    Height = 510
+    Height = 556
     Top = 0
     Width = 1262
     Align = alClient
-    ClientHeight = 510
+    ClientHeight = 556
     ClientWidth = 1262
     ParentColor = False
     ParentFont = False
     TabOrder = 0
     object Panel3: TPanel
       Left = 1
-      Height = 501
+      Height = 547
       Top = 8
       Width = 1260
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel3'
-      ClientHeight = 501
+      ClientHeight = 547
       ClientWidth = 1260
       Color = clBlack
       ParentColor = False
@@ -41,12 +41,12 @@ object Form1: TForm1
       TabOrder = 0
       object Panel4: TPanel
         Left = 0
-        Height = 501
+        Height = 547
         Top = 0
         Width = 204
         Align = alLeft
         BevelOuter = bvNone
-        ClientHeight = 501
+        ClientHeight = 547
         ClientWidth = 204
         ParentColor = False
         ParentFont = False
@@ -323,22 +323,23 @@ object Form1: TForm1
       end
       object mplayer: TMPlayerControl
         Left = 204
-        Height = 501
+        Height = 547
         Top = 0
         Width = 852
         Align = alClient
+        Engine = meMplayer
         Loop = 0
-        Volume = 100
+        Volume = -1
         OnStop = mplayerStop
       end
       object Panel10: TPanel
         Left = 1056
-        Height = 501
+        Height = 547
         Top = 0
         Width = 204
         Align = alRight
         BevelOuter = bvNone
-        ClientHeight = 501
+        ClientHeight = 547
         ClientWidth = 204
         ParentColor = False
         ParentFont = False
@@ -503,7 +504,7 @@ object Form1: TForm1
           AnchorSideBottom.Control = BitBtn9
           Left = 24
           Height = 49
-          Top = 373
+          Top = 419
           Width = 156
           Anchors = [akLeft, akRight, akBottom]
           BorderSpacing.Bottom = 8
@@ -546,7 +547,7 @@ object Form1: TForm1
           AnchorSideBottom.Side = asrBottom
           Left = 24
           Height = 49
-          Top = 430
+          Top = 476
           Width = 156
           Anchors = [akLeft, akBottom]
           BorderSpacing.Bottom = 22
@@ -564,20 +565,24 @@ object Form1: TForm1
           AnchorSideRight.Control = time_display
           AnchorSideRight.Side = asrBottom
           Left = 8
-          Height = 176
+          Height = 184
           Top = 194
           Width = 188
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Top = 4
-          ClientHeight = 176
+          ClientHeight = 184
           ClientWidth = 188
           ParentFont = False
           TabOrder = 2
           object Label13: TLabel
-            Left = 10
+            AnchorSideLeft.Control = Panel11
+            AnchorSideTop.Control = Panel11
+            Left = 3
             Height = 19
-            Top = 10
+            Top = 3
             Width = 87
+            BorderSpacing.Left = 2
+            BorderSpacing.Top = 2
             Caption = 'Konfiguracja:'
             ParentColor = False
             ParentFont = False
@@ -586,9 +591,9 @@ object Form1: TForm1
             AnchorSideLeft.Control = Label13
             AnchorSideTop.Control = Label16
             AnchorSideTop.Side = asrBottom
-            Left = 10
+            Left = 3
             Height = 23
-            Top = 58
+            Top = 51
             Width = 23
             BorderSpacing.Top = 12
             ParentFont = False
@@ -599,9 +604,9 @@ object Form1: TForm1
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = alternative_system_sound
             AnchorSideTop.Side = asrCenter
-            Left = 37
+            Left = 30
             Height = 30
-            Top = 54
+            Top = 47
             Width = 96
             BorderSpacing.Left = 4
             Caption = 'Alternatywny'#10'system dźwięku'
@@ -615,9 +620,9 @@ object Form1: TForm1
             AnchorSideLeft.Control = alternative_system_sound
             AnchorSideTop.Control = alternative_system_sound_caption
             AnchorSideTop.Side = asrBottom
-            Left = 10
+            Left = 3
             Height = 23
-            Top = 88
+            Top = 81
             Width = 23
             BorderSpacing.Top = 4
             ParentFont = False
@@ -628,9 +633,9 @@ object Form1: TForm1
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = server_on
             AnchorSideTop.Side = asrCenter
-            Left = 37
+            Left = 30
             Height = 15
-            Top = 92
+            Top = 85
             Width = 76
             BorderSpacing.Left = 4
             Caption = 'Tryb serwera'
@@ -644,9 +649,9 @@ object Form1: TForm1
             AnchorSideLeft.Control = Label13
             AnchorSideTop.Control = Label13
             AnchorSideTop.Side = asrBottom
-            Left = 10
+            Left = 3
             Height = 13
-            Top = 33
+            Top = 26
             Width = 152
             BorderSpacing.Top = 4
             Caption = '(Czerwone wymagają restartu)'
@@ -663,7 +668,7 @@ object Form1: TForm1
             AnchorSideRight.Side = asrBottom
             Left = 154
             Height = 25
-            Top = 57
+            Top = 50
             Width = 25
             Debug = False
             Active = False
@@ -682,7 +687,7 @@ object Form1: TForm1
             AnchorSideRight.Side = asrBottom
             Left = 154
             Height = 25
-            Top = 87
+            Top = 80
             Width = 25
             Debug = False
             Active = False
@@ -698,9 +703,9 @@ object Form1: TForm1
             AnchorSideLeft.Control = server_on
             AnchorSideTop.Control = server_on
             AnchorSideTop.Side = asrBottom
-            Left = 10
+            Left = 3
             Height = 15
-            Top = 119
+            Top = 112
             Width = 95
             BorderSpacing.Top = 8
             Caption = 'Synchro Wideo:'
@@ -713,11 +718,12 @@ object Form1: TForm1
             AnchorSideLeft.Control = Label14
             AnchorSideTop.Control = Label14
             AnchorSideTop.Side = asrBottom
-            Left = 10
-            Height = 31
+            Left = 3
+            Height = 22
             Hint = 'Ustaw jeśli Wideo względem napisów'#10'odpala się ze zbyt dużym opóźnieniem'
-            Top = 134
+            Top = 127
             Width = 107
+            AutoSize = False
             Increment = 0.1
             MaxValue = 10
             MinValue = 0
@@ -732,12 +738,39 @@ object Form1: TForm1
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = synchro_video
             AnchorSideTop.Side = asrCenter
-            Left = 121
+            Left = 114
             Height = 19
-            Top = 140
+            Top = 129
             Width = 26
             BorderSpacing.Left = 4
             Caption = 'sec.'
+            ParentColor = False
+            ParentFont = False
+          end
+          object force_mpv: TCheckBox
+            AnchorSideLeft.Control = server_on
+            AnchorSideTop.Control = synchro_video
+            AnchorSideTop.Side = asrBottom
+            Left = 3
+            Height = 23
+            Top = 153
+            Width = 23
+            BorderSpacing.Top = 4
+            TabOrder = 3
+          end
+          object force_mpv_caption: TLabel
+            AnchorSideLeft.Control = force_mpv
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = force_mpv
+            AnchorSideTop.Side = asrCenter
+            Left = 30
+            Height = 15
+            Top = 157
+            Width = 130
+            BorderSpacing.Left = 4
+            Caption = 'MPV zamiast MPlayer!'
+            Font.Height = -12
+            Font.Name = 'Sans'
             ParentColor = False
             ParentFont = False
           end
@@ -751,7 +784,7 @@ object Form1: TForm1
         AnchorSideBottom.Side = asrBottom
         Left = 204
         Height = 126
-        Top = 375
+        Top = 421
         Width = 852
         Alignment = taCenter
         Anchors = [akLeft, akRight, akBottom]
@@ -784,7 +817,7 @@ object Form1: TForm1
     Cursor = crVSplit
     Left = 0
     Height = 8
-    Top = 510
+    Top = 556
     Width = 1262
     Align = alBottom
     ResizeAnchor = akBottom
@@ -792,7 +825,7 @@ object Form1: TForm1
   object Panel9: TPanel
     Left = 0
     Height = 189
-    Top = 518
+    Top = 564
     Width = 1262
     Align = alBottom
     BevelOuter = bvNone
@@ -1042,8 +1075,10 @@ object Form1: TForm1
           Top = -43
           Width = 852
           Anchors = [akLeft, akRight, akBottom]
+          Engine = meMplayer
+          NoSound = True
           Loop = 0
-          Volume = 100
+          Volume = -1
         end
       end
     end

@@ -30,9 +30,11 @@ type
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
     alternative_system_sound: TCheckBox;
+    force_mpv: TCheckBox;
     Label14: TLabel;
     Label15: TLabel;
     Label17: TLabel;
+    force_mpv_caption: TLabel;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
@@ -235,6 +237,9 @@ begin
   alternative_system_sound.Checked:=true;
   alternative_system_sound.Enabled:=false;
   alternative_system_sound_caption.Enabled:=false;
+  //force_mpv.Enabled:=false;
+  //force_mpv.Checked:=false;
+  //force_mpv_caption.Enabled:=false;
   {$ENDIF}
   //SetDefaultLang('pl');
   SetConfDir('lektor');
@@ -447,6 +452,7 @@ begin
     autorun:=false;
     {$IFDEF MSWINDOWS}
     alternative_system_sound.Checked:=true;
+    //force_mpv.Checked:=false;
     {$ENDIF}
     ComboBox1Change(Sender);
     CheckBox2Change(Sender);
@@ -908,31 +914,32 @@ begin
 end;
 
 procedure TForm1.film_start;
-const
-  {$IFDEF MSWINDOWS}
-  ss = '-vo directx -zoom -fs -subcp utf-8';
-  {$ELSE}
-  ss = '-vo x11 -zoom -fs';
-  {$ENDIF}
 var
-  s,s2,s3: string;
+  ss,s,s2,s3: string;
 begin
   if film='' then exit;
-  if sound_master_data.active then mplayer.Volume:=sound_master_data.percent;
+  {$IFDEF MSWINDOWS}
+  if force_mpv.Checked then ss:='-vo direct3d -fs -subcp utf-8' else ss:='-vo directx -fs -subcp utf-8';
+  {$ELSE}
+  ss:='-vo x11 -fs';
+  {$ENDIF}
+  if force_mpv.Checked then mplayer.Engine:=meMPV else
+  begin
+    mplayer.Engine:=meMplayer;
+    ss:=ss+' -zoom';
+  end;
+  mplayer2.Engine:=mplayer.Engine;
   if speed.Value=100 then s:='' else s:=' -speed '+FormatFloat('0.00',speed.Value/100);
   if b_audio then s2:=' -audiofile "'+audio+'"' else s2:='';
   if CheckBox3.Checked then s3:=' -ss '+FormatDateTime('hh:nn:ss',TimeEdit1.Time)+'' else s3:='';
-  mplayer.Stop;
   mplayer.StartParam:=ss+s+s2+s3;
   mplayer.Filename:=film;
   mplayer.Play;
   if not b_napisy then
   begin
     Panel6.Visible:=true;
-    if sound_master_data.active then mplayer2.Volume:=sound_master_data.percent;
     mplayer2.Height:=mplayer.Height;
-    mplayer2.Stop;
-    mplayer2.StartParam:=ss+' -nosound'+s+s3;
+    mplayer2.StartParam:=ss+s+s3;
     mplayer2.Filename:=film;
     timer_mplayer2.Interval:=opoznienie.Value*1000;
     timer_mplayer2.Enabled:=true;
@@ -941,12 +948,10 @@ end;
 
 procedure TForm1.film_stop;
 begin
+  timer_mplayer2.Enabled:=false;
   mplayer.Stop;
-  if Panel6.Visible then
-  begin
-    mplayer2.Stop;
-    Panel6.Visible:=false;
-  end;
+  mplayer2.Stop;
+  Panel6.Visible:=false;
 end;
 
 procedure TForm1.rec_start;
