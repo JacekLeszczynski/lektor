@@ -240,6 +240,8 @@ begin
   //force_mpv.Enabled:=false;
   //force_mpv.Checked:=false;
   //force_mpv_caption.Enabled:=false;
+  {$ELSE}
+  MenuItem8.Visible:=false;
   {$ENDIF}
   //SetDefaultLang('pl');
   SetConfDir('lektor');
@@ -478,6 +480,10 @@ begin
     finally
       mix.Free;
     end;
+    {$IFDEF MSWINDOWS}
+    if (not FileExists('mplayer\mplayer.exe')) and (not FileExists('mpv\mpv.exe')) then
+      mess.ShowWarning('Brak zainstalowanych silników wideo!^Wgraj jeden z silników do właściwego katalogu, lub skorzystaj z opcji automatycznej instalacji, wybierając odpowiednią opcję z menu programu.^^Póki tego nie zrobisz, wyświetlanie wideo nie będzie możliwe.');
+    {$ENDIF}
   end;
 end;
 
@@ -586,17 +592,22 @@ end;
 
 procedure TForm1.MenuItem8Click(Sender: TObject);
 begin
-  FPobieranie:=TFPobieranie.Create(self);
-  try
-    FPobieranie.tytul:='Lektor - Aktualizacja Mplayer dla Windows';
-    FPobieranie.hide_dest_filename:=true;
-    FPobieranie.show_info_end:=false;
-    //FPobieranie.link_download:='http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2';
-    FPobieranie.link_download:='https://datapacket.dl.sourceforge.net/project/mplayerwin/MPlayer-MEncoder/r38119/mplayer-svn-38119.7z';
-    FPobieranie.plik:='mplayer.7z';
-    FPobieranie.ShowModal;
-  finally
-    FPobieranie.Free;
+  if mess.ShowConfirmationYesNo('Zostaną zainstalowane silniki wideo, archiwum zostanie ściągnięte ze zdalnego hosta, następnie zawartość zostanie rozpakowana. Istniejące pliki zostaną nadpisane.^^Kontynuować?') then
+  begin
+    FPobieranie:=TFPobieranie.Create(self);
+    try
+      FPobieranie.tytul:='Lektor - Instalacja Silników Video';
+      FPobieranie.hide_dest_filename:=true;
+      FPobieranie.show_info_end:=true;
+      FPobieranie.info_end_caption:='Silniki Video zostały wgrane i są gotowe do użycia.';
+      FPobieranie.link_download:='https://sourceforge.net/projects/lektor-pomocnik-lektora/files/Players%20Engines/player_engine.zip/download';
+      FPobieranie.plik:='player_engine.zip';
+      FPobieranie.unzipping:=true;
+      FPobieranie.delete_for_exit:=true;
+      FPobieranie.ShowModal;
+    finally
+      FPobieranie.Free;
+    end;
   end;
 end;
 

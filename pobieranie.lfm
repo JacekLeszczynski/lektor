@@ -1,48 +1,73 @@
 object FPobieranie: TFPobieranie
-  Left = 404
-  Height = 77
-  Top = 123
+  Left = 338
+  Height = 95
+  Top = 307
   Width = 459
   BorderStyle = bsDialog
   Caption = 'Lektor - pobieranie aktualizacji'
-  ClientHeight = 77
+  ClientHeight = 95
   ClientWidth = 459
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poOwnerFormCenter
   LCLVersion = '2.0.0.4'
   object pr: TColorProgress
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = cel
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
     Left = 8
     Height = 18
-    Top = 55
-    Width = 442
-    Anchors = [akLeft, akRight, akBottom]
+    Top = 69
+    Width = 443
+    Anchors = [akTop, akLeft, akRight]
     ForeColor = clMoneyGreen
     Progress = 0
   end
   object Label1: TLabel
-    Left = 16
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 8
     Height = 19
-    Top = 7
+    Top = 4
     Width = 308
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 4
     Caption = 'Właśnie trwa pobieranie pliku, proszę czekać...'
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
   end
   object Label2: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
     Left = 16
     Height = 19
-    Top = 24
+    Top = 25
     Width = 48
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 2
     Caption = 'Źródło:'
     ParentColor = False
   end
   object zrodlo: TLabel
-    Left = 64
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 68
     Height = 14
-    Top = 24
-    Width = 29
+    Top = 27
+    Width = 383
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Left = 4
+    BorderSpacing.Right = 8
     Caption = 'http://'
     Font.CharSet = EASTEUROPE_CHARSET
     Font.Color = clOlive
@@ -51,22 +76,40 @@ object FPobieranie: TFPobieranie
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsItalic]
+    Layout = tlCenter
     ParentColor = False
     ParentFont = False
   end
   object Label4: TLabel
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label2
+    AnchorSideRight.Side = asrBottom
     Left = 38
     Height = 19
-    Top = 40
+    Top = 46
     Width = 26
+    Anchors = [akTop, akRight]
+    BorderSpacing.Top = 2
+    BorderSpacing.Bottom = 4
     Caption = 'Cel:'
     ParentColor = False
   end
   object cel: TLabel
-    Left = 64
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 68
     Height = 14
-    Top = 40
-    Width = 90
+    Top = 48
+    Width = 383
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Left = 4
+    BorderSpacing.Right = 8
     Caption = 'Miejsce zapisu...'
     Font.CharSet = EASTEUROPE_CHARSET
     Font.Color = clOlive
@@ -75,6 +118,7 @@ object FPobieranie: TFPobieranie
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsItalic]
+    Layout = tlCenter
     ParentColor = False
     ParentFont = False
   end
@@ -94,10 +138,12 @@ object FPobieranie: TFPobieranie
     left = 371
     top = 8
   end
-  object NetSynHTTP1: TNetSynHTTP
-    Method = meGet
-    UserAgent = '<auto>'
-    left = 232
-    top = 16
+  object unzip: TAbUnZipper
+    ExtractOptions = [eoCreateDirs, eoRestorePath]
+    OnArchiveProgress = unzipArchiveProgress
+    OnConfirmOverwrite = unzipConfirmOverwrite
+    OnConfirmProcessItem = unzipConfirmProcessItem
+    left = 416
+    top = 8
   end
 end

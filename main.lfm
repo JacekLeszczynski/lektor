@@ -1204,8 +1204,7 @@ object Form1: TForm1
     object MenuItem7: TMenuItem
       Caption = 'Pomoc'
       object MenuItem8: TMenuItem
-        Caption = 'Aktualizacja silnika MPlayer (Windows)'
-        Visible = False
+        Caption = 'Automatyczna instalacja silników wideo'
         OnClick = MenuItem8Click
       end
       object MenuItem9: TMenuItem

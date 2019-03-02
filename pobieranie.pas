@@ -13,17 +13,17 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, ExtCtrls, ColorProgress, ExtMessage, HTTPSend, BlckSock,
-  NetSynHTTP{, ssl_openssl, ssl_openssl_lib};
+  StdCtrls, ExtCtrls, ColorProgress, ExtMessage, HTTPSend,
+  BlckSock, ssl_openssl, ssl_openssl_lib, AbUnzper, AbArcTyp, AbUtils;
 
 type
 
   { TFPobieranie }
 
   TFPobieranie = class(TForm)
+    unzip: TAbUnZipper;
     mess: TExtMessage;
     Label2: TLabel;
-    NetSynHTTP1: TNetSynHTTP;
     zrodlo: TLabel;
     Label4: TLabel;
     cel: TLabel;
@@ -33,6 +33,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure unzipArchiveProgress(Sender: TObject; Progress: Byte;
+      var Abort: Boolean);
+    procedure unzipConfirmOverwrite(var AName: string; var AConfirm: Boolean);
+    procedure unzipConfirmProcessItem(Sender: TObject; AItem: TAbArchiveItem;
+      AProcessType: TAbProcessType; var AConfirm: Boolean);
   private
     { private declarations }
     START: boolean;
@@ -42,8 +47,11 @@ type
     tytul: string;
     hide_dest_filename: boolean;
     show_info_end: boolean;
+    info_end_caption: string;
     link_download: string;
     plik: string;
+    unzipping: boolean;
+    delete_for_exit: boolean;
   end; 
 
 var
@@ -252,9 +260,12 @@ var
   URL: string;
 begin
   Timer1.Enabled:=false;
+  Label1.Caption:='Właśnie trwa pobieranie pliku, proszę czekać...';
+  application.ProcessMessages;
   pr.Progress:=0;
   //pr.MaxValue:=1;
-  URL:=SourceForgeURL(link_download); //Deal with sourceforge URLs
+  if pos('/sourceforge.net/',link_download)>0 then URL:=SourceForgeURL(link_download)
+                                              else URL:=link_download;
   H:=THTTPSend.Create;
   try
     H.ProxyHost:='';
@@ -266,10 +277,47 @@ begin
     H.Free;
   end;
   pr.Progress:=pr.MaxValue;
-  Application.ProcessMessages;
   sleep(200);
-  if show_info_end then mess.ShowMessage('Plik został pobrany.');
+
+  if unzipping then
+  begin
+    pr.BackColor:=clMoneyGreen;
+    pr.ForeColor:=clYellow;
+    pr.Progress:=0;
+    pr.MaxValue:=100;
+    Application.ProcessMessages;
+    Label1.Caption:='Rozpakowuję zawartość pliku...';
+    application.ProcessMessages;
+    unzip.FileName:=plik;
+    unzip.ExtractFiles('*.*');
+    sleep(200);
+  end;
+
+  if delete_for_exit then DeleteFile(plik);
+  if show_info_end then
+  begin
+    if info_end_caption='' then mess.ShowInformation('Plik został pobrany.')
+                           else mess.ShowInformation(info_end_caption);
+  end;
   close;
+end;
+
+procedure TFPobieranie.unzipArchiveProgress(Sender: TObject; Progress: Byte;
+  var Abort: Boolean);
+begin
+  pr.Progress:=Progress;
+end;
+
+procedure TFPobieranie.unzipConfirmOverwrite(var AName: string;
+  var AConfirm: Boolean);
+begin
+  AConfirm:=true;
+end;
+
+procedure TFPobieranie.unzipConfirmProcessItem(Sender: TObject;
+  AItem: TAbArchiveItem; AProcessType: TAbProcessType; var AConfirm: Boolean);
+begin
+  AConfirm:=true;
 end;
 
 procedure TFPobieranie.SockCallBack(Sender: TObject; Reason: THookSocketReason;
@@ -288,8 +336,9 @@ procedure TFPobieranie.FormShow(Sender: TObject);
 begin
   if START then
   begin
-    Caption:=tytul;
     START:=false;
+    Application.ProcessMessages;
+    Caption:=tytul;
     zrodlo.Caption:=link_download;
     if hide_dest_filename then cel.Caption:='Lokalny system plików' else cel.Caption:=plik;
     Timer1.Enabled:=true;
@@ -298,6 +347,8 @@ end;
 
 procedure TFPobieranie.FormCreate(Sender: TObject);
 begin
+  pr.BackColor:=clWhite;
+  pr.ForeColor:=clMoneyGreen;
   START:=true;
 end;
 
