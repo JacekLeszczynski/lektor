@@ -197,6 +197,9 @@ type
     tekst: string;
   end;
 
+const
+  symulacja_windows = false;
+
 var
   element: TElement;
   pp: ^TElement;
@@ -241,7 +244,7 @@ begin
   //force_mpv.Checked:=false;
   //force_mpv_caption.Enabled:=false;
   {$ELSE}
-  MenuItem8.Visible:=false;
+  MenuItem8.Visible:=symulacja_windows;
   {$ENDIF}
   //SetDefaultLang('pl');
   SetConfDir('lektor');
@@ -484,6 +487,9 @@ begin
     if (not FileExists('mplayer\mplayer.exe')) and (not FileExists('mpv\mpv.exe')) then
       mess.ShowWarning('Brak zainstalowanych silników wideo!^Wgraj jeden z silników do właściwego katalogu, lub skorzystaj z opcji automatycznej instalacji, wybierając odpowiednią opcję z menu programu.^^Póki tego nie zrobisz, wyświetlanie wideo nie będzie możliwe.');
     {$ENDIF}
+    if symulacja_windows then
+      if (not FileExists('mplayer\mplayer.exe')) and (not FileExists('mpv\mpv.exe')) then
+        mess.ShowWarning('Brak zainstalowanych silników wideo!^Wgraj jeden z silników do właściwego katalogu, lub skorzystaj z opcji automatycznej instalacji, wybierając odpowiednią opcję z menu programu.^^Póki tego nie zrobisz, wyświetlanie wideo nie będzie możliwe.');
   end;
 end;
 
