@@ -780,7 +780,10 @@ var
   t: integer;
 begin
   t:=czas_pomiarowy.GetIndexTime;
-  time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(t));
+  if speed.Value=100 then
+    time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(t))
+  else
+    time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(round(t*speed.Value/100)));
 end;
 
 procedure TForm1.XMLPropStorage1RestoreProperties(Sender: TObject);
