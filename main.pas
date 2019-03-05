@@ -35,6 +35,7 @@ type
     Label15: TLabel;
     Label17: TLabel;
     force_mpv_caption: TLabel;
+    MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
@@ -144,6 +145,7 @@ type
     procedure meDestroyElement(Sender: TObject; var AWskaznik: Pointer);
     procedure MenuItem3Click(Sender: TObject);
     procedure MenuItem4Click(Sender: TObject);
+    procedure MenuItem5Click(Sender: TObject);
     procedure MenuItem6Click(Sender: TObject);
     procedure MenuItem8Click(Sender: TObject);
     procedure MenuItem9Click(Sender: TObject);
@@ -197,9 +199,6 @@ type
     tekst: string;
   end;
 
-const
-  symulacja_windows = false;
-
 var
   element: TElement;
   pp: ^TElement;
@@ -243,8 +242,6 @@ begin
   //force_mpv.Enabled:=false;
   //force_mpv.Checked:=false;
   //force_mpv_caption.Enabled:=false;
-  {$ELSE}
-  MenuItem8.Visible:=symulacja_windows;
   {$ENDIF}
   //SetDefaultLang('pl');
   SetConfDir('lektor');
@@ -421,6 +418,7 @@ end;
 procedure TForm1.BitBtn4Click(Sender: TObject);
 begin
   b_play:=false;
+  rec_delay:=false;
   timer_czas.Enabled:=false;
   timer_czas_end.Enabled:=false;
   timer_time_display.Enabled:=false;
@@ -487,9 +485,6 @@ begin
     if (not FileExists('mplayer\mplayer.exe')) and (not FileExists('mpv\mpv.exe')) then
       mess.ShowWarning('Brak zainstalowanych silników wideo!^Wgraj jeden z silników do właściwego katalogu, lub skorzystaj z opcji automatycznej instalacji, wybierając odpowiednią opcję z menu programu.^^Póki tego nie zrobisz, wyświetlanie wideo nie będzie możliwe.');
     {$ENDIF}
-    if symulacja_windows then
-      if (not FileExists('mplayer\mplayer.exe')) and (not FileExists('mpv\mpv.exe')) then
-        mess.ShowWarning('Brak zainstalowanych silników wideo!^Wgraj jeden z silników do właściwego katalogu, lub skorzystaj z opcji automatycznej instalacji, wybierając odpowiednią opcję z menu programu.^^Póki tego nie zrobisz, wyświetlanie wideo nie będzie możliwe.');
   end;
 end;
 
@@ -591,6 +586,28 @@ begin
   SendToAll('all','info','load_subtitle');
 end;
 
+procedure TForm1.MenuItem5Click(Sender: TObject);
+var
+  s: TStringList;
+begin
+  s:=TStringList.Create;
+  s.Add('Format tego pliku wygląda następująco:');
+  s.Add('');
+  s.Add('00:09');
+  s.Add('Linia pierwsza...');
+  s.Add('00:18');
+  s.Add('Linia druga...');
+  s.Add('00:24');
+  s.Add('Linia trzecia...');
+  s.Add('00:30');
+  s.Add('Linia czwarta...');
+  s.Add('00:38');
+  s.Add('Linia kolejna i tdak dalej...');
+  s.Add('');
+  s.Add('Jeśli jesteście na youtube na filmie z napisami, możecie je sobie skopiować właśnie w takim formacie.');
+  mess.ShowInformation('Czym jest surowy plik youtube?',s.Text);
+end;
+
 procedure TForm1.MenuItem6Click(Sender: TObject);
 begin
   BitBtn5.Click;
@@ -636,7 +653,7 @@ end;
 
 procedure TForm1.mplayerStop(Sender: TObject);
 begin
-  rec_delay:=false;
+  //rec_delay:=false;
   BitBtn4.Click;
 end;
 
@@ -798,7 +815,7 @@ end;
 
 procedure TForm1.test;
 begin
-  BitBtn3.Enabled:=((b_napisy or b_film) and (not b_play) and (not led.Active));// or led3.Active;
+  BitBtn3.Enabled:=((b_napisy or b_film) and (not b_play) and (not led.Active));
   BitBtn4.Enabled:=b_play;
 end;
 

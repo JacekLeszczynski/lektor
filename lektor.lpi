@@ -17,8 +17,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="3"/>
-      <BuildNr Value="5"/>
+      <MinorVersionNr Value="4"/>
+      <BuildNr Value="6"/>
       <Language Value="0415"/>
       <CharSet Value="04B0"/>
       <StringTable InternalName="Lektor - Pomocnik Lektora" LegalCopyright="GPLv3" LegalTrademarks="GPLv3" ProductName="Lektor - Pomocnik Lektora" ProductVersion="0.0.0.0"/>

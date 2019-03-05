@@ -565,12 +565,13 @@ object Form1: TForm1
           AnchorSideRight.Control = time_display
           AnchorSideRight.Side = asrBottom
           Left = 8
-          Height = 184
+          Height = 190
           Top = 194
           Width = 188
           Anchors = [akTop, akLeft, akRight]
+          AutoSize = True
           BorderSpacing.Top = 4
-          ClientHeight = 184
+          ClientHeight = 190
           ClientWidth = 188
           ParentFont = False
           TabOrder = 2
@@ -719,11 +720,10 @@ object Form1: TForm1
             AnchorSideTop.Control = Label14
             AnchorSideTop.Side = asrBottom
             Left = 3
-            Height = 22
+            Height = 31
             Hint = 'Ustaw jeśli Wideo względem napisów'#10'odpala się ze zbyt dużym opóźnieniem'
             Top = 127
             Width = 107
-            AutoSize = False
             Increment = 0.1
             MaxValue = 10
             MinValue = 0
@@ -740,7 +740,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrCenter
             Left = 114
             Height = 19
-            Top = 129
+            Top = 133
             Width = 26
             BorderSpacing.Left = 4
             Caption = 'sec.'
@@ -753,9 +753,10 @@ object Form1: TForm1
             AnchorSideTop.Side = asrBottom
             Left = 3
             Height = 23
-            Top = 153
+            Top = 162
             Width = 23
             BorderSpacing.Top = 4
+            BorderSpacing.Bottom = 4
             TabOrder = 3
           end
           object force_mpv_caption: TLabel
@@ -765,7 +766,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrCenter
             Left = 30
             Height = 15
-            Top = 157
+            Top = 166
             Width = 130
             BorderSpacing.Left = 4
             Caption = 'MPV zamiast MPlayer!'
@@ -1206,6 +1207,10 @@ object Form1: TForm1
       object MenuItem8: TMenuItem
         Caption = 'Automatyczna instalacja silników wideo'
         OnClick = MenuItem8Click
+      end
+      object MenuItem5: TMenuItem
+        Caption = 'Czym jest plik surowy youtube?'
+        OnClick = MenuItem5Click
       end
       object MenuItem9: TMenuItem
         Caption = 'O programie'
