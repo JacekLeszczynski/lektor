@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab, SoundPlayer,
+  ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab,
   ExtMessage, LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl,
   lNetComponents, ueled, DefaultTranslator, LCLTranslator, Menus, EditBtn, lNet;
 
@@ -29,8 +29,10 @@ type
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
-    alternative_system_sound: TCheckBox;
     force_mpv: TCheckBox;
+    meter2: TProgressBar;
+    meter1: TProgressBar;
+    timer_meter: TIdleTimer;
     Label14: TLabel;
     Label15: TLabel;
     Label17: TLabel;
@@ -51,7 +53,6 @@ type
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
-    alternative_system_sound_caption: TLabel;
     server_on_caption: TLabel;
     Label16: TLabel;
     Panel11: TPanel;
@@ -101,7 +102,6 @@ type
     SaveNapisy: TSaveDialog;
     stat: TProgressBar;
     SaveSound: TSaveDialog;
-    so: TSoundPlayer;
     Splitter1: TSplitter;
     opozniony_start: TTimer;
     stat1: TProgressBar;
@@ -117,7 +117,6 @@ type
     time_display: TLabel;
     silnik: TUOSEngine;
     rec: TUOSPlayer;
-    v_asd: TuELED;
     v_ts: TuELED;
     XMLPropStorage1: TXMLPropStorage;
     procedure BitBtn1Click(Sender: TObject);
@@ -161,6 +160,8 @@ type
     procedure timer_czasTimer(Sender: TObject);
     procedure timer_czas_endTimer(Sender: TObject);
     procedure timer_delay_soundTimer(Sender: TObject);
+    procedure timer_meterStopTimer(Sender: TObject);
+    procedure timer_meterTimer(Sender: TObject);
     procedure timer_mplayer2Timer(Sender: TObject);
     procedure timer_time_displayTimer(Sender: TObject);
     procedure XMLPropStorage1RestoreProperties(Sender: TObject);
@@ -236,9 +237,6 @@ begin
   GetProgramVersion(s1,s2,s3);
   Caption:='Lektor - Pomocnik Lektora (ver. '+s3+')';
   {$IFDEF MSWINDOWS}
-  alternative_system_sound.Checked:=true;
-  alternative_system_sound.Enabled:=false;
-  alternative_system_sound_caption.Enabled:=false;
   //force_mpv.Enabled:=false;
   //force_mpv.Checked:=false;
   //force_mpv_caption.Enabled:=false;
@@ -247,11 +245,7 @@ begin
   SetConfDir('lektor');
   XMLPropStorage1.FileName:=MyConfDir('config.xml');
   XMLPropStorage1.Active:=true;
-  if XMLPropStorage1.ReadBoolean('alternative_system_sound_Checked',false) or alternative_system_sound.Checked then
-  begin
-    b_alternative_system_sound:=silnik.LoadLibrary;
-    v_asd.Active:=true;
-  end else b_alternative_system_sound:=false;
+  b_alternative_system_sound:=silnik.LoadLibrary;
   Panel6.Visible:=false;
   napisy:=TStringList.Create;
   BitBtn3.Enabled:=false;
@@ -454,7 +448,6 @@ begin
   begin
     autorun:=false;
     {$IFDEF MSWINDOWS}
-    alternative_system_sound.Checked:=true;
     //force_mpv.Checked:=false;
     {$ENDIF}
     ComboBox1Change(Sender);
@@ -748,11 +741,13 @@ end;
 procedure TForm1.soAfterStart(Sender: TObject);
 begin
   led.Active:=true;
+  timer_meter.Enabled:=true;
 end;
 
 procedure TForm1.soAfterStop(Sender: TObject);
 begin
   led.Active:=false;
+  timer_meter.Enabled:=false;
 end;
 
 procedure TForm1.timer_czasTimer(Sender: TObject);
@@ -777,13 +772,23 @@ end;
 procedure TForm1.timer_delay_soundTimer(Sender: TObject);
 begin
   timer_delay_sound.Enabled:=false;
-  if b_alternative_system_sound then
-  begin
-    rec.Stop;
-  end else begin
-    so.Stop;
-  end;
+  rec.Stop;
   test;
+end;
+
+procedure TForm1.timer_meterStopTimer(Sender: TObject);
+begin
+  meter2.Position:=0;
+  meter1.Position:=0;
+end;
+
+procedure TForm1.timer_meterTimer(Sender: TObject);
+var
+  a,b: integer;
+begin
+  rec.GetMeter(a,b);
+  if a>meter1.Position then meter1.Position:=a else if meter1.Position>0 then meter1.Position:=meter1.Position-1;
+  if b>meter2.Position then meter2.Position:=b else if meter2.Position>0 then meter2.Position:=meter2.Position-1;
 end;
 
 procedure TForm1.timer_mplayer2Timer(Sender: TObject);
@@ -995,14 +1000,8 @@ procedure TForm1.rec_start;
 begin
   if wave='' then exit;
   rec_delay:=true;
-  if b_alternative_system_sound then
-  begin
-    rec.FileName:=wave;
-    rec.Start;
-  end else begin
-    so.FileName:=wave;
-    so.Start;
-  end;
+  rec.FileName:=wave;
+  rec.Start;
 end;
 
 procedure TForm1.rec_stop;
@@ -1013,12 +1012,7 @@ begin
     rec_delay:=false;
     timer_delay_sound.Enabled:=true;
   end else begin
-    if b_alternative_system_sound then
-    begin
-      rec.Stop;
-    end else begin
-      so.Stop;
-    end;
+    rec.Stop;
   end;
 end;
 

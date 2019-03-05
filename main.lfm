@@ -12,7 +12,7 @@ object Form1: TForm1
   OnDestroy = FormDestroy
   OnResize = FormResize
   OnShow = FormShow
-  SessionProperties = 'alternative_system_sound.Checked;CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;Height;historia_napisy.Value;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;speed.Value;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState;force_mpv.Checked'
+  SessionProperties = 'CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;force_mpv.Checked;Height;historia_napisy.Value;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;speed.Value;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState'
   LCLVersion = '2.0.0.4'
   object Panel1: TPanel
     Left = 0
@@ -43,11 +43,11 @@ object Form1: TForm1
         Left = 0
         Height = 547
         Top = 0
-        Width = 204
+        Width = 220
         Align = alLeft
         BevelOuter = bvNone
         ClientHeight = 547
-        ClientWidth = 204
+        ClientWidth = 220
         ParentColor = False
         ParentFont = False
         TabOrder = 0
@@ -322,10 +322,10 @@ object Form1: TForm1
         end
       end
       object mplayer: TMPlayerControl
-        Left = 204
+        Left = 220
         Height = 547
         Top = 0
-        Width = 852
+        Width = 820
         Align = alClient
         Engine = meMplayer
         Loop = 0
@@ -333,14 +333,14 @@ object Form1: TForm1
         OnStop = mplayerStop
       end
       object Panel10: TPanel
-        Left = 1056
+        Left = 1040
         Height = 547
         Top = 0
-        Width = 204
+        Width = 220
         Align = alRight
         BevelOuter = bvNone
         ClientHeight = 547
-        ClientWidth = 204
+        ClientWidth = 220
         ParentColor = False
         ParentFont = False
         TabOrder = 2
@@ -502,7 +502,7 @@ object Form1: TForm1
           AnchorSideRight.Control = BitBtn9
           AnchorSideRight.Side = asrBottom
           AnchorSideBottom.Control = BitBtn9
-          Left = 24
+          Left = 32
           Height = 49
           Top = 419
           Width = 156
@@ -525,7 +525,7 @@ object Form1: TForm1
           Left = 8
           Height = 49
           Top = 141
-          Width = 188
+          Width = 204
           Alignment = taCenter
           Anchors = [akTop, akLeft, akRight]
           AutoSize = False
@@ -545,7 +545,7 @@ object Form1: TForm1
           AnchorSideLeft.Side = asrCenter
           AnchorSideBottom.Control = Panel10
           AnchorSideBottom.Side = asrBottom
-          Left = 24
+          Left = 32
           Height = 49
           Top = 476
           Width = 156
@@ -565,14 +565,14 @@ object Form1: TForm1
           AnchorSideRight.Control = time_display
           AnchorSideRight.Side = asrBottom
           Left = 8
-          Height = 190
+          Height = 148
           Top = 194
-          Width = 188
+          Width = 204
           Anchors = [akTop, akLeft, akRight]
           AutoSize = True
           BorderSpacing.Top = 4
-          ClientHeight = 190
-          ClientWidth = 188
+          ClientHeight = 148
+          ClientWidth = 204
           ParentFont = False
           TabOrder = 2
           object Label13: TLabel
@@ -588,46 +588,17 @@ object Form1: TForm1
             ParentColor = False
             ParentFont = False
           end
-          object alternative_system_sound: TCheckBox
-            AnchorSideLeft.Control = Label13
+          object server_on: TCheckBox
+            AnchorSideLeft.Control = Label16
             AnchorSideTop.Control = Label16
             AnchorSideTop.Side = asrBottom
             Left = 3
             Height = 23
-            Top = 51
-            Width = 23
-            BorderSpacing.Top = 12
-            ParentFont = False
-            TabOrder = 0
-          end
-          object alternative_system_sound_caption: TLabel
-            AnchorSideLeft.Control = alternative_system_sound
-            AnchorSideLeft.Side = asrBottom
-            AnchorSideTop.Control = alternative_system_sound
-            AnchorSideTop.Side = asrCenter
-            Left = 30
-            Height = 30
-            Top = 47
-            Width = 96
-            BorderSpacing.Left = 4
-            Caption = 'Alternatywny'#10'system dźwięku'
-            Font.Color = clRed
-            Font.Height = -12
-            Font.Name = 'Sans'
-            ParentColor = False
-            ParentFont = False
-          end
-          object server_on: TCheckBox
-            AnchorSideLeft.Control = alternative_system_sound
-            AnchorSideTop.Control = alternative_system_sound_caption
-            AnchorSideTop.Side = asrBottom
-            Left = 3
-            Height = 23
-            Top = 81
+            Top = 43
             Width = 23
             BorderSpacing.Top = 4
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 0
           end
           object server_on_caption: TLabel
             AnchorSideLeft.Control = server_on
@@ -636,7 +607,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrCenter
             Left = 30
             Height = 15
-            Top = 85
+            Top = 47
             Width = 76
             BorderSpacing.Left = 4
             Caption = 'Tryb serwera'
@@ -662,33 +633,13 @@ object Form1: TForm1
             ParentColor = False
             ParentFont = False
           end
-          object v_asd: TuELED
-            AnchorSideTop.Control = alternative_system_sound
-            AnchorSideTop.Side = asrCenter
-            AnchorSideRight.Control = Panel11
-            AnchorSideRight.Side = asrBottom
-            Left = 154
-            Height = 25
-            Top = 50
-            Width = 25
-            Debug = False
-            Active = False
-            LedType = ledRound
-            Bright = True
-            Reflection = True
-            Anchors = [akTop, akRight]
-            BorderSpacing.Right = 8
-            Color = clLime
-            ParentColor = False
-          end
           object v_ts: TuELED
             AnchorSideTop.Control = server_on
             AnchorSideTop.Side = asrCenter
-            AnchorSideRight.Control = Panel11
-            AnchorSideRight.Side = asrBottom
-            Left = 154
+            AnchorSideRight.Control = meter1
+            Left = 142
             Height = 25
-            Top = 80
+            Top = 42
             Width = 25
             Debug = False
             Active = False
@@ -706,9 +657,9 @@ object Form1: TForm1
             AnchorSideTop.Side = asrBottom
             Left = 3
             Height = 15
-            Top = 112
+            Top = 70
             Width = 95
-            BorderSpacing.Top = 8
+            BorderSpacing.Top = 4
             Caption = 'Synchro Wideo:'
             Font.Height = -12
             Font.Name = 'Sans'
@@ -722,7 +673,7 @@ object Form1: TForm1
             Left = 3
             Height = 31
             Hint = 'Ustaw jeśli Wideo względem napisów'#10'odpala się ze zbyt dużym opóźnieniem'
-            Top = 127
+            Top = 85
             Width = 107
             Increment = 0.1
             MaxValue = 10
@@ -730,7 +681,7 @@ object Form1: TForm1
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 1
             Value = 0
           end
           object Label15: TLabel
@@ -740,7 +691,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrCenter
             Left = 114
             Height = 19
-            Top = 133
+            Top = 91
             Width = 26
             BorderSpacing.Left = 4
             Caption = 'sec.'
@@ -753,11 +704,11 @@ object Form1: TForm1
             AnchorSideTop.Side = asrBottom
             Left = 3
             Height = 23
-            Top = 162
+            Top = 120
             Width = 23
             BorderSpacing.Top = 4
             BorderSpacing.Bottom = 4
-            TabOrder = 3
+            TabOrder = 2
           end
           object force_mpv_caption: TLabel
             AnchorSideLeft.Control = force_mpv
@@ -766,7 +717,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrCenter
             Left = 30
             Height = 15
-            Top = 166
+            Top = 124
             Width = 130
             BorderSpacing.Left = 4
             Caption = 'MPV zamiast MPlayer!'
@@ -774,6 +725,36 @@ object Form1: TForm1
             Font.Name = 'Sans'
             ParentColor = False
             ParentFont = False
+          end
+          object meter2: TProgressBar
+            AnchorSideTop.Control = Panel11
+            AnchorSideRight.Control = Panel11
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = Panel11
+            AnchorSideBottom.Side = asrBottom
+            Left = 185
+            Height = 134
+            Top = 5
+            Width = 10
+            Anchors = [akTop, akRight, akBottom]
+            BorderSpacing.Top = 4
+            BorderSpacing.Right = 8
+            BorderSpacing.Bottom = 8
+            Orientation = pbVertical
+            TabOrder = 3
+          end
+          object meter1: TProgressBar
+            AnchorSideTop.Control = meter2
+            AnchorSideRight.Control = meter2
+            AnchorSideBottom.Control = meter2
+            AnchorSideBottom.Side = asrBottom
+            Left = 175
+            Height = 134
+            Top = 5
+            Width = 10
+            Anchors = [akTop, akRight, akBottom]
+            Orientation = pbVertical
+            TabOrder = 4
           end
         end
       end
@@ -783,10 +764,10 @@ object Form1: TForm1
         AnchorSideRight.Control = Panel10
         AnchorSideBottom.Control = Panel3
         AnchorSideBottom.Side = asrBottom
-        Left = 204
+        Left = 220
         Height = 126
         Top = 421
-        Width = 852
+        Width = 820
         Alignment = taCenter
         Anchors = [akLeft, akRight, akBottom]
         Font.Height = -21
@@ -1047,7 +1028,7 @@ object Form1: TForm1
           Left = 0
           Height = 129
           Top = 0
-          Width = 204
+          Width = 220
           Align = alLeft
           BevelOuter = bvNone
           ParentColor = False
@@ -1055,10 +1036,10 @@ object Form1: TForm1
           TabOrder = 0
         end
         object Panel8: TPanel
-          Left = 1056
+          Left = 1040
           Height = 129
           Top = 0
-          Width = 204
+          Width = 220
           Align = alRight
           BevelOuter = bvNone
           ParentColor = False
@@ -1071,10 +1052,10 @@ object Form1: TForm1
           AnchorSideRight.Control = Panel8
           AnchorSideBottom.Control = Panel6
           AnchorSideBottom.Side = asrBottom
-          Left = 204
+          Left = 220
           Height = 172
           Top = -43
-          Width = 852
+          Width = 820
           Anchors = [akLeft, akRight, akBottom]
           Engine = meMplayer
           NoSound = True
@@ -1118,15 +1099,6 @@ object Form1: TForm1
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
     left = 507
     top = 25
-  end
-  object so: TSoundPlayer
-    Mode = smRecord
-    PlayCommand = '<auto>'
-    RecordCommand = '<auto>'
-    AfterStart = soAfterStart
-    AfterStop = soAfterStop
-    left = 229
-    top = 435
   end
   object timer_delay_sound: TTimer
     Enabled = False
@@ -1266,6 +1238,7 @@ object Form1: TForm1
   object rec: TUOSPlayer
     DeviceEngine = silnik
     Mode = moRecord
+    Meter = True
     AfterStart = soAfterStart
     AfterStop = soAfterStop
     left = 396
@@ -1277,5 +1250,13 @@ object Form1: TForm1
     OnTimer = play_synchroTimer
     left = 796
     top = 276
+  end
+  object timer_meter: TIdleTimer
+    Enabled = False
+    Interval = 1
+    OnTimer = timer_meterTimer
+    OnStopTimer = timer_meterStopTimer
+    left = 416
+    top = 270
   end
 end
