@@ -1,0 +1,442 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: about.str_001
+msgid "Istnieje nowsza wersja"
+msgstr "There is a newer version"
+
+#: about.str_002
+msgid "Twoja wersja jest aktualna."
+msgstr "Your version is up to date."
+
+#: main.dialogfilter1
+msgid "Wszystkie obsługiwane pliki napisów"
+msgstr "All supported subtitle files"
+
+#: main.dialogfilter2
+msgid "Plik w formacie SRT"
+msgstr "File in SRT format"
+
+#: main.dialogfilter3
+msgid "Plik w surowym formacie Youtube"
+msgstr "File in raw Youtube format"
+
+#: main.dialogfilter4
+msgid "Wszystkie pliki"
+msgstr "All files"
+
+#: main.dialogfilter5
+msgid "Pliki Video"
+msgstr "Video files"
+
+#: main.dialogfilter6
+msgid "Pliki"
+msgstr "Files"
+
+#: main.dialogfilter7
+msgid "Plik tekstowy"
+msgstr "Text file"
+
+#: main.dialogfilter8
+msgid "Pliki Audio"
+msgstr "Audio files"
+
+#: main.dialogfilter9
+msgid "Pliki napisów"
+msgstr "Subtitle files"
+
+#: main.menu_001
+msgid "Format tego pliku wygląda następująco:"
+msgstr "The format of this file is as follows:"
+
+#: main.menu_002
+msgid "Linia pierwsza"
+msgstr "First line"
+
+#: main.menu_003
+msgid "Linia druga"
+msgstr "Second line"
+
+#: main.menu_004
+msgid "Linia trzecia"
+msgstr "Third line"
+
+#: main.menu_005
+msgid "Linia czwarta"
+msgstr "Line four"
+
+#: main.menu_006
+msgid "Linia kolejna i tak dalej"
+msgstr "The next line and so on"
+
+#: main.menu_007
+msgid "Jeśli jesteście na youtube na filmie z napisami, możecie je sobie skopiować właśnie w takim formacie."
+msgstr "If you're on youtube on a movie with subtitles, you can copy them in this format."
+
+#: main.menu_008
+msgid "Czym jest surowy plik youtube?"
+msgstr "What is the raw youtube file?"
+
+#: main.menu_009
+msgid "Zostaną zainstalowane silniki wideo, archiwum zostanie ściągnięte ze zdalnego hosta, następnie zawartość zostanie rozpakowana. Istniejące pliki zostaną nadpisane."
+msgstr "Video engines will be installed, the archive will be downloaded from the remote host, then the content will be unpacked. Existing files will be overwritten."
+
+#: main.menu_010
+msgid "Kontynuować?"
+msgstr "Continue?"
+
+#: main.menu_011
+msgid "Lektor - Instalacja Silników Video"
+msgstr "Lektor - Installation of Video Engines"
+
+#: main.menu_012
+msgid "Silniki Video zostały wgrane i są gotowe do użycia."
+msgstr "Video engines have been uploaded and are ready for use."
+
+#: main.nazwa_programu
+msgctxt "main.nazwa_programu"
+msgid "Lektor - Pomocnik Lektora"
+msgstr "Lektor - Lektor's assistant"
+
+#: main.trans_000
+msgid "Informacja"
+msgstr "Information"
+
+#: main.trans_001
+msgid "Brak załadowanych napisów, operacja anulowana."
+msgstr "No subtitles loaded, operation canceled."
+
+#: pobieranie.str_001
+msgctxt "pobieranie.str_001"
+msgid "Właśnie trwa pobieranie pliku, proszę czekać..."
+msgstr "I just download the file, please wait..."
+
+#: pobieranie.str_002
+msgid "Rozpakowuję zawartość pliku..."
+msgstr "I unpack the contents of the file..."
+
+#: pobieranie.str_003
+msgid "Plik został pobrany."
+msgstr "The file has been downloaded."
+
+#: pobieranie.str_004
+msgid "Lokalny system plików"
+msgstr "Local file system"
+
+#: tfabout.caption
+msgid "Lektor - O programie"
+msgstr "Lektor - About the program"
+
+#: tfabout.label1.caption
+msgid "Lektor - Pomocnik Lektora"
+msgstr "Lektor - Lektor's assistant"
+
+#: tfabout.label2.caption
+msgid "by Jacek Leszczyński"
+msgstr "by Jacek Leszczyński"
+
+#: tfabout.label3.caption
+msgid ""
+"Program wydany na licencji GPL, oznacza to, że:\n"
+"- zezwala się na używanie programu do użytku niekomercyjnego.\n"
+"- zezwala się na wprowadzanie własnych zmian do kodu.\n"
+"- zezwala się na rozpowszechnianie programu zgodnie z licencją GPL.\n"
+msgstr ""
+"The program released under the GPL license means that:\n"
+"- it is allowed to use the program for non-commercial use.\n"
+"- you can make your own changes to the code.\n"
+"- you are allowed to distribute the program in accordance with the GPL license.\n"
+
+#: tfabout.label4.caption
+msgid ""
+"Wszelkie uwagi i znalezione błędy możesz zgłaszać\n"
+"wysyłając wiadomość na e-mail: sam@bialan.pl\n"
+msgstr ""
+"Any comments and errors found can be reported\n"
+"by sending a message to the e-mail address: sam@bialan.pl\n"
+
+#: tfabout.speedbutton1.caption
+msgid "Zrób test i sprawdź, czy posiadasz aktualną wersję?"
+msgstr "Do a test and check if you have the current version?"
+
+#: tfabout.wersja.caption
+msgid "v. 1.0"
+msgstr "v. 1.0"
+
+#: tform1.bitbtn1.caption
+msgctxt "tform1.bitbtn1.caption"
+msgid "Załaduj napisy do filmu"
+msgstr "Load subtitles for the movie"
+
+#: tform1.bitbtn2.caption
+msgid "Załaduj film"
+msgstr "Load the movie"
+
+#: tform1.bitbtn3.caption
+msgid "Start"
+msgstr "Start"
+
+#: tform1.bitbtn4.caption
+msgid "Stop"
+msgstr "Stop"
+
+#: tform1.bitbtn5.caption
+msgctxt "tform1.bitbtn5.caption"
+msgid "Wyjście"
+msgstr "Exit"
+
+#: tform1.bitbtn6.caption
+msgid "Ustaw nagrywanie dźwięku"
+msgstr "Set the sound recording"
+
+#: tform1.bitbtn7.caption
+msgid "Alter. ścieżka audio"
+msgstr "Alter. audio track"
+
+#: tform1.bitbtn8.caption
+msgid "Nowa linia"
+msgstr "New line"
+
+#: tform1.bitbtn9.caption
+msgid "Przerwa"
+msgstr "Pause"
+
+#: tform1.caption
+msgid "Lektor"
+msgstr "Lektor"
+
+#: tform1.checkbox1.caption
+msgid "Opóźnij START o 10 sekund"
+msgstr "Delay START by 10 seconds"
+
+#: tform1.checkbox2.caption
+msgid "Tryb nauki"
+msgstr "Learning mode"
+
+#: tform1.checkbox5.caption
+msgid "Tryb nauki (końcówki)"
+msgstr "Learning mode (endings)"
+
+#: tform1.combobox1.text
+msgid "Normalne"
+msgstr "Normal"
+
+#: tform1.force_mpv_caption.caption
+msgid "MPV zamiast MPlayer!"
+msgstr "MPV instead of MPlayer!"
+
+#: tform1.historia_napisy.hint
+msgid ""
+"Wybierz ilość pokazywanych linii na ekranie\n"
+"(pomocne jeśli napisy nie mieszczą się na ekranie)\n"
+msgstr ""
+"Select the number of lines shown on the screen\n"
+"(helpful if the subtitles do not fit on the screen)\n"
+
+#: tform1.label1.caption
+msgid "Record Active!"
+msgstr "Record Active!"
+
+#: tform1.label10.caption
+msgid "Alter. ścieżka Audio"
+msgstr "Alter. Audio track"
+
+#: tform1.label11.caption
+msgid "Wielkość czcionki:"
+msgstr "Font size:"
+
+#: tform1.label12.caption
+msgid "Zakres czasu:"
+msgstr "Time range:"
+
+#: tform1.label13.caption
+msgid "Konfiguracja:"
+msgstr "Configuration:"
+
+#: tform1.label14.caption
+msgid "Synchro Wideo:"
+msgstr "Synchro Video:"
+
+#: tform1.label15.caption
+msgctxt "tform1.label15.caption"
+msgid "sec."
+msgstr "sec."
+
+#: tform1.label16.caption
+msgid "(Czerwone wymagają restartu)"
+msgstr "(Reds require a restart)"
+
+#: tform1.label17.caption
+msgid "Historia linii:"
+msgstr "Line history:"
+
+#: tform1.label2.caption
+msgid "Film załadowany"
+msgstr "Film loaded"
+
+#: tform1.label3.caption
+msgid "Napisy załadowane"
+msgstr "Subtitles loaded"
+
+#: tform1.label4.caption
+msgid "Nagrywanie dźwięku"
+msgstr "Sound recording"
+
+#: tform1.label5.caption
+msgid "Opóźnienie wideo II:"
+msgstr "Video delay II:"
+
+#: tform1.label6.caption
+msgctxt "tform1.label6.caption"
+msgid "sec."
+msgstr "sec."
+
+#: tform1.label7.caption
+msgid "Prędkość odtw. (%):"
+msgstr "Play Speed (%):"
+
+#: tform1.label8.caption
+msgid ""
+"Wektor przesunięcia\n"
+"napisów w czasie:\n"
+msgstr ""
+"Vector shift of\n"
+"subtitles in time:\n"
+
+#: tform1.label9.caption
+msgctxt "tform1.label9.caption"
+msgid "sec."
+msgstr "sec."
+
+#: tform1.menuitem1.caption
+msgid "Menu"
+msgstr "Menu"
+
+#: tform1.menuitem2.caption
+msgctxt "tform1.menuitem2.caption"
+msgid "Załaduj napisy do filmu"
+msgstr "Load subtitles for the movie"
+
+#: tform1.menuitem3.caption
+msgid "Zapisz napisy w pliku *.srt"
+msgstr "Save the subtitles in the * .srt file"
+
+#: tform1.menuitem4.caption
+msgid "Załaduj surowe napisy do filmu"
+msgstr "Load raw movie subtitles"
+
+#: tform1.menuitem5.caption
+msgid "Czym jest plik surowy youtube?"
+msgstr "What is raw youtube file?"
+
+#: tform1.menuitem6.caption
+msgctxt "tform1.menuitem6.caption"
+msgid "Wyjście"
+msgstr "Exit"
+
+#: tform1.menuitem7.caption
+msgid "Pomoc"
+msgstr "Help"
+
+#: tform1.menuitem8.caption
+msgid "Automatyczna instalacja silników wideo"
+msgstr "Automatic installation of video engines"
+
+#: tform1.menuitem9.caption
+msgid "O programie"
+msgstr "About program"
+
+#: tform1.openaudio.title
+msgid "Otwórz istniejący plik audio"
+msgstr "Open an existing audio file"
+
+#: tform1.openfilm.title
+msgid "Otwórz istniejący plik wideo"
+msgstr "Open an existing video file"
+
+#: tform1.openrawnapisy.title
+msgid "Otwórz istniejący plik w formacie surowego tekstu"
+msgstr "Open an existing file in raw text format"
+
+#: tform1.opoznienie.hint
+msgid "Bez napisów włączone drugie wideo wystartuje z tym opóźnieniem"
+msgstr "No subtitles enabled the second video will start with this delay"
+
+#: tform1.opoznienie_napisow.hint
+msgid ""
+"Dostosowanie czasu wyświetlania napisów\n"
+"(pomocne gdy odtwarzasz film nie od początku)\n"
+msgstr ""
+"Adjust the subtitles display time\n"
+"(helpful when you play a movie not from the beginning)\n"
+
+#: tform1.panel3.caption
+msgid "Panel3"
+msgstr "Panel3"
+
+#: tform1.savenapisy.title
+msgid "Zapisz plik napisów jako"
+msgstr "Save the subtitle file as"
+
+#: tform1.savesound.title
+msgid "Zapisz plik audio jako"
+msgstr "Save the audio file as"
+
+#: tform1.server_on_caption.caption
+msgid "Tryb serwera"
+msgstr "Server mode"
+
+#: tform1.speed.hint
+msgid ""
+"Zwalnia wszystko jeśli nie nadążasz z mówieniem\n"
+"(wymaga potem konwersji pliku dźwiękowego)\n"
+msgstr ""
+"It releases everything if you can not keep up with speaking\n"
+"(then requires conversion of the sound file)\n"
+
+#: tform1.synchro_video.hint
+msgid ""
+"Ustaw jeśli Wideo względem napisów\n"
+"odpala się ze zbyt dużym opóźnieniem\n"
+msgstr "Set if Video to subtitle fires too late"
+
+#: tform1.timeedit1.text
+msgctxt "tform1.timeedit1.text"
+msgid "00:00:00"
+msgstr "00:00:00"
+
+#: tform1.timeedit2.text
+msgctxt "tform1.timeedit2.text"
+msgid "00:00:00"
+msgstr "00:00:00"
+
+#: tform1.time_display.caption
+msgctxt "tform1.time_display.caption"
+msgid "00:00:00"
+msgstr "00:00:00"
+
+#: tfpobieranie.caption
+msgid "Lektor - pobieranie aktualizacji"
+msgstr "Lektor - downloading the update"
+
+#: tfpobieranie.cel.caption
+msgid "Miejsce zapisu..."
+msgstr "Place of recording..."
+
+#: tfpobieranie.label1.caption
+msgctxt "tfpobieranie.label1.caption"
+msgid "Właśnie trwa pobieranie pliku, proszę czekać..."
+msgstr "I just download the file, please wait..."
+
+#: tfpobieranie.label2.caption
+msgid "Źródło:"
+msgstr "Source:"
+
+#: tfpobieranie.label4.caption
+msgid "Cel:"
+msgstr "Destination:"
+
+#: tfpobieranie.zrodlo.caption
+msgid "http://"
+msgstr "http://"
+

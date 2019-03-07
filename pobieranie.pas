@@ -255,12 +255,18 @@ end;
 
 { TFPobieranie }
 
+resourcestring
+  STR_001 = 'Właśnie trwa pobieranie pliku, proszę czekać...';
+  STR_002 = 'Rozpakowuję zawartość pliku...';
+  STR_003 = 'Plik został pobrany.';
+  STR_004 = 'Lokalny system plików';
+
 procedure TFPobieranie.Timer1Timer(Sender: TObject);
 var
   URL: string;
 begin
   Timer1.Enabled:=false;
-  Label1.Caption:='Właśnie trwa pobieranie pliku, proszę czekać...';
+  Label1.Caption:=STR_001;
   application.ProcessMessages;
   pr.Progress:=0;
   //pr.MaxValue:=1;
@@ -286,7 +292,7 @@ begin
     pr.Progress:=0;
     pr.MaxValue:=100;
     Application.ProcessMessages;
-    Label1.Caption:='Rozpakowuję zawartość pliku...';
+    Label1.Caption:=STR_002;
     application.ProcessMessages;
     unzip.FileName:=plik;
     unzip.ExtractFiles('*.*');
@@ -296,7 +302,7 @@ begin
   if delete_for_exit then DeleteFile(plik);
   if show_info_end then
   begin
-    if info_end_caption='' then mess.ShowInformation('Plik został pobrany.')
+    if info_end_caption='' then mess.ShowInformation(STR_003)
                            else mess.ShowInformation(info_end_caption);
   end;
   close;
@@ -340,7 +346,7 @@ begin
     Application.ProcessMessages;
     Caption:=tytul;
     zrodlo.Caption:=link_download;
-    if hide_dest_filename then cel.Caption:='Lokalny system plików' else cel.Caption:=plik;
+    if hide_dest_filename then cel.Caption:=STR_004 else cel.Caption:=plik;
     Timer1.Enabled:=true;
   end;
 end;

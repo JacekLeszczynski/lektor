@@ -41,6 +41,10 @@ uses
 
 { TFAbout }
 
+resourcestring
+  STR_001 = 'Istnieje nowsza wersja';
+  STR_002 = 'Twoja wersja jest aktualna.';
+
 procedure TFAbout.FormCreate(Sender: TObject);
 var
   s1,s2,s3: string;
@@ -75,10 +79,10 @@ begin
       minor:=StrToInt(GetLineToStr(s,2,'.'));
       if czy_jest_nowsza_wersja(major,minor) then
       begin
-        SpeedButton1.Caption:='Istnieje nowsza wersja '+IntToStr(major)+'.'+IntToStr(minor);
+        SpeedButton1.Caption:=STR_001+' '+IntToStr(major)+'.'+IntToStr(minor);
         SpeedButton1.Color:=clRed;
       end else begin
-        SpeedButton1.Caption:='Twoja wersja jest aktualna.';
+        SpeedButton1.Caption:=STR_002;
         SpeedButton1.Color:=clGreen;
       end;
     end;

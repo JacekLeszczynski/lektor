@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":214480905,"name":"tfpobieranie.caption","sourcebytes":[76,101,107,116,111,114,32,45,32,112,111,98,105,101,114,97,110,105,101,32,97,107,116,117,97,108,105,122,97,99,106,105],"value":"Lektor - pobieranie aktualizacji"},
+{"hash":210649518,"name":"tfpobieranie.label1.caption","sourcebytes":[87,197,130,97,197,155,110,105,101,32,116,114,119,97,32,112,111,98,105,101,114,97,110,105,101,32,112,108,105,107,117,44,32,112,114,111,115,122,196,153,32,99,122,101,107,97,196,135,46,46,46],"value":"W\u0142a\u015Bnie trwa pobieranie pliku, prosz\u0119 czeka\u0107..."},
+{"hash":246270410,"name":"tfpobieranie.label2.caption","sourcebytes":[197,185,114,195,179,100,197,130,111,58],"value":"\u0179r\u00F3d\u0142o:"},
+{"hash":263929215,"name":"tfpobieranie.zrodlo.caption","sourcebytes":[104,116,116,112,58,47,47],"value":"http://"},
+{"hash":302074,"name":"tfpobieranie.label4.caption","sourcebytes":[67,101,108,58],"value":"Cel:"},
+{"hash":13565358,"name":"tfpobieranie.cel.caption","sourcebytes":[77,105,101,106,115,99,101,32,122,97,112,105,115,117,46,46,46],"value":"Miejsce zapisu..."}
+]}

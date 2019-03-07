@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab,
   ExtMessage, LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl,
-  lNetComponents, ueled, DefaultTranslator, LCLTranslator, Menus, EditBtn, lNet;
+  lNetComponents, ueled, Menus, EditBtn, lNet;
 
 type
 
@@ -200,6 +200,31 @@ type
     tekst: string;
   end;
 
+resourcestring
+  NAZWA_PROGRAMU = 'Lektor - Pomocnik Lektora';
+  DialogFilter1 = 'Wszystkie obsługiwane pliki napisów';
+  DialogFilter2 = 'Plik w formacie SRT';
+  DialogFilter3 = 'Plik w surowym formacie Youtube';
+  DialogFilter4 = 'Wszystkie pliki';
+  DialogFilter5 = 'Pliki Video';
+  DialogFilter6 = 'Pliki';
+  DialogFilter7 = 'Plik tekstowy';
+  DialogFilter8 = 'Pliki Audio';
+  DialogFilter9 = 'Pliki napisów';
+  MENU_001 = 'Format tego pliku wygląda następująco:';
+  MENU_002 = 'Linia pierwsza';
+  MENU_003 = 'Linia druga';
+  MENU_004 = 'Linia trzecia';
+  MENU_005 = 'Linia czwarta';
+  MENU_006 = 'Linia kolejna i tak dalej';
+  MENU_007 = 'Jeśli jesteście na youtube na filmie z napisami, możecie je sobie skopiować właśnie w takim formacie.';
+  MENU_008 = 'Czym jest surowy plik youtube?';
+  MENU_009 = 'Zostaną zainstalowane silniki wideo, archiwum zostanie ściągnięte ze zdalnego hosta, następnie zawartość zostanie rozpakowana. Istniejące pliki zostaną nadpisane.';
+  MENU_010 = 'Kontynuować?';
+  MENU_011 = 'Lektor - Instalacja Silników Video';
+  MENU_012 = 'Silniki Video zostały wgrane i są gotowe do użycia.';
+  Trans_000 = 'Informacja';
+  Trans_001 = 'Brak załadowanych napisów, operacja anulowana.';
 var
   element: TElement;
   pp: ^TElement;
@@ -235,13 +260,21 @@ var
   s1,s2,s3: string;
 begin
   GetProgramVersion(s1,s2,s3);
-  Caption:='Lektor - Pomocnik Lektora (ver. '+s3+')';
+  Caption:=NAZWA_PROGRAMU+' (ver. '+s3+')';
+  OpenNapisy.Filter:=DialogFilter1+'|*.srt;*.youtube|'+DialogFilter2+'|*.srt|'+DialogFilter3+'|*.youtube|'+DialogFilter4+'|*.*';
+  OpenFilm.Filter:=DialogFilter5+'|*.avi;*mp4;*.mkv;*.webm|'+DialogFilter6+' *.mp4|*.mp4|'+DialogFilter4+'|*.*';
+  SaveSound.Filter:=DialogFilter6+' Wave|*.wav';
+  OpenRawNapisy.Filter:=DialogFilter7+'|*.txt';
+  OpenAudio.Filter:=DialogFilter5+'|*.avi;*mp4;*.mkv;*.webm|'+DialogFilter8+'|*.wav;*.flac;*.ogg;*.mp3;*.mp2|'+DialogFilter4+'|*.*';
+  SaveNapisy.Filter:=DialogFilter9+' *.srt|*.srt';
   {$IFDEF MSWINDOWS}
   //force_mpv.Enabled:=false;
   //force_mpv.Checked:=false;
   //force_mpv_caption.Enabled:=false;
+  {$ELSE}
+  MenuItem8.Visible:=false;
   {$ENDIF}
-  //SetDefaultLang('pl');
+  //SetDefaultLang('en');
   SetConfDir('lektor');
   XMLPropStorage1.FileName:=MyConfDir('config.xml');
   XMLPropStorage1.Active:=true;
@@ -266,7 +299,7 @@ begin
     katalog:=ExtractFilePath(SaveSound.FileName);
     wave:=SaveSound.FileName;
     led3.Active:=true;
-    Caption:='Lektor ('+wave+')';
+    //Caption:='Lektor ('+wave+')';
   end;
   test;
 end;
@@ -531,7 +564,7 @@ var
 begin
   if not b_napisy then
   begin
-    mess.ShowInformation('Brak załadowanych napisów, operacja anulowana.');
+    mess.ShowInformation(Trans_000,Trans_001);
     exit;
   end;
   SaveNapisy.InitialDir:=katalog;
@@ -584,21 +617,21 @@ var
   s: TStringList;
 begin
   s:=TStringList.Create;
-  s.Add('Format tego pliku wygląda następująco:');
+  s.Add(MENU_001);
   s.Add('');
   s.Add('00:09');
-  s.Add('Linia pierwsza...');
+  s.Add(MENU_002+'...');
   s.Add('00:18');
-  s.Add('Linia druga...');
+  s.Add(MENU_003+'...');
   s.Add('00:24');
-  s.Add('Linia trzecia...');
+  s.Add(MENU_004+'...');
   s.Add('00:30');
-  s.Add('Linia czwarta...');
+  s.Add(MENU_005+'...');
   s.Add('00:38');
-  s.Add('Linia kolejna i tdak dalej...');
+  s.Add(MENU_006+'...');
   s.Add('');
-  s.Add('Jeśli jesteście na youtube na filmie z napisami, możecie je sobie skopiować właśnie w takim formacie.');
-  mess.ShowInformation('Czym jest surowy plik youtube?',s.Text);
+  s.Add(MENU_007);
+  mess.ShowInformation(MENU_008,s.Text);
 end;
 
 procedure TForm1.MenuItem6Click(Sender: TObject);
@@ -608,14 +641,14 @@ end;
 
 procedure TForm1.MenuItem8Click(Sender: TObject);
 begin
-  if mess.ShowConfirmationYesNo('Zostaną zainstalowane silniki wideo, archiwum zostanie ściągnięte ze zdalnego hosta, następnie zawartość zostanie rozpakowana. Istniejące pliki zostaną nadpisane.^^Kontynuować?') then
+  if mess.ShowConfirmationYesNo(MENU_009+'^^'+MENU_010) then
   begin
     FPobieranie:=TFPobieranie.Create(self);
     try
-      FPobieranie.tytul:='Lektor - Instalacja Silników Video';
+      FPobieranie.tytul:=MENU_011;
       FPobieranie.hide_dest_filename:=true;
       FPobieranie.show_info_end:=true;
-      FPobieranie.info_end_caption:='Silniki Video zostały wgrane i są gotowe do użycia.';
+      FPobieranie.info_end_caption:=MENU_012;
       FPobieranie.link_download:='https://sourceforge.net/projects/lektor-pomocnik-lektora/files/Players%20Engines/player_engine.zip/download';
       FPobieranie.plik:='player_engine.zip';
       FPobieranie.unzipping:=true;

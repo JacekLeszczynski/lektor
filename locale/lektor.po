@@ -1,0 +1,429 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: about.str_001
+msgid "Istnieje nowsza wersja"
+msgstr ""
+
+#: about.str_002
+msgid "Twoja wersja jest aktualna."
+msgstr ""
+
+#: main.dialogfilter1
+msgid "Wszystkie obsługiwane pliki napisów"
+msgstr ""
+
+#: main.dialogfilter2
+msgid "Plik w formacie SRT"
+msgstr ""
+
+#: main.dialogfilter3
+msgid "Plik w surowym formacie Youtube"
+msgstr ""
+
+#: main.dialogfilter4
+msgid "Wszystkie pliki"
+msgstr ""
+
+#: main.dialogfilter5
+msgid "Pliki Video"
+msgstr ""
+
+#: main.dialogfilter6
+msgid "Pliki"
+msgstr ""
+
+#: main.dialogfilter7
+msgid "Plik tekstowy"
+msgstr ""
+
+#: main.dialogfilter8
+msgid "Pliki Audio"
+msgstr ""
+
+#: main.dialogfilter9
+msgid "Pliki napisów"
+msgstr ""
+
+#: main.menu_001
+msgid "Format tego pliku wygląda następująco:"
+msgstr ""
+
+#: main.menu_002
+msgid "Linia pierwsza"
+msgstr ""
+
+#: main.menu_003
+msgid "Linia druga"
+msgstr ""
+
+#: main.menu_004
+msgid "Linia trzecia"
+msgstr ""
+
+#: main.menu_005
+msgid "Linia czwarta"
+msgstr ""
+
+#: main.menu_006
+msgid "Linia kolejna i tak dalej"
+msgstr ""
+
+#: main.menu_007
+msgid "Jeśli jesteście na youtube na filmie z napisami, możecie je sobie skopiować właśnie w takim formacie."
+msgstr ""
+
+#: main.menu_008
+msgid "Czym jest surowy plik youtube?"
+msgstr ""
+
+#: main.menu_009
+msgid "Zostaną zainstalowane silniki wideo, archiwum zostanie ściągnięte ze zdalnego hosta, następnie zawartość zostanie rozpakowana. Istniejące pliki zostaną nadpisane."
+msgstr ""
+
+#: main.menu_010
+msgid "Kontynuować?"
+msgstr ""
+
+#: main.menu_011
+msgid "Lektor - Instalacja Silników Video"
+msgstr ""
+
+#: main.menu_012
+msgid "Silniki Video zostały wgrane i są gotowe do użycia."
+msgstr ""
+
+#: main.nazwa_programu
+msgctxt "main.nazwa_programu"
+msgid "Lektor - Pomocnik Lektora"
+msgstr ""
+
+#: main.trans_000
+msgid "Informacja"
+msgstr ""
+
+#: main.trans_001
+msgid "Brak załadowanych napisów, operacja anulowana."
+msgstr ""
+
+#: pobieranie.str_001
+msgctxt "pobieranie.str_001"
+msgid "Właśnie trwa pobieranie pliku, proszę czekać..."
+msgstr ""
+
+#: pobieranie.str_002
+msgid "Rozpakowuję zawartość pliku..."
+msgstr ""
+
+#: pobieranie.str_003
+msgid "Plik został pobrany."
+msgstr ""
+
+#: pobieranie.str_004
+msgid "Lokalny system plików"
+msgstr ""
+
+#: tfabout.caption
+msgid "Lektor - O programie"
+msgstr ""
+
+#: tfabout.label1.caption
+msgctxt "tfabout.label1.caption"
+msgid "Lektor - Pomocnik Lektora"
+msgstr ""
+
+#: tfabout.label2.caption
+msgid "by Jacek Leszczyński"
+msgstr ""
+
+#: tfabout.label3.caption
+msgid ""
+"Program wydany na licencji GPL, oznacza to, że:\n"
+"- zezwala się na używanie programu do użytku niekomercyjnego.\n"
+"- zezwala się na wprowadzanie własnych zmian do kodu.\n"
+"- zezwala się na rozpowszechnianie programu zgodnie z licencją GPL.\n"
+msgstr ""
+
+#: tfabout.label4.caption
+msgid ""
+"Wszelkie uwagi i znalezione błędy możesz zgłaszać\n"
+"wysyłając wiadomość na e-mail: sam@bialan.pl\n"
+msgstr ""
+
+#: tfabout.speedbutton1.caption
+msgid "Zrób test i sprawdź, czy posiadasz aktualną wersję?"
+msgstr ""
+
+#: tfabout.wersja.caption
+msgid "v. 1.0"
+msgstr ""
+
+#: tform1.bitbtn1.caption
+msgctxt "tform1.bitbtn1.caption"
+msgid "Załaduj napisy do filmu"
+msgstr ""
+
+#: tform1.bitbtn2.caption
+msgid "Załaduj film"
+msgstr ""
+
+#: tform1.bitbtn3.caption
+msgid "Start"
+msgstr ""
+
+#: tform1.bitbtn4.caption
+msgid "Stop"
+msgstr ""
+
+#: tform1.bitbtn5.caption
+msgctxt "tform1.bitbtn5.caption"
+msgid "Wyjście"
+msgstr ""
+
+#: tform1.bitbtn6.caption
+msgid "Ustaw nagrywanie dźwięku"
+msgstr ""
+
+#: tform1.bitbtn7.caption
+msgid "Alter. ścieżka audio"
+msgstr ""
+
+#: tform1.bitbtn8.caption
+msgid "Nowa linia"
+msgstr ""
+
+#: tform1.bitbtn9.caption
+msgid "Przerwa"
+msgstr ""
+
+#: tform1.caption
+msgid "Lektor"
+msgstr ""
+
+#: tform1.checkbox1.caption
+msgid "Opóźnij START o 10 sekund"
+msgstr ""
+
+#: tform1.checkbox2.caption
+msgid "Tryb nauki"
+msgstr ""
+
+#: tform1.checkbox5.caption
+msgid "Tryb nauki (końcówki)"
+msgstr ""
+
+#: tform1.combobox1.text
+msgid "Normalne"
+msgstr ""
+
+#: tform1.force_mpv_caption.caption
+msgid "MPV zamiast MPlayer!"
+msgstr ""
+
+#: tform1.historia_napisy.hint
+msgid ""
+"Wybierz ilość pokazywanych linii na ekranie\n"
+"(pomocne jeśli napisy nie mieszczą się na ekranie)\n"
+msgstr ""
+
+#: tform1.label1.caption
+msgid "Record Active!"
+msgstr ""
+
+#: tform1.label10.caption
+msgid "Alter. ścieżka Audio"
+msgstr ""
+
+#: tform1.label11.caption
+msgid "Wielkość czcionki:"
+msgstr ""
+
+#: tform1.label12.caption
+msgid "Zakres czasu:"
+msgstr ""
+
+#: tform1.label13.caption
+msgid "Konfiguracja:"
+msgstr ""
+
+#: tform1.label14.caption
+msgid "Synchro Wideo:"
+msgstr ""
+
+#: tform1.label15.caption
+msgctxt "tform1.label15.caption"
+msgid "sec."
+msgstr ""
+
+#: tform1.label16.caption
+msgid "(Czerwone wymagają restartu)"
+msgstr ""
+
+#: tform1.label17.caption
+msgid "Historia linii:"
+msgstr ""
+
+#: tform1.label2.caption
+msgid "Film załadowany"
+msgstr ""
+
+#: tform1.label3.caption
+msgid "Napisy załadowane"
+msgstr ""
+
+#: tform1.label4.caption
+msgid "Nagrywanie dźwięku"
+msgstr ""
+
+#: tform1.label5.caption
+msgid "Opóźnienie wideo II:"
+msgstr ""
+
+#: tform1.label6.caption
+msgctxt "tform1.label6.caption"
+msgid "sec."
+msgstr ""
+
+#: tform1.label7.caption
+msgid "Prędkość odtw. (%):"
+msgstr ""
+
+#: tform1.label8.caption
+msgid ""
+"Wektor przesunięcia\n"
+"napisów w czasie:\n"
+msgstr ""
+
+#: tform1.label9.caption
+msgctxt "tform1.label9.caption"
+msgid "sec."
+msgstr ""
+
+#: tform1.menuitem1.caption
+msgid "Menu"
+msgstr ""
+
+#: tform1.menuitem2.caption
+msgctxt "tform1.menuitem2.caption"
+msgid "Załaduj napisy do filmu"
+msgstr ""
+
+#: tform1.menuitem3.caption
+msgid "Zapisz napisy w pliku *.srt"
+msgstr ""
+
+#: tform1.menuitem4.caption
+msgid "Załaduj surowe napisy do filmu"
+msgstr ""
+
+#: tform1.menuitem5.caption
+msgid "Czym jest plik surowy youtube?"
+msgstr ""
+
+#: tform1.menuitem6.caption
+msgctxt "tform1.menuitem6.caption"
+msgid "Wyjście"
+msgstr ""
+
+#: tform1.menuitem7.caption
+msgid "Pomoc"
+msgstr ""
+
+#: tform1.menuitem8.caption
+msgid "Automatyczna instalacja silników wideo"
+msgstr ""
+
+#: tform1.menuitem9.caption
+msgid "O programie"
+msgstr ""
+
+#: tform1.openaudio.title
+msgid "Otwórz istniejący plik audio"
+msgstr ""
+
+#: tform1.openfilm.title
+msgid "Otwórz istniejący plik wideo"
+msgstr ""
+
+#: tform1.openrawnapisy.title
+msgid "Otwórz istniejący plik w formacie surowego tekstu"
+msgstr ""
+
+#: tform1.opoznienie.hint
+msgid "Bez napisów włączone drugie wideo wystartuje z tym opóźnieniem"
+msgstr ""
+
+#: tform1.opoznienie_napisow.hint
+msgid ""
+"Dostosowanie czasu wyświetlania napisów\n"
+"(pomocne gdy odtwarzasz film nie od początku)\n"
+msgstr ""
+
+#: tform1.panel3.caption
+msgid "Panel3"
+msgstr ""
+
+#: tform1.savenapisy.title
+msgid "Zapisz plik napisów jako"
+msgstr ""
+
+#: tform1.savesound.title
+msgid "Zapisz plik audio jako"
+msgstr ""
+
+#: tform1.server_on_caption.caption
+msgid "Tryb serwera"
+msgstr ""
+
+#: tform1.speed.hint
+msgid ""
+"Zwalnia wszystko jeśli nie nadążasz z mówieniem\n"
+"(wymaga potem konwersji pliku dźwiękowego)\n"
+msgstr ""
+
+#: tform1.synchro_video.hint
+msgid ""
+"Ustaw jeśli Wideo względem napisów\n"
+"odpala się ze zbyt dużym opóźnieniem\n"
+msgstr ""
+
+#: tform1.timeedit1.text
+msgctxt "tform1.timeedit1.text"
+msgid "00:00:00"
+msgstr ""
+
+#: tform1.timeedit2.text
+msgctxt "tform1.timeedit2.text"
+msgid "00:00:00"
+msgstr ""
+
+#: tform1.time_display.caption
+msgctxt "tform1.time_display.caption"
+msgid "00:00:00"
+msgstr ""
+
+#: tfpobieranie.caption
+msgid "Lektor - pobieranie aktualizacji"
+msgstr ""
+
+#: tfpobieranie.cel.caption
+msgid "Miejsce zapisu..."
+msgstr ""
+
+#: tfpobieranie.label1.caption
+msgctxt "tfpobieranie.label1.caption"
+msgid "Właśnie trwa pobieranie pliku, proszę czekać..."
+msgstr ""
+
+#: tfpobieranie.label2.caption
+msgid "Źródło:"
+msgstr ""
+
+#: tfpobieranie.label4.caption
+msgid "Cel:"
+msgstr ""
+
+#: tfpobieranie.zrodlo.caption
+msgid "http://"
+msgstr ""
+

@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Interfaces, // this includes the LCL widgetset
+  Interfaces, DefaultTranslator, // this includes the LCL widgetset
   Forms, main, uecontrols, abbrevia, lnetvisual, about;
 
 {$R *.res}
