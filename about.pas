@@ -91,7 +91,7 @@ end;
 
 function TFAbout.czy_jest_nowsza_wersja(v1, v2: integer): boolean;
 begin
-  if (vMajorVersion>v1) or ((vMajorVersion=v1) and (vMinorVersion>v2)) then result:=true else result:=false;
+  if (v1>vMajorVersion) or ((v1=vMajorVersion) and (v2>vMinorVersion)) then result:=true else result:=false;
 end;
 
 end.

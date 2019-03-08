@@ -274,7 +274,6 @@ begin
   {$ELSE}
   MenuItem8.Visible:=false;
   {$ENDIF}
-  //SetDefaultLang('en');
   SetConfDir('lektor');
   XMLPropStorage1.FileName:=MyConfDir('config.xml');
   XMLPropStorage1.Active:=true;
