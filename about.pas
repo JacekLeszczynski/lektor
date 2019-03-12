@@ -24,7 +24,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
   private
     vMajorVersion,vMinorVersion,vRelease,vBuild: integer;
-    function czy_jest_nowsza_wersja(v1,v2: integer): boolean;
+    function czy_jest_nowsza_wersja(v1,v2,v3,v4: integer): boolean;
   public
 
   end;
@@ -57,8 +57,8 @@ end;
 procedure TFAbout.SpeedButton1Click(Sender: TObject);
 var
   status,a,b: integer;
-  s: string;
-  major,minor: integer;
+  s,s2: string;
+  major,minor,rel,bu: integer;
 begin
   if SpeedButton1.Color=clRed then exit;
   status:=http.execute('https://sourceforge.net/projects/lektor-pomocnik-lektora/files/',s);
@@ -77,9 +77,12 @@ begin
       s:=GetLineToStr(s,2,'_');
       major:=StrToInt(GetLineToStr(s,1,'.'));
       minor:=StrToInt(GetLineToStr(s,2,'.'));
-      if czy_jest_nowsza_wersja(major,minor) then
+      s2:=GetLineToStr(s,3,'.');
+      try rel:=StrToInt(GetLineToStr(s,1,'-')); except rel:=0; end;
+      try bu:=StrToInt(GetLineToStr(s,2,'-')); except bu:=0; end;
+      if czy_jest_nowsza_wersja(major,minor,rel,bu) then
       begin
-        SpeedButton1.Caption:=STR_001+' '+IntToStr(major)+'.'+IntToStr(minor);
+        SpeedButton1.Caption:=STR_001+' '+IntToStr(major)+'.'+IntToStr(minor)+'.'+IntToStr(rel)+'-'+IntToStr(bu);
         SpeedButton1.Color:=clRed;
       end else begin
         SpeedButton1.Caption:=STR_002;
@@ -89,9 +92,13 @@ begin
   end;
 end;
 
-function TFAbout.czy_jest_nowsza_wersja(v1, v2: integer): boolean;
+function TFAbout.czy_jest_nowsza_wersja(v1, v2, v3, v4: integer): boolean;
 begin
-  if (v1>vMajorVersion) or ((v1=vMajorVersion) and (v2>vMinorVersion)) then result:=true else result:=false;
+  if (v1>vMajorVersion) or
+  ((v1=vMajorVersion) and (v2>vMinorVersion)) or
+  ((v1=vMajorVersion) and (v2=vMinorVersion) and (v3>vRelease)) or
+  ((v1=vMajorVersion) and (v2=vMinorVersion) and (v3=vRelease) and (v4>vBuild))
+  then result:=true else result:=false;
 end;
 
 end.
