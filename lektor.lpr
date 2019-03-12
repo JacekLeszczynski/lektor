@@ -62,7 +62,7 @@ begin
   inherited DoRun;
   go_exit:=false;
   lang:=getlang;
-  if lang<>'pl' then lang:='en';
+  if (lang<>'pl') and (lang<>'ru') then lang:='en';
   SetDefaultLang(lang);
 
   par:=TExtParams.Create(nil);
