@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 379
+  Left = 356
   Height = 780
-  Top = 217
+  Top = 191
   Width = 1262
   Caption = 'Lektor'
   ClientHeight = 753
@@ -1232,13 +1232,14 @@ object Form1: TForm1
   end
   object silnik: TUOSEngine
     LibDirectory = 'library'
+    DriversLoad = [dlPortAudio, dlSndAudio]
     left = 302
     top = 435
   end
   object rec: TUOSPlayer
     DeviceEngine = silnik
     Mode = moRecord
-    Meter = True
+    CalcMeter = True
     AfterStart = soAfterStart
     AfterStop = soAfterStop
     left = 396
