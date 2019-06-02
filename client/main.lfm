@@ -1,12 +1,11 @@
 object Form1: TForm1
   Left = 387
-  Height = 612
+  Height = 625
   Top = 358
-  Width = 835
+  Width = 853
   Caption = 'Lektor - Client'
-  ClientHeight = 612
-  ClientWidth = 835
-  DesignTimePPI = 94
+  ClientHeight = 625
+  ClientWidth = 853
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -15,35 +14,38 @@ object Form1: TForm1
   LCLVersion = '2.0.0.4'
   object Panel1: TPanel
     Left = 0
-    Height = 32
+    Height = 33
     Top = 0
-    Width = 835
+    Width = 853
     Align = alTop
-    ClientHeight = 32
-    ClientWidth = 835
+    ClientHeight = 33
+    ClientWidth = 853
+    ParentFont = False
     TabOrder = 0
     object Label1: TLabel
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Panel1
       AnchorSideTop.Side = asrCenter
       Left = 5
-      Height = 18
+      Height = 19
       Top = 7
-      Width = 56
+      Width = 53
       BorderSpacing.Left = 4
       Caption = 'Serwer:'
       ParentColor = False
+      ParentFont = False
     end
     object Edit1: TEdit
       AnchorSideLeft.Control = Label1
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Label1
       AnchorSideTop.Side = asrCenter
-      Left = 65
-      Height = 28
-      Top = 2
-      Width = 198
+      Left = 62
+      Height = 31
+      Top = 1
+      Width = 202
       BorderSpacing.Left = 4
+      ParentFont = False
       TabOrder = 0
       Text = '192.168.10.2'
     end
@@ -53,57 +55,61 @@ object Form1: TForm1
       AnchorSideTop.Control = Edit1
       AnchorSideBottom.Control = Edit1
       AnchorSideBottom.Side = asrBottom
-      Left = 263
-      Height = 28
-      Top = 2
-      Width = 90
+      Left = 264
+      Height = 31
+      Top = 1
+      Width = 81
       Anchors = [akTop, akLeft, akBottom]
       AutoSize = True
       Caption = ' Połączenie '
       OnClick = SpeedButton1Click
+      ParentFont = False
     end
     object CheckBox1: TCheckBox
       AnchorSideLeft.Control = SpeedButton1
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = SpeedButton1
       AnchorSideTop.Side = asrCenter
-      Left = 355
-      Height = 22
+      Left = 347
+      Height = 23
       Top = 5
-      Width = 134
+      Width = 125
       BorderSpacing.Left = 2
       Caption = 'Historia 10 linii'
+      ParentFont = False
       TabOrder = 1
     end
   end
   object Panel2: TPanel
     Left = 0
-    Height = 497
-    Top = 39
-    Width = 835
+    Height = 509
+    Top = 40
+    Width = 853
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 497
-    ClientWidth = 835
+    ClientHeight = 509
+    ClientWidth = 853
+    ParentFont = False
     TabOrder = 1
     object Panel4: TPanel
       Left = 0
-      Height = 411
+      Height = 420
       Top = 0
-      Width = 835
+      Width = 853
       Align = alTop
-      ClientHeight = 411
-      ClientWidth = 835
+      ClientHeight = 420
+      ClientWidth = 853
+      ParentFont = False
       TabOrder = 0
       object Memo2: TMemo
         Left = 1
-        Height = 409
+        Height = 418
         Top = 1
-        Width = 833
+        Width = 851
         Align = alClient
         Alignment = taCenter
         BorderStyle = bsNone
-        Font.Height = -26
+        Font.Height = -27
         Font.Name = 'Liberation Sans'
         Font.Style = [fsBold]
         Lines.Strings = (
@@ -115,23 +121,24 @@ object Form1: TForm1
     end
     object Panel5: TPanel
       Left = 0
-      Height = 81
-      Top = 416
-      Width = 835
+      Height = 84
+      Top = 425
+      Width = 853
       Align = alClient
-      ClientHeight = 81
-      ClientWidth = 835
+      ClientHeight = 84
+      ClientWidth = 853
+      ParentFont = False
       TabOrder = 1
       object Memo1: TMemo
         Left = 1
-        Height = 79
+        Height = 82
         Top = 1
-        Width = 833
+        Width = 851
         Align = alClient
         Alignment = taCenter
         BorderStyle = bsNone
         Color = clSilver
-        Font.Height = -26
+        Font.Height = -27
         Font.Name = 'Liberation Sans'
         Lines.Strings = (
           'Memo1'
@@ -144,49 +151,52 @@ object Form1: TForm1
       Cursor = crVSplit
       Left = 0
       Height = 5
-      Top = 411
-      Width = 835
+      Top = 420
+      Width = 853
       Align = alTop
       ResizeAnchor = akTop
     end
   end
   object Panel3: TPanel
     Left = 0
-    Height = 54
-    Top = 536
-    Width = 835
+    Height = 55
+    Top = 549
+    Width = 853
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 54
-    ClientWidth = 835
+    ClientHeight = 55
+    ClientWidth = 853
+    ParentFont = False
     TabOrder = 2
     object BitBtn1: TBitBtn
       AnchorSideLeft.Control = Panel3
       AnchorSideTop.Control = stat2
       AnchorSideTop.Side = asrBottom
       Left = 1
-      Height = 29
+      Height = 30
       Top = 20
-      Width = 73
+      Width = 75
       BorderSpacing.Left = 1
       BorderSpacing.Top = 4
       Caption = 'START'
       Color = clAqua
       OnClick = BitBtn1Click
+      ParentFont = False
       TabOrder = 0
     end
     object BitBtn2: TBitBtn
       AnchorSideLeft.Control = BitBtn1
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = BitBtn1
-      Left = 75
-      Height = 29
+      Left = 77
+      Height = 30
       Top = 20
-      Width = 73
+      Width = 75
       BorderSpacing.Left = 1
       Caption = 'STOP'
       Color = clRed
       OnClick = BitBtn2Click
+      ParentFont = False
       TabOrder = 1
     end
     object stat: TProgressBar
@@ -197,9 +207,10 @@ object Form1: TForm1
       Left = 0
       Height = 7
       Top = 1
-      Width = 835
+      Width = 853
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Top = 1
+      ParentFont = False
       Smooth = True
       TabOrder = 2
     end
@@ -212,90 +223,98 @@ object Form1: TForm1
       Left = 0
       Height = 7
       Top = 9
-      Width = 835
+      Width = 853
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Top = 1
+      ParentFont = False
       Smooth = True
       TabOrder = 3
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 22
-    Top = 590
-    Width = 835
+    Height = 21
+    Top = 604
+    Width = 853
     Panels = <    
       item
         Text = 'Serwer:'
-        Width = 200
+        Width = 204
       end    
       item
         Text = 'Połączenie:'
-        Width = 170
+        Width = 174
       end    
       item
-        Text = 'Wektor czasu: 0ms'
-        Width = 250
+        Text = 'Wektor czasu:'
+        Width = 255
       end>
+    ParentFont = False
     SimplePanel = False
   end
   object stat1: TProgressBar
     Left = 0
     Height = 7
-    Top = 32
-    Width = 835
+    Top = 33
+    Width = 853
     Align = alTop
+    ParentFont = False
     Smooth = True
     TabOrder = 4
-  end
-  object client: TLTCPComponent
-    Port = 0
-    OnReceive = clientReceive
-    OnError = clientError
-    OnDisconnect = clientDisconnect
-    OnConnect = clientConnect
-    Timeout = 0
-    ReuseAddress = True
-    left = 24
-    top = 96
   end
   object close_delay: TTimer
     Enabled = False
     Interval = 200
     OnTimer = close_delayTimer
-    left = 144
-    top = 96
+    left = 147
+    top = 98
   end
   object me: TPointerTab
     OnCreateElement = meCreateElement
     OnDestroyElement = meDestroyElement
     OnReadElement = meReadElement
     OnWriteElement = meWriteElement
-    left = 272
-    top = 96
+    left = 278
+    top = 98
   end
   object czas_pomiarowy: TLiveTimer
-    left = 392
-    top = 96
+    left = 400
+    top = 98
   end
   object timer_czas: TTimer
     Enabled = False
     Interval = 50
     OnTimer = timer_czasTimer
-    left = 392
-    top = 152
+    left = 400
+    top = 155
   end
   object autorun: TTimer
     Enabled = False
     Interval = 200
     OnTimer = autorunTimer
-    left = 144
-    top = 160
+    left = 147
+    top = 163
   end
   object XMLPropStorage1: TXMLPropStorage
     StoredValues = <>
     Active = False
-    left = 640
-    top = 80
+    left = 654
+    top = 82
+  end
+  object client: TNetSocket
+    Mode = smClient
+    Security = ssNone
+    BinaryMode = False
+    Port = 0
+    ReuseAddress = True
+    Timeout = 0
+    SSLMethod = msSSLv2or3
+    OnConnect = clientConnect
+    OnDisconnect = clientDisconnect
+    OnError = clientError
+    OnReceiveString = clientReceiveString
+    OnTimeVector = clientTimeVector
+    left = 40
+    top = 64
   end
 end

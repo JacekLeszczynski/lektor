@@ -218,6 +218,10 @@ msgstr "Learning mode"
 msgid "Tryb nauki (końcówki)"
 msgstr "Learning mode (endings)"
 
+#: tform1.checkbox6.caption
+msgid "Sound Film Jack Audio"
+msgstr ""
+
 #: tform1.combobox1.text
 msgid "Normalne"
 msgstr "Normal"

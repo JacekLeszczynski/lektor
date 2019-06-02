@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   StdCtrls, Buttons, ComCtrls, XMLPropStorage, lNetComponents, lNet, PointerTab,
-  LiveTimer;
+  LiveTimer, NetSocket;
 
 type
 
@@ -17,13 +17,13 @@ type
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     CheckBox1: TCheckBox;
-    client: TLTCPComponent;
     czas_pomiarowy: TLiveTimer;
     Edit1: TEdit;
     Label1: TLabel;
     me: TPointerTab;
     Memo1: TMemo;
     Memo2: TMemo;
+    client: TNetSocket;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -42,10 +42,7 @@ type
     procedure autorunTimer(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
-    procedure clientConnect(aSocket: TLSocket);
-    procedure clientDisconnect(aSocket: TLSocket);
-    procedure clientError(const msg: string; aSocket: TLSocket);
-    procedure clientReceive(aSocket: TLSocket);
+    procedure clientTimeVector(aTimeVector: integer);
     procedure close_delayTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -55,6 +52,10 @@ type
     procedure meDestroyElement(Sender: TObject; var AWskaznik: Pointer);
     procedure meReadElement(Sender: TObject; var AWskaznik: Pointer);
     procedure meWriteElement(Sender: TObject; var AWskaznik: Pointer);
+    procedure clientConnect(aSocket: TLSocket);
+    procedure clientDisconnect(aSocket: TLSocket);
+    procedure clientError(const aMsg: string; aSocket: TLSocket);
+    procedure clientReceiveString(aMsg: string; aSocket: TLSocket);
     procedure SpeedButton1Click(Sender: TObject);
     procedure timer_czasTimer(Sender: TObject);
   private
@@ -114,24 +115,6 @@ var
 
 { TForm1 }
 
-procedure TForm1.clientError(const msg: string; aSocket: TLSocket);
-begin
-  inc(client_err);
-end;
-
-procedure TForm1.clientConnect(aSocket: TLSocket);
-begin
-  StatusBar1.Panels[0].Text:='Serwer: '+Edit1.Text;
-  StatusBar1.Panels[1].Text:='Połączenie: OK';
-  komendy.Clear;
-  komendy.Add('ntp');
-  komendy.Add('wczytaj_tekst');
-  komendy.Add('status');
-  operacja:=0;
-  _BLOKUJ:=false;
-  autorun.Enabled:=true;
-end;
-
 procedure TForm1.autorunTimer(Sender: TObject);
 var
   s: string;
@@ -140,16 +123,20 @@ begin
   if _BLOKUJ or (komendy.Count=0) then exit;
   s:=komendy[0];
   komendy.Delete(0);
-  if s='ntp' then synchronize_time else
+  if s='ntp' then
+  begin
+    _BLOKUJ:=true;
+    client.GetTimeVector;
+  end else
   if s='wczytaj_tekst' then wczytaj_tekst else
   if s='status' then pobierz_status else
   if s='start' then
   begin
     //if CheckBox2.Checked then client.SendMessage('CTL$'+Edit1.Text+'$start:1')
     //else client.SendMessage('CTL$'+Edit1.Text+'$start:1');
-    client.SendMessage('CTL$'+Edit1.Text+'$start');
+    client.SendString('CTL$'+Edit1.Text+'$start');
   end else
-  if s='stop' then client.SendMessage('CTL$'+Edit1.Text+'$stop');
+  if s='stop' then client.SendString('CTL$'+Edit1.Text+'$stop');
 end;
 
 procedure TForm1.BitBtn1Click(Sender: TObject);
@@ -162,139 +149,11 @@ begin
   komendy.Add('stop');
 end;
 
-procedure TForm1.clientDisconnect(aSocket: TLSocket);
+procedure TForm1.clientTimeVector(aTimeVector: integer);
 begin
-  autorun.Enabled:=false;
-  StatusBar1.Panels[0].Text:='Serwer: ';
-  StatusBar1.Panels[1].Text:='Połączenie:';
-end;
-
-procedure TForm1.clientReceive(aSocket: TLSocket);
-var
-  WYSLIJ_STRING: string;
-  czas_odebrania_ramki: integer;
-  ctl,s: string;
-  adresat,komenda,odpowiedz: string;
-  numer,start,stop,pom,i: integer;
-  tekst: string;
-  t1,t2,t3,t4,srednia: integer;
-begin
-  if aSocket.GetMessage(s)>0 then
-  begin
-    czas_odebrania_ramki:=TimeToInteger;
-    WYSLIJ_STRING:='';
-    ctl:=czytaj_i_usun_pierwsza_zmienna(s);
-    if ctl<>'CTL' then exit;
-    adresat:=czytaj_i_usun_pierwsza_zmienna(s);
-    if (adresat=Edit1.Text) or (adresat='all') then
-    begin
-      komenda:=czytaj_i_usun_pierwsza_zmienna(s);
-      odpowiedz:=s;
-      if komenda='ntp' then
-      begin
-        { synchronizacja czasu }
-        t1:=ntp_t1;
-        t2:=StrToInt(GetLineToStr(odpowiedz,1,':'));
-        t3:=StrToInt(GetLineToStr(odpowiedz,2,':'));
-        t4:=czas_odebrania_ramki;
-        srednia:=round(((t2-t1)+(t3-t4))/2);
-        ntp_srednia:=ntp_srednia+srednia;
-        inc(ntp_count);
-        if ntp_count<100 then
-        begin
-          ntp_t1:=TimeToInteger;
-          client.SendMessage('CTL$'+Edit1.Text+'$ntp');
-        end else begin
-          wektor_czasu:=round(ntp_srednia/ntp_count);
-          czas_pomiarowy.Correction:=wektor_czasu;
-          StatusBar1.Panels[2].Text:='Wektor czasu: '+IntToStr(wektor_czasu)+'ms';
-          _BLOKUJ:=false;
-          Memo1.Lines.Add('Synchronizacja czasu: OK');
-        end;
-      end else
-      if komenda='info' then
-      begin
-        if odpowiedz='start' then client.SendMessage('CTL$'+Edit1.Text+'$index_time') else
-        if odpowiedz='stop' then wylacz else
-        if odpowiedz='exit' then close else
-        if odpowiedz='load_subtitle' then wczytaj_tekst;
-      end else
-      if komenda='count' then
-      begin
-        operacja_count:=StrToInt(odpowiedz);
-        if operacja=1 then
-        begin
-          if operacja_count=0 then
-          begin
-            me.Clear;
-            operacja:=0;
-            _BLOKUJ:=false;
-          end else client.SendMessage('CTL$'+Edit1.Text+'$segment$0');
-          Memo1.Lines.Add('Do zsynchronizowania: '+IntToStr(operacja_count)+' ramek');
-        end;
-      end else
-      if komenda='segment' then
-      begin
-        numer:=StrToInt(GetLineToStr(odpowiedz,1,':'));
-        start:=StrToInt(GetLineToStr(odpowiedz,2,':'));
-        stop:=StrToInt(GetLineToStr(odpowiedz,3,':'));
-        for i:=1 to 3 do
-        begin
-          pom:=pos(':',odpowiedz);
-          delete(odpowiedz,1,pom);
-        end;
-        tekst:=odpowiedz;
-        element.start:=start;
-        element.stop:=stop;
-        element.tekst:=tekst;
-        if operacja=1 then
-        begin
-          me.Add;
-          if numer<operacja_count-1 then
-          begin
-            WYSLIJ_STRING:='CTL$'+Edit1.Text+'$segment$'+IntToStr(numer+1);
-          end else begin
-            Memo1.Lines.Add('Ramki tekstu zostały wczytane.');
-            wczytano_count:=me.Count;
-            operacja:=0;
-            _BLOKUJ:=false;
-          end;
-        end;
-      end else
-      if komenda='segments' then
-      begin
-        me.Clear;
-        while odpowiedz<>'' do
-        begin
-          s:=czytaj_i_usun_pierwsza_zmienna(odpowiedz,#9);
-          element.start:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
-          element.stop:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
-          element.tekst:=s;
-          me.Add;
-        end;
-      end else
-      if komenda='index_time' then
-      begin
-        czas_pomiarowy.Start(StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':')));
-        speed:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
-        opoznienie_napisow:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
-        wczytano:=StrToInt(odpowiedz);
-        if wczytano>1 then dec(wczytano);
-        wlacz;
-      end else
-      if komenda='status' then
-      begin
-        _BLOKUJ:=false;
-        Memo1.Lines.Add('STATUS: '+odpowiedz);
-        if odpowiedz='1' then client.SendMessage('CTL$'+Edit1.Text+'$index_time') else wylacz;
-      end;
-    end;
-  end;
-  if WYSLIJ_STRING<>'' then
-  begin
-    client.SendMessage(WYSLIJ_STRING);
-    WYSLIJ_STRING:='';
-  end;
+  _BLOKUJ:=false;
+  czas_pomiarowy.Correction:=aTimeVector;
+  StatusBar1.Panels[2].Text:='Wektor czasu: '+IntToStr(aTimeVector)+' ms.';
 end;
 
 procedure TForm1.close_delayTimer(Sender: TObject);
@@ -307,7 +166,7 @@ procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction:=caFree;
   me.Clear;
-  if client.Connected then
+  if client.Active then
   begin
     CloseAction:=caNone;
     client.Disconnect;
@@ -363,6 +222,138 @@ begin
   AWskaznik:=pp;
 end;
 
+procedure TForm1.clientConnect(aSocket: TLSocket);
+begin
+  StatusBar1.Panels[0].Text:='Serwer: '+Edit1.Text;
+  StatusBar1.Panels[1].Text:='Połączenie: OK';
+  komendy.Clear;
+  komendy.Add('ntp');
+  komendy.Add('wczytaj_tekst');
+  komendy.Add('status');
+  operacja:=0;
+  _BLOKUJ:=false;
+  autorun.Enabled:=true;
+end;
+
+procedure TForm1.clientDisconnect(aSocket: TLSocket);
+begin
+  autorun.Enabled:=false;
+  StatusBar1.Panels[0].Text:='Serwer: ';
+  StatusBar1.Panels[1].Text:='Połączenie:';
+end;
+
+procedure TForm1.clientError(const aMsg: string; aSocket: TLSocket);
+begin
+  inc(client_err);
+end;
+
+procedure TForm1.clientReceiveString(aMsg: string; aSocket: TLSocket);
+var
+  WYSLIJ_STRING: string;
+  czas_odebrania_ramki: integer;
+  ctl,s: string;
+  adresat,komenda,odpowiedz: string;
+  numer,start,stop,pom,i: integer;
+  tekst: string;
+begin
+  czas_odebrania_ramki:=TimeToInteger;
+  s:=aMsg;
+  WYSLIJ_STRING:='';
+  ctl:=czytaj_i_usun_pierwsza_zmienna(s);
+  if ctl<>'CTL' then exit;
+  adresat:=czytaj_i_usun_pierwsza_zmienna(s);
+  if (adresat=Edit1.Text) or (adresat='all') then
+  begin
+    komenda:=czytaj_i_usun_pierwsza_zmienna(s);
+    odpowiedz:=s;
+    if komenda='info' then
+    begin
+      if odpowiedz='start' then client.SendString('CTL$'+Edit1.Text+'$index_time') else
+      if odpowiedz='stop' then wylacz else
+      if odpowiedz='exit' then
+      begin
+        client.Disconnect(true);
+        close;
+      end else
+      if odpowiedz='load_subtitle' then wczytaj_tekst;
+    end else
+    if komenda='count' then
+    begin
+      operacja_count:=StrToInt(odpowiedz);
+      if operacja=1 then
+      begin
+        if operacja_count=0 then
+        begin
+          me.Clear;
+          operacja:=0;
+          _BLOKUJ:=false;
+        end else client.SendString('CTL$'+Edit1.Text+'$segment$0');
+        Memo1.Lines.Add('Do zsynchronizowania: '+IntToStr(operacja_count)+' ramek');
+      end;
+    end else
+    if komenda='segment' then
+    begin
+      numer:=StrToInt(GetLineToStr(odpowiedz,1,':'));
+      start:=StrToInt(GetLineToStr(odpowiedz,2,':'));
+      stop:=StrToInt(GetLineToStr(odpowiedz,3,':'));
+      for i:=1 to 3 do
+      begin
+        pom:=pos(':',odpowiedz);
+        delete(odpowiedz,1,pom);
+      end;
+      tekst:=odpowiedz;
+      element.start:=start;
+      element.stop:=stop;
+      element.tekst:=tekst;
+      if operacja=1 then
+      begin
+        me.Add;
+        if numer<operacja_count-1 then
+        begin
+          WYSLIJ_STRING:='CTL$'+Edit1.Text+'$segment$'+IntToStr(numer+1);
+        end else begin
+          Memo1.Lines.Add('Ramki tekstu zostały wczytane.');
+          wczytano_count:=me.Count;
+          operacja:=0;
+          _BLOKUJ:=false;
+        end;
+      end;
+    end else
+    if komenda='segments' then
+    begin
+      me.Clear;
+      while odpowiedz<>'' do
+      begin
+        s:=czytaj_i_usun_pierwsza_zmienna(odpowiedz,#9);
+        element.start:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
+        element.stop:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
+        element.tekst:=s;
+        me.Add;
+      end;
+    end else
+    if komenda='index_time' then
+    begin
+      czas_pomiarowy.Start(StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':')));
+      speed:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
+      opoznienie_napisow:=StrToInt(czytaj_i_usun_pierwsza_zmienna(odpowiedz,':'));
+      wczytano:=StrToInt(odpowiedz);
+      if wczytano>1 then dec(wczytano);
+      wlacz;
+    end else
+    if komenda='status' then
+    begin
+      _BLOKUJ:=false;
+      Memo1.Lines.Add('STATUS: '+odpowiedz);
+      if odpowiedz='1' then client.SendString('CTL$'+Edit1.Text+'$index_time') else wylacz;
+    end;
+  end;
+  if WYSLIJ_STRING<>'' then
+  begin
+    client.SendString(WYSLIJ_STRING);
+    WYSLIJ_STRING:='';
+  end;
+end;
+
 procedure TForm1.SpeedButton1Click(Sender: TObject);
 begin
   reconnect;
@@ -375,9 +366,11 @@ end;
 
 function TForm1.reconnect: boolean;
 begin
-  if client.Connected then client.Disconnect;
+  if client.Active then client.Disconnect;
   sleep(200);
-  result:=client.Connect(Edit1.Text,4665);
+  client.Host:=Edit1.Text;
+  client.Port:=4665;
+  result:=client.Connect;
 end;
 
 procedure TForm1.synchronize_time;
@@ -386,7 +379,7 @@ begin
   ntp_count:=0;
   ntp_srednia:=0;
   ntp_t1:=TimeToInteger;
-  client.SendMessage('CTL$'+Edit1.Text+'$ntp');
+  client.SendString('CTL$'+Edit1.Text+'$ntp');
 end;
 
 procedure TForm1.wczytaj_tekst;
@@ -394,13 +387,13 @@ begin
   _BLOKUJ:=true;
   operacja:=1;
   me.Clear;
-  client.SendMessage('CTL$'+Edit1.Text+'$count');
+  client.SendString('CTL$'+Edit1.Text+'$count');
 end;
 
 procedure TForm1.pobierz_status;
 begin
   _BLOKUJ:=true;
-  client.SendMessage('CTL$'+Edit1.Text+'$status');
+  client.SendString('CTL$'+Edit1.Text+'$status');
 end;
 
 function TForm1.czytaj_i_usun_pierwsza_zmienna(var wartosc: string;

@@ -13,7 +13,7 @@ object Form1: TForm1
   OnResize = FormResize
   OnShow = FormShow
   SessionProperties = 'CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;force_mpv.Checked;Height;historia_napisy.Value;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;speed.Value;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState'
-  LCLVersion = '2.0.0.4'
+  LCLVersion = '2.0.2.0'
   object Panel1: TPanel
     Left = 0
     Height = 556
@@ -320,6 +320,14 @@ object Form1: TForm1
           TabOrder = 10
           Value = 10
         end
+        object CheckBox6: TCheckBox
+          Left = 8
+          Height = 23
+          Top = 445
+          Width = 173
+          Caption = 'Sound Film Jack Audio'
+          TabOrder = 11
+        end
       end
       object mplayer: TMPlayerControl
         Left = 220
@@ -329,6 +337,10 @@ object Form1: TForm1
         Align = alClient
         Engine = meMplayer
         Loop = 0
+        MPlayerPath = 'mplayer'
+        ICYRadio = False
+        CaptureDump = False
+        ActiveTimer = False
         Volume = -1
         OnStop = mplayerStop
       end
@@ -1060,6 +1072,10 @@ object Form1: TForm1
           Engine = meMplayer
           NoSound = True
           Loop = 0
+          MPlayerPath = 'mplayer'
+          ICYRadio = False
+          CaptureDump = False
+          ActiveTimer = False
           Volume = -1
         end
       end
@@ -1204,15 +1220,6 @@ object Form1: TForm1
     left = 302
     top = 82
   end
-  object server: TLTCPComponent
-    Port = 0
-    OnReceive = serverReceive
-    OnError = serverError
-    Timeout = 0
-    ReuseAddress = True
-    left = 302
-    top = 368
-  end
   object timer_czas_end: TTimer
     Enabled = False
     OnTimer = timer_czas_endTimer
@@ -1239,6 +1246,8 @@ object Form1: TForm1
   object rec: TUOSPlayer
     DeviceEngine = silnik
     Mode = moRecord
+    Volume = 1
+    VolumeGlobal = 1
     CalcMeter = True
     AfterStart = soAfterStart
     AfterStop = soAfterStop
@@ -1259,5 +1268,18 @@ object Form1: TForm1
     OnStopTimer = timer_meterStopTimer
     left = 416
     top = 270
+  end
+  object server: TNetSocket
+    Mode = smServer
+    Security = ssNone
+    BinaryMode = False
+    Port = 0
+    ReuseAddress = True
+    Timeout = 0
+    SSLMethod = msSSLv2or3
+    OnError = serverError
+    OnReceiveString = serverReceiveString
+    left = 302
+    top = 370
   end
 end

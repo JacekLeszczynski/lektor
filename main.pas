@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab,
-  ExtMessage, LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl,
+  ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab, ExtMessage,
+  LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl, NetSocket,
   lNetComponents, ueled, Menus, EditBtn, lNet;
 
 type
@@ -29,9 +29,11 @@ type
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
     force_mpv: TCheckBox;
     meter2: TProgressBar;
     meter1: TProgressBar;
+    server: TNetSocket;
     timer_meter: TIdleTimer;
     Label14: TLabel;
     Label15: TLabel;
@@ -56,7 +58,6 @@ type
     server_on_caption: TLabel;
     Label16: TLabel;
     Panel11: TPanel;
-    server: TLTCPComponent;
     MainMenu1: TMainMenu;
     Memo2: TMemo;
     MenuItem1: TMenuItem;
@@ -151,10 +152,10 @@ type
     procedure meReadElement(Sender: TObject; var AWskaznik: Pointer);
     procedure meWriteElement(Sender: TObject; var AWskaznik: Pointer);
     procedure mplayerStop(Sender: TObject);
+    procedure serverError(const aMsg: string; aSocket: TLSocket);
+    procedure serverReceiveString(aMsg: string; aSocket: TLSocket);
     procedure opozniony_startTimer(Sender: TObject);
     procedure play_synchroTimer(Sender: TObject);
-    procedure serverError(const msg: string; aSocket: TLSocket);
-    procedure serverReceive(aSocket: TLSocket);
     procedure soAfterStart(Sender: TObject);
     procedure soAfterStop(Sender: TObject);
     procedure timer_czasTimer(Sender: TObject);
@@ -200,6 +201,9 @@ type
     tekst: string;
   end;
 
+const
+  LINK_MPLAYERS_ENGINE = 'https://sourceforge.net/projects/paczki-do-moich-program-w/files/player_engine.zip/download';
+
 resourcestring
   NAZWA_PROGRAMU = 'Lektor - Pomocnik Lektora';
   DialogFilter1 = 'Wszystkie obsługiwane pliki napisów';
@@ -225,6 +229,7 @@ resourcestring
   MENU_012 = 'Silniki Video zostały wgrane i są gotowe do użycia.';
   Trans_000 = 'Informacja';
   Trans_001 = 'Brak załadowanych napisów, operacja anulowana.';
+
 var
   element: TElement;
   pp: ^TElement;
@@ -486,9 +491,9 @@ begin
     CheckBox2Change(Sender);
     if server_on.Checked then
     begin
-      b_server_on:=true;
-      server.Listen(4665);
-      v_ts.Active:=true;
+      server.Port:=4665;
+      b_server_on:=server.Connect;
+      v_ts.Active:=b_server_on;
     end else b_server_on:=false;
     (* pobieramy wartość mixera - główny kanał *)
     sound_master_data.active:=false;
@@ -648,7 +653,7 @@ begin
       FPobieranie.hide_dest_filename:=true;
       FPobieranie.show_info_end:=true;
       FPobieranie.info_end_caption:=MENU_012;
-      FPobieranie.link_download:='https://sourceforge.net/projects/lektor-pomocnik-lektora/files/Players%20Engines/player_engine.zip/download';
+      FPobieranie.link_download:=LINK_MPLAYERS_ENGINE;
       FPobieranie.plik:='player_engine.zip';
       FPobieranie.unzipping:=true;
       FPobieranie.delete_for_exit:=true;
@@ -682,24 +687,12 @@ begin
   BitBtn4.Click;
 end;
 
-procedure TForm1.opozniony_startTimer(Sender: TObject);
-begin
-  opozniony_start.Enabled:=false;
-  procedura_startu;
-end;
-
-procedure TForm1.play_synchroTimer(Sender: TObject);
-begin
-  play_synchro.Enabled:=false;
-  start_init_2;
-end;
-
-procedure TForm1.serverError(const msg: string; aSocket: TLSocket);
+procedure TForm1.serverError(const aMsg: string; aSocket: TLSocket);
 begin
   inc(server_err);
 end;
 
-procedure TForm1.serverReceive(aSocket: TLSocket);
+procedure TForm1.serverReceiveString(aMsg: string; aSocket: TLSocket);
 var
   czas_otrzymania_ramki,czas_wyslania_ramki: integer;
   i: integer;
@@ -710,64 +703,69 @@ begin
   {
   "CTL"$IP_ADDRESS$COMMAND[$OPTION]
   }
-  if aSocket.GetMessage(s)>0 then
+  czas_otrzymania_ramki:=TimeToInteger;
+  s:=aMsg;
+  kod:=GetLineToStr(s,1,'$');
+  if kod='CTL' then
   begin
-    czas_otrzymania_ramki:=TimeToInteger;
-    kod:=GetLineToStr(s,1,'$');
-    if kod='CTL' then
+    ip:=GetLineToStr(s,2,'$');
+    komenda:=GetLineToStr(s,3,'$');
+    opcja:=GetLineToStr(s,4,'$');
+    if komenda='count' then SendToAll(ip,'count',IntToStr(me.Count)) else
+    if komenda='segment' then
     begin
-      ip:=GetLineToStr(s,2,'$');
-      komenda:=GetLineToStr(s,3,'$');
-      opcja:=GetLineToStr(s,4,'$');
-      if komenda='ntp' then
+      numer:=StrToInt(opcja);
+      me.Read(numer);
+      start:=element.start;
+      stop:=element.stop;
+      tekst:=element.tekst;
+      SendToAll(ip,'segment',IntToStr(numer)+':'+IntToStr(start)+':'+IntToStr(stop)+':'+tekst);
+    end else if komenda='segments' then
+    begin
+      ss:='';
+      for i:=0 to me.Count-1 do
       begin
-        { kod wykorzystywany do synchronizacji czasu }
-        SendToAll(ip,'ntp',IntToStr(czas_otrzymania_ramki),true);
-      end else
-      if komenda='count' then SendToAll(ip,'count',IntToStr(me.Count)) else
-      if komenda='segment' then
-      begin
-        numer:=StrToInt(opcja);
-        me.Read(numer);
+        me.Read(i);
         start:=element.start;
         stop:=element.stop;
         tekst:=element.tekst;
-        SendToAll(ip,'segment',IntToStr(numer)+':'+IntToStr(start)+':'+IntToStr(stop)+':'+tekst);
-      end else if komenda='segments' then
-      begin
-        ss:='';
-        for i:=0 to me.Count-1 do
-        begin
-          me.Read(i);
-          start:=element.start;
-          stop:=element.stop;
-          tekst:=element.tekst;
-          if i=0 then ss:=IntToStr(start)+':'+IntToStr(stop)+':'+tekst else ss:=ss+#9+IntToStr(start)+':'+IntToStr(stop)+':'+tekst;
-        end;
-        SendToAll(ip,'segments',ss);
-      end else if komenda='start' then
-      begin
-        if BitBtn3.Enabled then
-        begin
-          BitBtn3.Click;
-          SendToAll(ip,'start','1');
-        end else SendToAll(ip,'start','0');
-      end else if komenda='stop' then
-      begin
-        if BitBtn4.Enabled then
-        begin
-          BitBtn4.Click;
-          SendToAll(ip,'stop','1');
-        end else SendToAll(ip,'stop','0');
-      end else if komenda='index_time' then
-      begin
-        SendToAll(ip,'index_time',IntToStr(czas_pomiarowy.GetIndexStartTime)+':'+IntToStr(speed.Value)+':'+IntToStr(trunc(opoznienie_napisow.Value*100))+':'+IntToStr(Wczytano));
-      end else if komenda='status' then
-      begin
-        if b_play then SendToAll(ip,'status','1') else SendToAll(ip,'status','0');
+        if i=0 then ss:=IntToStr(start)+':'+IntToStr(stop)+':'+tekst else ss:=ss+#9+IntToStr(start)+':'+IntToStr(stop)+':'+tekst;
       end;
+      SendToAll(ip,'segments',ss);
+    end else if komenda='start' then
+    begin
+      if BitBtn3.Enabled then
+      begin
+        BitBtn3.Click;
+        SendToAll(ip,'start','1');
+      end else SendToAll(ip,'start','0');
+    end else if komenda='stop' then
+    begin
+      if BitBtn4.Enabled then
+      begin
+        BitBtn4.Click;
+        SendToAll(ip,'stop','1');
+      end else SendToAll(ip,'stop','0');
+    end else if komenda='index_time' then
+    begin
+      SendToAll(ip,'index_time',IntToStr(czas_pomiarowy.GetIndexStartTime)+':'+IntToStr(speed.Value)+':'+IntToStr(trunc(opoznienie_napisow.Value*100))+':'+IntToStr(Wczytano));
+    end else if komenda='status' then
+    begin
+      if b_play then SendToAll(ip,'status','1') else SendToAll(ip,'status','0');
     end;
   end;
+end;
+
+procedure TForm1.opozniony_startTimer(Sender: TObject);
+begin
+  opozniony_start.Enabled:=false;
+  procedura_startu;
+end;
+
+procedure TForm1.play_synchroTimer(Sender: TObject);
+begin
+  play_synchro.Enabled:=false;
+  start_init_2;
 end;
 
 procedure TForm1.soAfterStart(Sender: TObject);
@@ -990,8 +988,10 @@ end;
 procedure TForm1.film_start;
 var
   ss,s,s2,s3: string;
+  ss_mplayer: string;
 begin
   if film='' then exit;
+  ss_mplayer:='';
   {$IFDEF MSWINDOWS}
   if force_mpv.Checked then ss:='-vo direct3d -fs -subcp utf-8' else ss:='-vo directx -fs -subcp utf-8';
   {$ELSE}
@@ -1001,12 +1001,13 @@ begin
   begin
     mplayer.Engine:=meMplayer;
     ss:=ss+' -zoom';
+    if CheckBox6.Checked then ss_mplayer:=' -ao jack';
   end;
   mplayer2.Engine:=mplayer.Engine;
   if speed.Value=100 then s:='' else s:=' -speed '+FormatFloat('0.00',speed.Value/100);
   if b_audio then s2:=' -audiofile "'+audio+'"' else s2:='';
   if CheckBox3.Checked then s3:=' -ss '+FormatDateTime('hh:nn:ss',TimeEdit1.Time)+'' else s3:='';
-  mplayer.StartParam:=ss+s+s2+s3;
+  mplayer.StartParam:=ss+ss_mplayer+s+s2+s3;
   mplayer.Filename:=film;
   mplayer.Play;
   if not b_napisy then
@@ -1206,15 +1207,9 @@ var
   n: integer;
   s: string;
 begin
-  //'CTL'$adres_ip$rodzaj$ramka
   s:='CTL$'+adres_ip+'$'+rodzaj+'$'+ramka;
-  server.IterReset;
-  while server.IterNext do
-  begin
-    if dolacz_czas_wyslania_ramki then s:=s+':'+IntToStr(TimeToInteger);
-    n:=server.SendMessage(s,server.Iterator);
-    //if n<Length(aMsg) then MemoText.Append('Error on send [' + IntToStr(n) + ']');
-  end;
+  if dolacz_czas_wyslania_ramki then s:=s+':'+IntToStr(TimeToInteger);
+  server.SendString(s);
 end;
 
 end.
