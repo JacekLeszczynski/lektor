@@ -903,7 +903,7 @@ begin
   if CheckBox3.Checked then
   begin
     if speed.Value=100 then czas_pomiarowy.Start(TimeToInteger-TimeToInteger(TimeEdit1.Time))
-                          else czas_pomiarowy.Start(TimeToInteger-round(TimeToInteger(TimeEdit1.Time)*(100/speed.Value)));
+                       else czas_pomiarowy.Start(TimeToInteger-round(TimeToInteger(TimeEdit1.Time)*(100/speed.Value)));
   end else czas_pomiarowy.Start;
   b_play:=true;
   rec_start;

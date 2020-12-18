@@ -13,7 +13,7 @@ object Form1: TForm1
   OnResize = FormResize
   OnShow = FormShow
   SessionProperties = 'CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;force_mpv.Checked;Height;historia_napisy.Value;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;speed.Value;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState'
-  LCLVersion = '2.0.2.0'
+  LCLVersion = '2.0.10.0'
   object Panel1: TPanel
     Left = 0
     Height = 556
@@ -53,9 +53,9 @@ object Form1: TForm1
         TabOrder = 0
         object Label5: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 11
-          Width = 132
+          Width = 131
           Caption = 'Opóźnienie wideo II:'
           ParentColor = False
           ParentFont = False
@@ -67,10 +67,10 @@ object Form1: TForm1
           AnchorSideRight.Control = Label5
           AnchorSideRight.Side = asrBottom
           Left = 8
-          Height = 31
+          Height = 30
           Hint = 'Bez napisów włączone drugie wideo wystartuje z tym opóźnieniem'
-          Top = 30
-          Width = 132
+          Top = 28
+          Width = 131
           Anchors = [akTop, akLeft, akRight]
           MaxValue = 20
           MinValue = 1
@@ -85,9 +85,9 @@ object Form1: TForm1
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = opoznienie
           AnchorSideTop.Side = asrCenter
-          Left = 144
-          Height = 19
-          Top = 36
+          Left = 143
+          Height = 17
+          Top = 35
           Width = 26
           BorderSpacing.Left = 4
           Caption = 'sec.'
@@ -96,9 +96,9 @@ object Form1: TForm1
         end
         object Label7: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 65
-          Width = 130
+          Width = 128
           Caption = 'Prędkość odtw. (%):'
           ParentColor = False
           ParentFont = False
@@ -108,9 +108,9 @@ object Form1: TForm1
           AnchorSideTop.Control = historia_napisy
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 38
-          Top = 172
-          Width = 135
+          Height = 34
+          Top = 169
+          Width = 134
           BorderSpacing.Top = 8
           Caption = 'Wektor przesunięcia'#10'napisów w czasie:'
           ParentColor = False
@@ -121,9 +121,9 @@ object Form1: TForm1
           AnchorSideTop.Control = Label8
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 31
+          Height = 30
           Hint = 'Dostosowanie czasu wyświetlania napisów'#10'(pomocne gdy odtwarzasz film nie od początku)'
-          Top = 210
+          Top = 203
           Width = 96
           Increment = 0.1
           MaxValue = 10
@@ -132,7 +132,6 @@ object Form1: TForm1
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          Value = 0
         end
         object Label9: TLabel
           AnchorSideLeft.Control = opoznienie_napisow
@@ -140,8 +139,8 @@ object Form1: TForm1
           AnchorSideTop.Control = opoznienie_napisow
           AnchorSideTop.Side = asrCenter
           Left = 108
-          Height = 19
-          Top = 216
+          Height = 17
+          Top = 210
           Width = 26
           BorderSpacing.Left = 4
           Caption = 'sec.'
@@ -153,9 +152,9 @@ object Form1: TForm1
           AnchorSideTop.Control = opoznienie_napisow
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 19
-          Top = 245
-          Width = 119
+          Height = 17
+          Top = 237
+          Width = 118
           BorderSpacing.Top = 4
           Caption = 'Wielkość czcionki:'
           ParentColor = False
@@ -167,7 +166,7 @@ object Form1: TForm1
           AnchorSideTop.Side = asrBottom
           Left = 8
           Height = 29
-          Top = 264
+          Top = 254
           Width = 172
           ItemHeight = 0
           ItemIndex = 0
@@ -187,8 +186,8 @@ object Form1: TForm1
           AnchorSideTop.Side = asrBottom
           Left = 8
           Height = 23
-          Top = 297
-          Width = 94
+          Top = 287
+          Width = 93
           BorderSpacing.Top = 4
           Caption = 'Tryb nauki'
           Font.Color = clRed
@@ -201,8 +200,8 @@ object Form1: TForm1
           AnchorSideTop.Control = Label12
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 31
-          Top = 370
+          Height = 30
+          Top = 358
           Width = 157
           ButtonWidth = 23
           NumGlyphs = 1
@@ -216,9 +215,9 @@ object Form1: TForm1
           AnchorSideTop.Control = CheckBox5
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 19
-          Top = 351
-          Width = 90
+          Height = 17
+          Top = 341
+          Width = 89
           BorderSpacing.Top = 4
           Caption = 'Zakres czasu:'
           ParentColor = False
@@ -229,8 +228,8 @@ object Form1: TForm1
           AnchorSideTop.Control = TimeEdit1
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 31
-          Top = 401
+          Height = 30
+          Top = 388
           Width = 157
           ButtonWidth = 23
           NumGlyphs = 1
@@ -246,7 +245,7 @@ object Form1: TForm1
           AnchorSideTop.Side = asrCenter
           Left = 165
           Height = 23
-          Top = 374
+          Top = 362
           Width = 23
           ParentFont = False
           TabOrder = 6
@@ -258,7 +257,7 @@ object Form1: TForm1
           AnchorSideTop.Side = asrCenter
           Left = 165
           Height = 23
-          Top = 405
+          Top = 392
           Width = 23
           ParentFont = False
           TabOrder = 7
@@ -269,8 +268,8 @@ object Form1: TForm1
           AnchorSideTop.Side = asrBottom
           Left = 8
           Height = 23
-          Top = 324
-          Width = 166
+          Top = 314
+          Width = 164
           BorderSpacing.Top = 4
           Caption = 'Tryb nauki (końcówki)'
           Font.Color = clRed
@@ -283,10 +282,11 @@ object Form1: TForm1
           AnchorSideTop.Control = Label7
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 31
+          Height = 30
           Hint = 'Zwalnia wszystko jeśli nie nadążasz z mówieniem'#10'(wymaga potem konwersji pliku dźwiękowego)'
-          Top = 84
+          Top = 82
           Width = 153
+          MaxValue = 150
           MinValue = 75
           ParentFont = False
           ParentShowHint = False
@@ -296,7 +296,7 @@ object Form1: TForm1
         end
         object Label17: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 114
           Width = 84
           Caption = 'Historia linii:'
@@ -308,9 +308,9 @@ object Form1: TForm1
           AnchorSideTop.Control = Label17
           AnchorSideTop.Side = asrBottom
           Left = 8
-          Height = 31
+          Height = 30
           Hint = 'Wybierz ilość pokazywanych linii na ekranie'#10'(pomocne jeśli napisy nie mieszczą się na ekranie)'
-          Top = 133
+          Top = 131
           Width = 153
           MaxValue = 10
           MinValue = 2
@@ -324,7 +324,7 @@ object Form1: TForm1
           Left = 8
           Height = 23
           Top = 445
-          Width = 173
+          Width = 169
           Caption = 'Sound Film Jack Audio'
           TabOrder = 11
         end
@@ -334,6 +334,9 @@ object Form1: TForm1
         Height = 547
         Top = 0
         Width = 820
+        AccelType = '<auto>'
+        ScreenshotDirectory = '<auto>'
+        MpvIpcDevFile = '<auto>'
         Align = alClient
         Engine = meMplayer
         Loop = 0
@@ -378,9 +381,9 @@ object Form1: TForm1
           AnchorSideTop.Control = led
           AnchorSideTop.Side = asrCenter
           Left = 37
-          Height = 19
-          Top = 111
-          Width = 94
+          Height = 17
+          Top = 112
+          Width = 93
           BorderSpacing.Left = 4
           Caption = 'Record Active!'
           ParentColor = False
@@ -410,9 +413,9 @@ object Form1: TForm1
           AnchorSideTop.Control = led1
           AnchorSideTop.Side = asrCenter
           Left = 37
-          Height = 19
-          Top = 11
-          Width = 111
+          Height = 17
+          Top = 12
+          Width = 110
           BorderSpacing.Left = 4
           Caption = 'Film załadowany'
           ParentColor = False
@@ -441,8 +444,8 @@ object Form1: TForm1
           AnchorSideTop.Control = led2
           AnchorSideTop.Side = asrCenter
           Left = 37
-          Height = 19
-          Top = 61
+          Height = 17
+          Top = 62
           Width = 127
           BorderSpacing.Left = 4
           Caption = 'Napisy załadowane'
@@ -472,9 +475,9 @@ object Form1: TForm1
           AnchorSideTop.Control = led3
           AnchorSideTop.Side = asrCenter
           Left = 37
-          Height = 19
-          Top = 86
-          Width = 137
+          Height = 17
+          Top = 87
+          Width = 135
           BorderSpacing.Left = 4
           Caption = 'Nagrywanie dźwięku'
           ParentColor = False
@@ -502,9 +505,9 @@ object Form1: TForm1
           AnchorSideTop.Control = led4
           AnchorSideTop.Side = asrCenter
           Left = 37
-          Height = 19
-          Top = 36
-          Width = 129
+          Height = 17
+          Top = 37
+          Width = 127
           Caption = 'Alter. ścieżka Audio'
           ParentColor = False
           ParentFont = False
@@ -577,13 +580,13 @@ object Form1: TForm1
           AnchorSideRight.Control = time_display
           AnchorSideRight.Side = asrBottom
           Left = 8
-          Height = 148
+          Height = 141
           Top = 194
           Width = 204
           Anchors = [akTop, akLeft, akRight]
           AutoSize = True
           BorderSpacing.Top = 4
-          ClientHeight = 148
+          ClientHeight = 141
           ClientWidth = 204
           ParentFont = False
           TabOrder = 2
@@ -591,7 +594,7 @@ object Form1: TForm1
             AnchorSideLeft.Control = Panel11
             AnchorSideTop.Control = Panel11
             Left = 3
-            Height = 19
+            Height = 17
             Top = 3
             Width = 87
             BorderSpacing.Left = 2
@@ -606,7 +609,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrBottom
             Left = 3
             Height = 23
-            Top = 43
+            Top = 39
             Width = 23
             BorderSpacing.Top = 4
             ParentFont = False
@@ -618,9 +621,9 @@ object Form1: TForm1
             AnchorSideTop.Control = server_on
             AnchorSideTop.Side = asrCenter
             Left = 30
-            Height = 15
-            Top = 47
-            Width = 76
+            Height = 13
+            Top = 44
+            Width = 77
             BorderSpacing.Left = 4
             Caption = 'Tryb serwera'
             Font.Color = clRed
@@ -634,8 +637,8 @@ object Form1: TForm1
             AnchorSideTop.Control = Label13
             AnchorSideTop.Side = asrBottom
             Left = 3
-            Height = 13
-            Top = 26
+            Height = 11
+            Top = 24
             Width = 152
             BorderSpacing.Top = 4
             Caption = '(Czerwone wymagają restartu)'
@@ -651,7 +654,7 @@ object Form1: TForm1
             AnchorSideRight.Control = meter1
             Left = 142
             Height = 25
-            Top = 42
+            Top = 38
             Width = 25
             Debug = False
             Active = False
@@ -668,8 +671,8 @@ object Form1: TForm1
             AnchorSideTop.Control = server_on
             AnchorSideTop.Side = asrBottom
             Left = 3
-            Height = 15
-            Top = 70
+            Height = 13
+            Top = 66
             Width = 95
             BorderSpacing.Top = 4
             Caption = 'Synchro Wideo:'
@@ -683,18 +686,16 @@ object Form1: TForm1
             AnchorSideTop.Control = Label14
             AnchorSideTop.Side = asrBottom
             Left = 3
-            Height = 31
+            Height = 30
             Hint = 'Ustaw jeśli Wideo względem napisów'#10'odpala się ze zbyt dużym opóźnieniem'
-            Top = 85
+            Top = 79
             Width = 107
             Increment = 0.1
             MaxValue = 10
-            MinValue = 0
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
-            Value = 0
           end
           object Label15: TLabel
             AnchorSideLeft.Control = synchro_video
@@ -702,8 +703,8 @@ object Form1: TForm1
             AnchorSideTop.Control = synchro_video
             AnchorSideTop.Side = asrCenter
             Left = 114
-            Height = 19
-            Top = 91
+            Height = 17
+            Top = 86
             Width = 26
             BorderSpacing.Left = 4
             Caption = 'sec.'
@@ -716,7 +717,7 @@ object Form1: TForm1
             AnchorSideTop.Side = asrBottom
             Left = 3
             Height = 23
-            Top = 120
+            Top = 113
             Width = 23
             BorderSpacing.Top = 4
             BorderSpacing.Bottom = 4
@@ -728,8 +729,8 @@ object Form1: TForm1
             AnchorSideTop.Control = force_mpv
             AnchorSideTop.Side = asrCenter
             Left = 30
-            Height = 15
-            Top = 124
+            Height = 13
+            Top = 118
             Width = 130
             BorderSpacing.Left = 4
             Caption = 'MPV zamiast MPlayer!'
@@ -745,7 +746,7 @@ object Form1: TForm1
             AnchorSideBottom.Control = Panel11
             AnchorSideBottom.Side = asrBottom
             Left = 185
-            Height = 134
+            Height = 127
             Top = 5
             Width = 10
             Anchors = [akTop, akRight, akBottom]
@@ -761,7 +762,7 @@ object Form1: TForm1
             AnchorSideBottom.Control = meter2
             AnchorSideBottom.Side = asrBottom
             Left = 175
-            Height = 134
+            Height = 127
             Top = 5
             Width = 10
             Anchors = [akTop, akRight, akBottom]
@@ -878,7 +879,7 @@ object Form1: TForm1
         AnchorSideLeft.Control = BitBtn6
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = BitBtn6
-        Left = 600
+        Left = 596
         Height = 30
         Top = 21
         Width = 74
@@ -893,7 +894,7 @@ object Form1: TForm1
         AnchorSideLeft.Control = BitBtn3
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = BitBtn3
-        Left = 678
+        Left = 674
         Height = 30
         Top = 21
         Width = 74
@@ -927,10 +928,10 @@ object Form1: TForm1
         AnchorSideLeft.Control = BitBtn7
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = BitBtn7
-        Left = 407
+        Left = 406
         Height = 29
         Top = 21
-        Width = 189
+        Width = 186
         AutoSize = True
         BorderSpacing.Left = 4
         Caption = 'Ustaw nagrywanie dźwięku'
@@ -943,10 +944,10 @@ object Form1: TForm1
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = BitBtn4
         AnchorSideTop.Side = asrCenter
-        Left = 756
+        Left = 752
         Height = 23
         Top = 25
-        Width = 204
+        Width = 199
         BorderSpacing.Left = 4
         Caption = 'Opóźnij START o 10 sekund'
         ParentFont = False
@@ -974,7 +975,7 @@ object Form1: TForm1
         Left = 266
         Height = 29
         Top = 21
-        Width = 137
+        Width = 136
         AutoSize = True
         BorderSpacing.Left = 4
         Caption = 'Alter. ścieżka audio'
@@ -1068,6 +1069,9 @@ object Form1: TForm1
           Height = 172
           Top = -43
           Width = 820
+          AccelType = '<auto>'
+          ScreenshotDirectory = '<auto>'
+          MpvIpcDevFile = '<auto>'
           Anchors = [akLeft, akRight, akBottom]
           Engine = meMplayer
           NoSound = True
@@ -1083,29 +1087,29 @@ object Form1: TForm1
   end
   object OpenNapisy: TOpenDialog
     Filter = 'Wszystkie obsługiwane pliki napisów|*.srt;*.youtube|Plik w formacie SRT|*.srt|Plik w surowym formacie Youtube|*.youtube|Wszystkie pliki|*.*'
-    left = 302
-    top = 25
+    Left = 302
+    Top = 25
   end
   object OpenFilm: TOpenDialog
     Title = 'Otwórz istniejący plik wideo'
     Filter = 'Pliki Video|*.avi;*mp4;*.mkv;*.webm|Pliki *.mp4|*.mp4|Wszystkie pliki|*.*'
-    left = 417
-    top = 25
+    Left = 417
+    Top = 25
   end
   object timer_czas: TTimer
     Enabled = False
     Interval = 50
     OnTimer = timer_czasTimer
-    left = 302
-    top = 155
+    Left = 302
+    Top = 155
   end
   object me: TPointerTab
     OnCreateElement = meCreateElement
     OnDestroyElement = meDestroyElement
     OnReadElement = meReadElement
     OnWriteElement = meWriteElement
-    left = 645
-    top = 25
+    Left = 645
+    Top = 25
   end
   object SaveSound: TSaveDialog
     Title = 'Zapisz plik audio jako'
@@ -1113,29 +1117,29 @@ object Form1: TForm1
     FileName = 'lektor.wav'
     Filter = 'Pliki Wave|*.wav'
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
-    left = 507
-    top = 25
+    Left = 507
+    Top = 25
   end
   object timer_delay_sound: TTimer
     Enabled = False
     Interval = 5000
     OnTimer = timer_delay_soundTimer
-    left = 302
-    top = 212
+    Left = 302
+    Top = 212
   end
   object timer_mplayer2: TTimer
     Enabled = False
     Interval = 2000
     OnTimer = timer_mplayer2Timer
-    left = 531
-    top = 155
+    Left = 531
+    Top = 155
   end
   object opozniony_start: TTimer
     Enabled = False
     Interval = 10000
     OnTimer = opozniony_startTimer
-    left = 302
-    top = 270
+    Left = 302
+    Top = 270
   end
   object XMLPropStorage1: TXMLPropStorage
     StoredValues = <>
@@ -1143,14 +1147,14 @@ object Form1: TForm1
     Active = False
     OnSaveProperties = XMLPropStorage1SaveProperties
     OnRestoreProperties = XMLPropStorage1RestoreProperties
-    left = 842
-    top = 25
+    Left = 842
+    Top = 25
   end
   object OpenAudio: TOpenDialog
     Title = 'Otwórz istniejący plik audio'
     Filter = 'Pliki Video|*.avi;*mp4;*.mkv;*.webm|Pliki Audio|*.wav;*.flac;*.ogg;*.mp3;*.mp2|Wszystkie pliki|*.*'
-    left = 417
-    top = 82
+    Left = 417
+    Top = 82
   end
   object mess: TExtMessage
     Caption = '<Auto>'
@@ -1158,16 +1162,16 @@ object Form1: TForm1
     PosTop = 0
     PosLeft = 0
     StringToCR = '^'
-    left = 711
-    top = 25
+    Left = 711
+    Top = 25
   end
   object czas_pomiarowy: TLiveTimer
-    left = 842
-    top = 82
+    Left = 842
+    Top = 82
   end
   object MainMenu1: TMainMenu
-    left = 711
-    top = 82
+    Left = 711
+    Top = 82
     object MenuItem1: TMenuItem
       Caption = 'Menu'
       object MenuItem2: TMenuItem
@@ -1210,38 +1214,38 @@ object Form1: TForm1
     Title = 'Zapisz plik napisów jako'
     DefaultExt = '.srt'
     Filter = 'Pliki napisów *.srt|*.srt'
-    left = 507
-    top = 82
+    Left = 507
+    Top = 82
   end
   object OpenRawNapisy: TOpenDialog
     Title = 'Otwórz istniejący plik w formacie surowego tekstu'
     DefaultExt = '.txt'
     Filter = 'Plik tekstowy|*.txt'
-    left = 302
-    top = 82
+    Left = 302
+    Top = 82
   end
   object timer_czas_end: TTimer
     Enabled = False
     OnTimer = timer_czas_endTimer
-    left = 409
-    top = 155
+    Left = 409
+    Top = 155
   end
   object timer_time_display: TTimer
     Enabled = False
     Interval = 500
     OnTimer = timer_time_displayTimer
-    left = 670
-    top = 155
+    Left = 670
+    Top = 155
   end
   object amixer: TConsMixer
-    left = 396
-    top = 370
+    Left = 396
+    Top = 370
   end
   object silnik: TUOSEngine
     LibDirectory = 'library'
     DriversLoad = [dlPortAudio, dlSndAudio]
-    left = 302
-    top = 435
+    Left = 302
+    Top = 435
   end
   object rec: TUOSPlayer
     DeviceEngine = silnik
@@ -1251,23 +1255,23 @@ object Form1: TForm1
     CalcMeter = True
     AfterStart = soAfterStart
     AfterStop = soAfterStop
-    left = 396
-    top = 435
+    Left = 396
+    Top = 435
   end
   object play_synchro: TTimer
     Enabled = False
     Interval = 1
     OnTimer = play_synchroTimer
-    left = 796
-    top = 276
+    Left = 796
+    Top = 276
   end
   object timer_meter: TIdleTimer
     Enabled = False
     Interval = 1
     OnTimer = timer_meterTimer
     OnStopTimer = timer_meterStopTimer
-    left = 416
-    top = 270
+    Left = 416
+    Top = 270
   end
   object server: TNetSocket
     Mode = smServer
@@ -1279,7 +1283,7 @@ object Form1: TForm1
     SSLMethod = msSSLv2or3
     OnError = serverError
     OnReceiveString = serverReceiveString
-    left = 302
-    top = 370
+    Left = 302
+    Top = 370
   end
 end
