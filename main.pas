@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab, ExtMessage,
   LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl, NetSocket,
-  lNetComponents, ueled, Menus, EditBtn, lNet;
+  Presentation, lNetComponents, ueled, Menus, EditBtn, lNet;
 
 type
 
@@ -33,6 +33,7 @@ type
     force_mpv: TCheckBox;
     meter2: TProgressBar;
     meter1: TProgressBar;
+    pilot: TPresentation;
     server: TNetSocket;
     timer_meter: TIdleTimer;
     Label14: TLabel;
@@ -118,6 +119,7 @@ type
     time_display: TLabel;
     silnik: TUOSEngine;
     rec: TUOSPlayer;
+    ledrec: TuELED;
     v_ts: TuELED;
     XMLPropStorage1: TXMLPropStorage;
     procedure BitBtn1Click(Sender: TObject);
@@ -135,6 +137,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure led1DblClick(Sender: TObject);
@@ -152,6 +155,7 @@ type
     procedure meReadElement(Sender: TObject; var AWskaznik: Pointer);
     procedure meWriteElement(Sender: TObject; var AWskaznik: Pointer);
     procedure mplayerStop(Sender: TObject);
+    procedure pilotClick(aButton: integer; var aTestDblClick: boolean);
     procedure serverError(const aMsg: string; aSocket: TLSocket);
     procedure serverReceiveString(aMsg: string; aSocket: TLSocket);
     procedure opozniony_startTimer(Sender: TObject);
@@ -182,6 +186,9 @@ type
     function load_napisy_srt: integer;
     function load_napisy_youtube: integer;
     function load_napisy_raw: integer;
+    procedure mic_mute;
+    procedure mic_unmute;
+    function mic_reversemute: boolean;
     procedure SendToAll(adres_ip,rodzaj: string; const ramka: string; dolacz_czas_wyslania_ramki: boolean = false);
   public
 
@@ -471,6 +478,13 @@ begin
   me.Clear;
 end;
 
+procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+  );
+begin
+  pilot.Execute(Key);
+  Key:=0;
+end;
+
 procedure TForm1.FormResize(Sender: TObject);
 begin
   if Panel6.Visible then mplayer2.Height:=mplayer.Height;
@@ -687,6 +701,15 @@ begin
   BitBtn4.Click;
 end;
 
+procedure TForm1.pilotClick(aButton: integer; var aTestDblClick: boolean);
+begin
+  case aButton of
+    1: mic_reversemute;
+    2: mic_mute;
+    3: mic_unmute;
+  end;
+end;
+
 procedure TForm1.serverError(const aMsg: string; aSocket: TLSocket);
 begin
   inc(server_err);
@@ -771,12 +794,15 @@ end;
 procedure TForm1.soAfterStart(Sender: TObject);
 begin
   led.Active:=true;
+  ledrec.Color:=clRed;
+  ledrec.Active:=true;
   timer_meter.Enabled:=true;
 end;
 
 procedure TForm1.soAfterStop(Sender: TObject);
 begin
   led.Active:=false;
+  ledrec.Active:=false;
   timer_meter.Enabled:=false;
 end;
 
@@ -980,7 +1006,14 @@ begin
     else
       while Memo1.Lines.Count>historia_napisy.Value do Memo1.Lines.Delete(0);
   end;
-  if stat.Position<stat.Max then stat2.Position:=0 else stat2.Position:=pom-czas_elementu2;
+  if stat.Position<stat.Max then
+  begin
+    stat2.Position:=0;
+  end else begin
+    stat2.Position:=pom-czas_elementu2;
+    if (not rec.Mute) and (stat2.Position>3000) and (stat2.Max>5000) and (stat2.Position<=stat2.Max-1000) then mic_mute else
+    if rec.Mute and (stat2.Position>stat2.Max-1000) then mic_unmute;
+  end;
   stat.Position:=pom-czas_elementu;
   stat1.Position:=pom;
 end;
@@ -1199,6 +1232,28 @@ begin
   l:=me.Count;
   wczytano_count:=l;
   result:=l;
+end;
+
+procedure TForm1.mic_mute;
+begin
+  if rec.Mute then exit;
+  rec.Mute:=true;
+  led.Color:=clRed;
+  ledrec.Color:=clSilver;
+end;
+
+procedure TForm1.mic_unmute;
+begin
+  if not rec.Mute then exit;
+  rec.Mute:=false;
+  led.Color:=clYellow;
+  ledrec.Color:=clRed;
+end;
+
+function TForm1.mic_reversemute: boolean;
+begin
+  if rec.Mute then mic_unmute else mic_mute;
+  result:=rec.Mute;
 end;
 
 procedure TForm1.SendToAll(adres_ip, rodzaj: string; const ramka: string;

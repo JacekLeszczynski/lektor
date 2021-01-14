@@ -6,10 +6,12 @@ object Form1: TForm1
   Caption = 'Lektor'
   ClientHeight = 753
   ClientWidth = 1262
+  KeyPreview = True
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow
   SessionProperties = 'CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;ComboBox1.ItemIndex;force_mpv.Checked;Height;historia_napisy.Value;Left;opoznienie_napisow.Value;opoznienie.Value;Panel9.Height;server_on.Checked;speed.Value;synchro_video.Value;TimeEdit1.Text;TimeEdit2.Text;Top;Width;WindowState'
@@ -940,11 +942,11 @@ object Form1: TForm1
         TabOrder = 5
       end
       object CheckBox1: TCheckBox
-        AnchorSideLeft.Control = BitBtn4
+        AnchorSideLeft.Control = ledrec
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = BitBtn4
+        AnchorSideTop.Control = ledrec
         AnchorSideTop.Side = asrCenter
-        Left = 752
+        Left = 780
         Height = 23
         Top = 25
         Width = 199
@@ -998,6 +1000,24 @@ object Form1: TForm1
         ParentFont = False
         Smooth = True
         TabOrder = 9
+      end
+      object ledrec: TuELED
+        AnchorSideLeft.Control = BitBtn4
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = BitBtn4
+        AnchorSideTop.Side = asrCenter
+        Left = 752
+        Height = 24
+        Top = 24
+        Width = 24
+        Debug = False
+        Active = False
+        LedType = ledSquare
+        Bright = True
+        Reflection = True
+        BorderSpacing.Left = 4
+        Color = clRed
+        ParentColor = False
       end
     end
     object Panel5: TPanel
@@ -1285,5 +1305,11 @@ object Form1: TForm1
     OnReceiveString = serverReceiveString
     Left = 302
     Top = 370
+  end
+  object pilot: TPresentation
+    Device = dvGembird
+    OnClick = pilotClick
+    Left = 302
+    Top = 584
   end
 end
