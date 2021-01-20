@@ -142,22 +142,25 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="6">
       <Item1>
-        <PackageName Value="Abbrevia"/>
+        <PackageName Value="industrial"/>
       </Item1>
       <Item2>
-        <PackageName Value="lnetvisual"/>
+        <PackageName Value="Abbrevia"/>
       </Item2>
       <Item3>
-        <PackageName Value="uEControls"/>
+        <PackageName Value="lnetvisual"/>
       </Item3>
       <Item4>
-        <PackageName Value="ExtLazarus"/>
+        <PackageName Value="uEControls"/>
       </Item4>
       <Item5>
-        <PackageName Value="LCL"/>
+        <PackageName Value="ExtLazarus"/>
       </Item5>
+      <Item6>
+        <PackageName Value="LCL"/>
+      </Item6>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

@@ -165,8 +165,10 @@ msgid "v. 1.0"
 msgstr "v. 1.0"
 
 #: tform1.bitbtn1.caption
+#, fuzzy
+#| msgid "Załaduj napisy do filmu"
 msgctxt "tform1.bitbtn1.caption"
-msgid "Załaduj napisy do filmu"
+msgid "Załaduj napisy"
 msgstr "Load subtitles for the movie"
 
 #: tform1.bitbtn2.caption
@@ -206,10 +208,6 @@ msgstr "Pause"
 msgid "Lektor"
 msgstr "Lektor"
 
-#: tform1.checkbox1.caption
-msgid "Opóźnij START o 10 sekund"
-msgstr "Delay START by 10 seconds"
-
 #: tform1.checkbox2.caption
 msgid "Tryb nauki"
 msgstr "Learning mode"
@@ -217,10 +215,6 @@ msgstr "Learning mode"
 #: tform1.checkbox5.caption
 msgid "Tryb nauki (końcówki)"
 msgstr "Learning mode (endings)"
-
-#: tform1.checkbox6.caption
-msgid "Sound Film Jack Audio"
-msgstr ""
 
 #: tform1.combobox1.text
 msgid "Normalne"
@@ -274,6 +268,11 @@ msgstr "(Reds require a restart)"
 #: tform1.label17.caption
 msgid "Historia linii:"
 msgstr "Line history:"
+
+#: tform1.label18.caption
+msgctxt "tform1.label18.caption"
+msgid "Opóźnij START o 10 sekund"
+msgstr ""
 
 #: tform1.label2.caption
 msgid "Film załadowany"

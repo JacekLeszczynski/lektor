@@ -160,7 +160,7 @@ msgstr ""
 
 #: tform1.bitbtn1.caption
 msgctxt "tform1.bitbtn1.caption"
-msgid "Załaduj napisy do filmu"
+msgid "Załaduj napisy"
 msgstr ""
 
 #: tform1.bitbtn2.caption
@@ -200,20 +200,12 @@ msgstr ""
 msgid "Lektor"
 msgstr ""
 
-#: tform1.checkbox1.caption
-msgid "Opóźnij START o 10 sekund"
-msgstr ""
-
 #: tform1.checkbox2.caption
 msgid "Tryb nauki"
 msgstr ""
 
 #: tform1.checkbox5.caption
 msgid "Tryb nauki (końcówki)"
-msgstr ""
-
-#: tform1.checkbox6.caption
-msgid "Sound Film Jack Audio"
 msgstr ""
 
 #: tform1.combobox1.text
@@ -265,6 +257,11 @@ msgstr ""
 
 #: tform1.label17.caption
 msgid "Historia linii:"
+msgstr ""
+
+#: tform1.label18.caption
+msgctxt "tform1.label18.caption"
+msgid "Opóźnij START o 10 sekund"
 msgstr ""
 
 #: tform1.label2.caption

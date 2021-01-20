@@ -8,33 +8,38 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab, ExtMessage,
   LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl, NetSocket,
-  Presentation, lNetComponents, ueled, Menus, EditBtn, lNet;
+  Presentation, lNetComponents, ueled, uETilePanel, Menus, EditBtn, lNet,
+  switches, A3nalogGauge;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn4: TBitBtn;
-    BitBtn5: TBitBtn;
-    BitBtn6: TBitBtn;
-    BitBtn7: TBitBtn;
+    Label18: TLabel;
+    meter1: TA3nalogGauge;
+    meter2: TA3nalogGauge;
+    BitBtn4: TSpeedButton;
+    BitBtn3: TSpeedButton;
+    BitBtn6: TSpeedButton;
+    BitBtn7: TSpeedButton;
+    BitBtn2: TSpeedButton;
     BitBtn8: TBitBtn;
     BitBtn9: TBitBtn;
-    CheckBox1: TCheckBox;
+    CheckBox1: TOnOffSwitch;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
-    CheckBox6: TCheckBox;
     force_mpv: TCheckBox;
-    meter2: TProgressBar;
-    meter1: TProgressBar;
+    ImageList1: TImageList;
+    ledsynchro: TuELED;
     pilot: TPresentation;
     server: TNetSocket;
+    BitBtn5: TSpeedButton;
+    BitBtn1: TSpeedButton;
+    tsynchro2: TTimer;
+    tsynchro: TTimer;
     timer_meter: TIdleTimer;
     Label14: TLabel;
     Label15: TLabel;
@@ -92,14 +97,14 @@ type
     opoznienie: TSpinEdit;
     Panel1: TPanel;
     me: TPointerTab;
-    Panel10: TPanel;
-    Panel2: TPanel;
+    Panel10: TuETilePanel;
+    Panel2: TuETilePanel;
     Panel3: TPanel;
-    Panel4: TPanel;
+    Panel4: TuETilePanel;
     Panel5: TPanel;
     Panel6: TPanel;
-    Panel7: TPanel;
-    Panel8: TPanel;
+    Panel7: TuETilePanel;
+    Panel8: TuETilePanel;
     Panel9: TPanel;
     SaveNapisy: TSaveDialog;
     stat: TProgressBar;
@@ -120,6 +125,7 @@ type
     silnik: TUOSEngine;
     rec: TUOSPlayer;
     ledrec: TuELED;
+    uETilePanel1: TuETilePanel;
     v_ts: TuELED;
     XMLPropStorage1: TXMLPropStorage;
     procedure BitBtn1Click(Sender: TObject);
@@ -170,6 +176,11 @@ type
     procedure timer_meterTimer(Sender: TObject);
     procedure timer_mplayer2Timer(Sender: TObject);
     procedure timer_time_displayTimer(Sender: TObject);
+    procedure tsynchro2StopTimer(Sender: TObject);
+    procedure tsynchro2Timer(Sender: TObject);
+    procedure tsynchroStartTimer(Sender: TObject);
+    procedure tsynchroStopTimer(Sender: TObject);
+    procedure tsynchroTimer(Sender: TObject);
     procedure XMLPropStorage1RestoreProperties(Sender: TObject);
     procedure XMLPropStorage1SaveProperties(Sender: TObject);
   private
@@ -703,8 +714,10 @@ begin
   pom1:=mplayer.SingleMpToInteger(mplayer.GetPositionOnlyRead);
   if pom1=0 then exit;
   pom2:=czas_pomiarowy.GetIndexTime;
-  if abs(pom1-pom2)>100 then
+  if abs(pom1-pom2)>50 then
   begin
+    tsynchro.Enabled:=false;
+    tsynchro.Enabled:=rec.Busy;
     a:=czas_pomiarowy.GetIndexStartTime+(pom2-pom1)-10;
     if a<0 then a:=0;
     czas_pomiarowy.SetIndexStartTime(a);
@@ -811,7 +824,6 @@ end;
 procedure TForm1.soAfterStart(Sender: TObject);
 begin
   led.Active:=true;
-  ledrec.Color:=clRed;
   ledrec.Active:=true;
   timer_meter.Enabled:=true;
 end;
@@ -820,7 +832,6 @@ procedure TForm1.soAfterStop(Sender: TObject);
 begin
   led.Active:=false;
   ledrec.Active:=false;
-  timer_meter.Enabled:=false;
 end;
 
 procedure TForm1.timer_czasTimer(Sender: TObject);
@@ -857,11 +868,13 @@ end;
 
 procedure TForm1.timer_meterTimer(Sender: TObject);
 var
-  a,b: integer;
+  a,b: single;
 begin
-  rec.GetMeter(a,b);
-  if a>meter1.Position then meter1.Position:=a else if meter1.Position>0 then meter1.Position:=meter1.Position-1;
-  if b>meter2.Position then meter2.Position:=b else if meter2.Position>0 then meter2.Position:=meter2.Position-1;
+  a:=meter1.Position;
+  b:=meter2.Position;
+  timer_meter.Enabled:=rec.GetMeterEx(a,b);
+  meter1.Position:=a;
+  meter2.Position:=b;
 end;
 
 procedure TForm1.timer_mplayer2Timer(Sender: TObject);
@@ -879,6 +892,31 @@ begin
     time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(t))
   else
     time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(round(t*speed.Value/100)));
+end;
+
+procedure TForm1.tsynchro2StopTimer(Sender: TObject);
+begin
+  ledsynchro.Active:=false;
+end;
+
+procedure TForm1.tsynchro2Timer(Sender: TObject);
+begin
+  ledsynchro.Active:=not ledsynchro.Active;
+end;
+
+procedure TForm1.tsynchroStartTimer(Sender: TObject);
+begin
+  tsynchro2.Enabled:=true;
+end;
+
+procedure TForm1.tsynchroStopTimer(Sender: TObject);
+begin
+  tsynchro2.Enabled:=false;
+end;
+
+procedure TForm1.tsynchroTimer(Sender: TObject);
+begin
+  tsynchro.Enabled:=false;
 end;
 
 procedure TForm1.XMLPropStorage1RestoreProperties(Sender: TObject);
@@ -1051,7 +1089,7 @@ begin
   begin
     mplayer.Engine:=meMplayer;
     ss:=ss+' -zoom';
-    if CheckBox6.Checked then ss_mplayer:=' -ao jack';
+    //if CheckBox6.Checked then ss_mplayer:=' -ao jack';
   end;
   mplayer2.Engine:=mplayer.Engine;
   if speed.Value=100 then s:='' else s:=' -speed '+FormatFloat('0.00',speed.Value/100);
@@ -1255,16 +1293,14 @@ procedure TForm1.mic_mute;
 begin
   if rec.Mute then exit;
   rec.Mute:=true;
-  led.Color:=clRed;
-  ledrec.Color:=clSilver;
+  ledrec.Active:=false;
 end;
 
 procedure TForm1.mic_unmute;
 begin
   if not rec.Mute then exit;
   rec.Mute:=false;
-  led.Color:=clYellow;
-  ledrec.Color:=clRed;
+  ledrec.Active:=true;
 end;
 
 function TForm1.mic_reversemute: boolean;
