@@ -154,6 +154,7 @@ type
     procedure MenuItem9Click(Sender: TObject);
     procedure meReadElement(Sender: TObject; var AWskaznik: Pointer);
     procedure meWriteElement(Sender: TObject; var AWskaznik: Pointer);
+    procedure mplayerPlaying(ASender: TObject; APosition, ADuration: single);
     procedure mplayerStop(Sender: TObject);
     procedure pilotClick(aButton: integer; var aTestDblClick: boolean);
     procedure serverError(const aMsg: string; aSocket: TLSocket);
@@ -693,6 +694,22 @@ procedure TForm1.meWriteElement(Sender: TObject; var AWskaznik: Pointer);
 begin
   pp^:=element;
   AWskaznik:=pp;
+end;
+
+procedure TForm1.mplayerPlaying(ASender: TObject; APosition, ADuration: single);
+var
+  a,pom1,pom2: integer;
+begin
+  pom1:=mplayer.SingleMpToInteger(mplayer.GetPositionOnlyRead);
+  if pom1=0 then exit;
+  pom2:=czas_pomiarowy.GetIndexTime;
+  if abs(pom1-pom2)>100 then
+  begin
+    a:=czas_pomiarowy.GetIndexStartTime+(pom2-pom1)-10;
+    if a<0 then a:=0;
+    czas_pomiarowy.SetIndexStartTime(a);
+    //writeln('SYNCHRONIZACJA ',pom2-pom1-10);
+  end;
 end;
 
 procedure TForm1.mplayerStop(Sender: TObject);

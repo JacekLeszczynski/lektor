@@ -338,15 +338,18 @@ object Form1: TForm1
         Width = 820
         AccelType = '<auto>'
         ScreenshotDirectory = '<auto>'
+        MpvIpcServer = True
         MpvIpcDevFile = '<auto>'
         Align = alClient
-        Engine = meMplayer
+        Engine = meMPV
         Loop = 0
         MPlayerPath = 'mplayer'
         ICYRadio = False
         CaptureDump = False
-        ActiveTimer = False
+        ActiveTimer = True
+        MpvNoOSC = True
         Volume = -1
+        OnPlaying = mplayerPlaying
         OnStop = mplayerStop
       end
       object Panel10: TPanel
