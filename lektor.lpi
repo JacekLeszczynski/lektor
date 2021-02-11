@@ -17,7 +17,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <MajorVersionNr Value="2"/>
+      <MajorVersionNr Value="3"/>
       <BuildNr Value="1"/>
       <Language Value="0415"/>
       <CharSet Value="04B0"/>

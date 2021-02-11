@@ -24,8 +24,8 @@ type
     BitBtn6: TSpeedButton;
     BitBtn7: TSpeedButton;
     BitBtn2: TSpeedButton;
-    BitBtn8: TBitBtn;
-    BitBtn9: TBitBtn;
+    BitBtn8: TSpeedButton;
+    BitBtn9: TSpeedButton;
     CheckBox1: TOnOffSwitch;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
@@ -38,6 +38,7 @@ type
     server: TNetSocket;
     BitBtn5: TSpeedButton;
     BitBtn1: TSpeedButton;
+    tred: TTimer;
     tsynchro2: TTimer;
     tsynchro: TTimer;
     timer_meter: TIdleTimer;
@@ -63,7 +64,7 @@ type
     Label13: TLabel;
     server_on_caption: TLabel;
     Label16: TLabel;
-    Panel11: TPanel;
+    Panel11: TuETilePanel;
     MainMenu1: TMainMenu;
     Memo2: TMemo;
     MenuItem1: TMenuItem;
@@ -75,7 +76,6 @@ type
     led4: TuELED;
     OpenAudio: TOpenDialog;
     OpenRawNapisy: TOpenDialog;
-    opoznienie_napisow: TFloatSpinEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -83,8 +83,6 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
     led: TuELED;
     led1: TuELED;
     led2: TuELED;
@@ -125,6 +123,7 @@ type
     silnik: TUOSEngine;
     rec: TUOSPlayer;
     ledrec: TuELED;
+    ledred: TuELED;
     uETilePanel1: TuETilePanel;
     v_ts: TuELED;
     XMLPropStorage1: TXMLPropStorage;
@@ -167,6 +166,7 @@ type
     procedure serverReceiveString(aMsg: string; aSocket: TLSocket);
     procedure opozniony_startTimer(Sender: TObject);
     procedure play_synchroTimer(Sender: TObject);
+    procedure server_onClick(Sender: TObject);
     procedure soAfterStart(Sender: TObject);
     procedure soAfterStop(Sender: TObject);
     procedure timer_czasTimer(Sender: TObject);
@@ -176,6 +176,9 @@ type
     procedure timer_meterTimer(Sender: TObject);
     procedure timer_mplayer2Timer(Sender: TObject);
     procedure timer_time_displayTimer(Sender: TObject);
+    procedure tredStartTimer(Sender: TObject);
+    procedure tredStopTimer(Sender: TObject);
+    procedure tredTimer(Sender: TObject);
     procedure tsynchro2StopTimer(Sender: TObject);
     procedure tsynchro2Timer(Sender: TObject);
     procedure tsynchroStartTimer(Sender: TObject);
@@ -517,7 +520,6 @@ begin
     CheckBox2Change(Sender);
     if server_on.Checked then
     begin
-      server.Port:=4665;
       b_server_on:=server.Connect;
       v_ts.Active:=b_server_on;
     end else b_server_on:=false;
@@ -711,6 +713,7 @@ procedure TForm1.mplayerPlaying(ASender: TObject; APosition, ADuration: single);
 var
   a,pom1,pom2: integer;
 begin
+  if not b_napisy then exit;
   pom1:=mplayer.SingleMpToInteger(mplayer.GetPositionOnlyRead);
   if pom1=0 then exit;
   pom2:=czas_pomiarowy.GetIndexTime;
@@ -721,13 +724,11 @@ begin
     a:=czas_pomiarowy.GetIndexStartTime+(pom2-pom1)-10;
     if a<0 then a:=0;
     czas_pomiarowy.SetIndexStartTime(a);
-    //writeln('SYNCHRONIZACJA ',pom2-pom1-10);
   end;
 end;
 
 procedure TForm1.mplayerStop(Sender: TObject);
 begin
-  //rec_delay:=false;
   BitBtn4.Click;
 end;
 
@@ -801,7 +802,7 @@ begin
       end else SendToAll(ip,'stop','0');
     end else if komenda='index_time' then
     begin
-      SendToAll(ip,'index_time',IntToStr(czas_pomiarowy.GetIndexStartTime)+':'+IntToStr(speed.Value)+':'+IntToStr(trunc(opoznienie_napisow.Value*100))+':'+IntToStr(Wczytano));
+      SendToAll(ip,'index_time',IntToStr(czas_pomiarowy.GetIndexStartTime)+':'+IntToStr(speed.Value)+':0:'+IntToStr(Wczytano));
     end else if komenda='status' then
     begin
       if b_play then SendToAll(ip,'status','1') else SendToAll(ip,'status','0');
@@ -819,6 +820,19 @@ procedure TForm1.play_synchroTimer(Sender: TObject);
 begin
   play_synchro.Enabled:=false;
   start_init_2;
+end;
+
+procedure TForm1.server_onClick(Sender: TObject);
+begin
+  if server_on.Checked then
+  begin
+    b_server_on:=server.Connect;
+    v_ts.Active:=b_server_on;
+  end else begin
+    server.Disconnect;
+    b_server_on:=false;
+    v_ts.Active:=b_server_on;
+  end;
 end;
 
 procedure TForm1.soAfterStart(Sender: TObject);
@@ -875,6 +889,7 @@ begin
   timer_meter.Enabled:=rec.GetMeterEx(a,b);
   meter1.Position:=a;
   meter2.Position:=b;
+  if (a>=meter1.IndMaximum) or (b>=meter2.IndMaximum) then tred.Enabled:=true;
 end;
 
 procedure TForm1.timer_mplayer2Timer(Sender: TObject);
@@ -892,6 +907,21 @@ begin
     time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(t))
   else
     time_display.Caption:=FormatDateTime('hh:nn:ss',IntegerToTime(round(t*speed.Value/100)));
+end;
+
+procedure TForm1.tredStartTimer(Sender: TObject);
+begin
+  ledred.Active:=true;
+end;
+
+procedure TForm1.tredStopTimer(Sender: TObject);
+begin
+  ledred.Active:=false;
+end;
+
+procedure TForm1.tredTimer(Sender: TObject);
+begin
+  tred.Enabled:=false;
 end;
 
 procedure TForm1.tsynchro2StopTimer(Sender: TObject);
@@ -1013,7 +1043,7 @@ var
 begin
   pom:=czas_pomiarowy.GetIndexTime;
   if speed.Value=100 then max:=czas_max else max:=round(czas_max*(100/speed.Value));
-  if pom-(opoznienie_napisow.Value*1000)>=max then
+  if pom>=max then
   begin
     if mplayer.Playing then timer_czas.Enabled:=false else BitBtn4.Click;
     exit;
@@ -1029,7 +1059,7 @@ begin
   me.Read(wczytano);
   if speed.Value=100 then czas:=element.start else czas:=round(element.start*(100/speed.Value));
   if Memo2.Visible and (wczytano=0) and (Memo2.Lines.Count=0) then Memo2.Lines.Add(element.tekst);
-  if pom-(opoznienie_napisow.Value*1000)>=czas then
+  if pom>=czas then
   begin
     czas_elementu:=pom;
     if speed.Value=100 then
@@ -1094,7 +1124,11 @@ begin
   mplayer2.Engine:=mplayer.Engine;
   if speed.Value=100 then s:='' else s:=' -speed '+FormatFloat('0.00',speed.Value/100);
   if b_audio then s2:=' -audiofile "'+audio+'"' else s2:='';
-  if CheckBox3.Checked then s3:=' -ss '+FormatDateTime('hh:nn:ss',TimeEdit1.Time)+'' else s3:='';
+  if CheckBox3.Checked then
+  begin
+    if mplayer.Engine=meMPV then s3:=' --start='+FormatDateTime('hh:nn:ss',TimeEdit1.Time)+'' else
+    if mplayer.Engine=meMplayer then s3:=' -ss '+FormatDateTime('hh:nn:ss',TimeEdit1.Time)+'' else s3:='';
+  end;
   mplayer.StartParam:=ss+ss_mplayer+s+s2+s3;
   mplayer.Filename:=film;
   mplayer.Play;

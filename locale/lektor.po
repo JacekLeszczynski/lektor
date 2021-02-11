@@ -289,17 +289,6 @@ msgstr ""
 msgid "Prędkość odtw. (%):"
 msgstr ""
 
-#: tform1.label8.caption
-msgid ""
-"Wektor przesunięcia\n"
-"napisów w czasie:\n"
-msgstr ""
-
-#: tform1.label9.caption
-msgctxt "tform1.label9.caption"
-msgid "sec."
-msgstr ""
-
 #: tform1.menuitem1.caption
 msgid "Menu"
 msgstr ""
@@ -352,12 +341,6 @@ msgstr ""
 
 #: tform1.opoznienie.hint
 msgid "Bez napisów włączone drugie wideo wystartuje z tym opóźnieniem"
-msgstr ""
-
-#: tform1.opoznienie_napisow.hint
-msgid ""
-"Dostosowanie czasu wyświetlania napisów\n"
-"(pomocne gdy odtwarzasz film nie od początku)\n"
 msgstr ""
 
 #: tform1.panel3.caption
