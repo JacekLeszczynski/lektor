@@ -208,6 +208,10 @@ msgstr ""
 msgid "Tryb nauki (końcówki)"
 msgstr ""
 
+#: tform1.checkbox6.caption
+msgid "Steruj programem OBS"
+msgstr ""
+
 #: tform1.combobox1.text
 msgid "Normalne"
 msgstr ""

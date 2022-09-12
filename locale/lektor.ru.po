@@ -216,6 +216,10 @@ msgstr "Режим обучения"
 msgid "Tryb nauki (końcówki)"
 msgstr "Режим обучения (окончания)"
 
+#: tform1.checkbox6.caption
+msgid "Steruj programem OBS"
+msgstr ""
+
 #: tform1.combobox1.text
 msgid "Normalne"
 msgstr "нормальный"

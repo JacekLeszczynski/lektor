@@ -8,14 +8,15 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, Buttons, Spin, XMLPropStorage, ComCtrls, PointerTab, ExtMessage,
   LiveTimer, ConsMixer, UOSEngine, UOSPlayer, MPlayerCtrl, NetSocket,
-  Presentation, lNetComponents, ueled, uETilePanel, Menus, EditBtn, lNet,
-  switches, A3nalogGauge;
+  Presentation, lNetComponents, ueled, uETilePanel, Menus, EditBtn,
+  Process, AsyncProcess, lNet, switches, A3nalogGauge;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    CheckBox6: TCheckBox;
     Label18: TLabel;
     meter1: TA3nalogGauge;
     meter2: TA3nalogGauge;
@@ -205,6 +206,8 @@ type
     procedure mic_unmute;
     function mic_reversemute: boolean;
     procedure SendToAll(adres_ip,rodzaj: string; const ramka: string; dolacz_czas_wyslania_ramki: boolean = false);
+    procedure obs_rec_start;
+    procedure obs_rec_stop;
   public
 
   end;
@@ -476,6 +479,7 @@ begin
   timer_czas_end.Enabled:=false;
   timer_time_display.Enabled:=false;
   Memo2.Visible:=false;
+  if CheckBox6.Checked then obs_rec_stop;
   rec_stop;
   film_stop;
   stat.Position:=0;
@@ -717,11 +721,13 @@ begin
   pom1:=mplayer.SingleMpToInteger(mplayer.GetPositionOnlyRead);
   if pom1=0 then exit;
   pom2:=czas_pomiarowy.GetIndexTime;
+  //if speed.Value=100 then pom2:=czas_pomiarowy.GetIndexTime else pom2:=round(czas_pomiarowy.GetIndexTime*(100/speed.Value));
   if abs(pom1-pom2)>50 then
   begin
     tsynchro.Enabled:=false;
     tsynchro.Enabled:=rec.Busy;
     a:=czas_pomiarowy.GetIndexStartTime+(pom2-pom1)-10;
+    //if speed.Value<>100 then a:=round(a*(speed.Value/100));
     if a<0 then a:=0;
     czas_pomiarowy.SetIndexStartTime(a);
   end;
@@ -973,6 +979,7 @@ begin
   stat1.Position:=0;
   stat2.Min:=0;
   stat2.Position:=0;
+  if CheckBox6.Checked then obs_rec_start;
   film_start;
   if synchro_video.Value>0 then
   begin
@@ -1252,8 +1259,13 @@ begin
   for i:=0 to napisy.Count-1 do
   begin
     s:=napisy[i];
-    if (length(s)=5) and IsDigit(s[1]) and IsDigit(s[2]) and (s[3]=':') and IsDigit(s[4]) and IsDigit(s[5]) then
+    if
+      ((length(s)=4) and IsDigit(s[1]) and (s[2]=':') and IsDigit(s[3]) and IsDigit(s[4]))
+      or
+      ((length(s)=5) and IsDigit(s[1]) and IsDigit(s[2]) and (s[3]=':') and IsDigit(s[4]) and IsDigit(s[5]))
+    then
     begin
+      if length(s)=4 then s:='0'+s;
       if ss<>'' then
       begin
         element.start:=czas;
@@ -1352,6 +1364,40 @@ begin
   s:='CTL$'+adres_ip+'$'+rodzaj+'$'+ramka;
   if dolacz_czas_wyslania_ramki then s:=s+':'+IntToStr(TimeToInteger);
   server.SendString(s);
+end;
+
+procedure TForm1.obs_rec_start;
+var
+  p: TAsyncProcess;
+begin
+  //obs-cli --password 123ikpd recording start
+  p:=TAsyncProcess.Create(self);
+  try
+    p.ShowWindow:=swoHIDE;
+    p.Options:=[poWaitOnExit,poNoConsole];
+    p.CommandLine:='obs-cli --password 123ikpd recording start';
+    p.Execute;
+    if p.Running then p.Terminate(0);
+  finally
+    p.Free;
+  end;
+end;
+
+procedure TForm1.obs_rec_stop;
+var
+  p: TAsyncProcess;
+begin
+  //obs-cli --password 123ikpd recording stop
+  p:=TAsyncProcess.Create(self);
+  try
+    p.ShowWindow:=swoHIDE;
+    p.Options:=[poWaitOnExit,poNoConsole];
+    p.CommandLine:='obs-cli --password 123ikpd recording stop';
+    p.Execute;
+    if p.Running then p.Terminate(0);
+  finally
+    p.Free;
+  end;
 end;
 
 end.
