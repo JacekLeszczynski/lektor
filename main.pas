@@ -1263,9 +1263,15 @@ begin
       ((length(s)=4) and IsDigit(s[1]) and (s[2]=':') and IsDigit(s[3]) and IsDigit(s[4]))
       or
       ((length(s)=5) and IsDigit(s[1]) and IsDigit(s[2]) and (s[3]=':') and IsDigit(s[4]) and IsDigit(s[5]))
+      or
+      ((length(s)=7) and IsDigit(s[1]) and (s[2]=':') and IsDigit(s[3]) and IsDigit(s[4]) and (s[5]=':') and IsDigit(s[6]) and IsDigit(s[7]))
+      or
+      ((length(s)=8) and IsDigit(s[1]) and IsDigit(s[2]) and (s[3]=':') and IsDigit(s[4]) and IsDigit(s[5]) and (s[6]=':') and IsDigit(s[7]) and IsDigit(s[8]))
     then
     begin
-      if length(s)=4 then s:='0'+s;
+      if length(s)=4 then s:='00:0'+s else
+      if length(s)=5 then s:='00:'+s else
+      if length(s)=7 then s:='0'+s;
       if ss<>'' then
       begin
         element.start:=czas;
@@ -1276,9 +1282,9 @@ begin
         ss:='';
       end;
       try
-        second:=StrToInt(copy(s,4,2));
-        minutes:=StrToInt(copy(s,1,2));
-        hour:=0;
+        hour:=StrToInt(copy(s,1,2));
+        minutes:=StrToInt(copy(s,4,2));
+        second:=StrToInt(copy(s,7,2));
         while minutes>60 do
         begin
           inc(hour);
