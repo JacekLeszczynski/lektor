@@ -277,6 +277,7 @@ var
   pom,wczytano,wczytano_count: integer;
   rec_delay: boolean = false;
   nauka: boolean = false;
+  mem_czas_pomiarowy_start: integer = 0;
 
 var {server}
   server_err: integer = 0;
@@ -721,13 +722,13 @@ begin
   pom1:=mplayer.SingleMpToInteger(mplayer.GetPositionOnlyRead);
   if pom1=0 then exit;
   pom2:=czas_pomiarowy.GetIndexTime;
-  //if speed.Value=100 then pom2:=czas_pomiarowy.GetIndexTime else pom2:=round(czas_pomiarowy.GetIndexTime*(100/speed.Value));
+  if speed.Value<>100 then pom:=round(pom1/(100/speed.Value));
+  writeln(pom1,' = ',pom2);
   if abs(pom1-pom2)>50 then
   begin
     tsynchro.Enabled:=false;
     tsynchro.Enabled:=rec.Busy;
     a:=czas_pomiarowy.GetIndexStartTime+(pom2-pom1)-10;
-    //if speed.Value<>100 then a:=round(a*(speed.Value/100));
     if a<0 then a:=0;
     czas_pomiarowy.SetIndexStartTime(a);
   end;
@@ -1020,9 +1021,9 @@ begin
   (* GO! *)
   if CheckBox3.Checked then
   begin
-    if speed.Value=100 then czas_pomiarowy.Start(TimeToInteger-TimeToInteger(TimeEdit1.Time))
-                       else czas_pomiarowy.Start(TimeToInteger-round(TimeToInteger(TimeEdit1.Time)*(100/speed.Value)));
-  end else czas_pomiarowy.Start;
+    if speed.Value=100 then mem_czas_pomiarowy_start:=czas_pomiarowy.Start(TimeToInteger-TimeToInteger(TimeEdit1.Time))
+                       else mem_czas_pomiarowy_start:=czas_pomiarowy.Start(TimeToInteger-round(TimeToInteger(TimeEdit1.Time)*(100/speed.Value)));
+  end else mem_czas_pomiarowy_start:=czas_pomiarowy.Start;
   b_play:=true;
   rec_start;
   (* reszta *)
@@ -1043,12 +1044,13 @@ end;
 
 procedure TForm1.wczytaj_napisy;
 var
-  i: integer;
+  a,i: integer;
   czas,max: integer;
   s,s2: string;
   start2,stop2: integer;
 begin
   pom:=czas_pomiarowy.GetIndexTime;
+  if speed.Value<100 then pom:=round(pom*(100/speed.Value));
   if speed.Value=100 then max:=czas_max else max:=round(czas_max*(100/speed.Value));
   if pom>=max then
   begin
